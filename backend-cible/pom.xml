@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cible</groupId>
-	<artifactId>task</artifactId>
+	<artifactId>backend-cible</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>task</name>
-	<description>Cible backend application task manager</description>
+	<name>backend-cible</name>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
