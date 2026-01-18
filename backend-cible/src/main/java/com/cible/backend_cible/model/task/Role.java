@@ -1,4 +1,4 @@
-package com.cible.backend_cible.model;
+package com.cible.backend_cible.model.task;
 
 public enum Role {
     
