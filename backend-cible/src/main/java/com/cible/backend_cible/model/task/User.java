@@ -80,7 +80,7 @@ public class User {
     private LocalDateTime passwordUpdatedAt;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt; // date of the creation of the account
+    private LocalDateTime createdAt = LocalDateTime.now(); // date of the creation of the account
 
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt; // date of the last update of the account
@@ -89,6 +89,7 @@ public class User {
     @PrePersist
     protected void onCreate() {
     this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
