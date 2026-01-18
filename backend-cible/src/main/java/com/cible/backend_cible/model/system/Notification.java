@@ -1,6 +1,8 @@
-package com.cible.backend_cible.model;
+package com.cible.backend_cible.model.system;
 
 import java.time.LocalDateTime;
+
+import com.cible.backend_cible.model.task.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,8 +24,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "activities")
-public class Activity {
+@Table(name = "notifications")
+public class Notification {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,19 +34,15 @@ public class Activity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "User is mandatory")
-    private Users user;
+    private User user;
     
-    @NotBlank(message = "Action is mandatory")
-    @Column(nullable = false, length = 100)
-    private String action; // CREATED, UPDATED, DELETED, COMPLETED
+    @NotBlank(message = "Message is mandatory")
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String message;
     
-    @NotBlank(message = "Entity type is mandatory")
-    @Column(name = "entity_type", nullable = false, length = 50)
-    private String entityType; // TASK, COMMENT, USER
-    
-    @NotNull(message = "Entity ID is mandatory")
-    @Column(name = "entity_id", nullable = false)
-    private Integer entityId;
+    @NotNull(message = "Read status is mandatory")
+    @Column(name = "is_read", nullable = false)
+    private Boolean isRead = false;
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -52,5 +50,6 @@ public class Activity {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+        if (isRead == null) isRead = false;
     }
 }

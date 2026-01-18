@@ -1,4 +1,4 @@
-package com.cible.backend_cible.model;
+package com.cible.backend_cible.model.task;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

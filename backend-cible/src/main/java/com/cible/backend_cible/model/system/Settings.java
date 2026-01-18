@@ -1,4 +1,4 @@
-package com.cible.backend_cible.model;
+package com.cible.backend_cible.model.system;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +19,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
+import com.cible.backend_cible.model.task.User;
+
+
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,7 +37,7 @@ public class Settings {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     @NotNull(message = "User is mandatory")
-    private Users user;
+    private User user;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

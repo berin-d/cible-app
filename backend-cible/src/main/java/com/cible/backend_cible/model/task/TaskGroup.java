@@ -1,6 +1,7 @@
-package com.cible.backend_cible.model;
+package com.cible.backend_cible.model.task;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,32 +23,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "notifications")
-public class Notification {
+@Table(name = "task_groups")
+public class TaskGroup {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @NotBlank(message = "Group name is mandatory")
+    @Column(nullable = false, length = 100)
+    private String name;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "User is mandatory")
-    private Users user;
-    
-    @NotBlank(message = "Message is mandatory")
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String message;
-    
-    @NotNull(message = "Read status is mandatory")
-    @Column(name = "is_read", nullable = false)
-    private Boolean isRead = false;
-    
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-    
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        if (isRead == null) isRead = false;
-    }
+    private User user; // owner of group
+
+    @OneToMany(mappedBy = "taskGroup")
+    private List<Task> tasks = new ArrayList<>();
 }

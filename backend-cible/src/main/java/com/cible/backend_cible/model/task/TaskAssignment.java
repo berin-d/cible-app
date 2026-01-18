@@ -1,4 +1,4 @@
-package com.cible.backend_cible.model;
+package com.cible.backend_cible.model.task;
 
 import java.time.LocalDateTime;
 
@@ -31,16 +31,16 @@ public class TaskAssignment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id", nullable = false)
     @NotNull(message = "Task is mandatory")
-    private Tasks task;
+    private Task task;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "Assigned user is mandatory")
-    private Users user; // user assigned
+    private User user; // user assigned
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assigned_by")
-    private Users assignedBy; // the guy who did the assignation
+    private User assignedBy; // the guy who did the assignation
     
     @Column(name = "assigned_at", nullable = false, updatable = false)
     private LocalDateTime assignedAt;
