@@ -1,4 +1,21 @@
 services:
+
+  backend:
+    build: .
+    container_name: backend-cible
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    environment:
+      # Connexion à PostgreSQL via le service "postgres"
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/CibleDB
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+
   postgres:
     image: postgres:15
     container_name: pg-dev
@@ -10,22 +27,6 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-
-  backend:
-    build: .
-    container_name: backend-cible
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-    environment:
-      # Connexion à PostgreSQL via le service "postgres"
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/CibleDB
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_SHOW_SQL: "true"
-      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
 
 volumes:
   pgdata:
