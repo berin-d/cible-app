@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "frontend-cible",
+  "productName": "Cible",
   "version": "0.1.0",
   "identifier": "com.frontend-cible",
   "build": {
@@ -12,11 +12,12 @@
   "app": {
     "windows": [
       {
-        "title": "frontend-cible",
-        "width": 800,
-        "height": 600,
+        "title": "Cible",
+        "width": 1200,
+        "height": 1000,
         "titleBarStyle": "Overlay",
-        "theme": "Dark"
+        "theme": "Dark",
+        "url": "/login"
       }
     ],
     "security": {
