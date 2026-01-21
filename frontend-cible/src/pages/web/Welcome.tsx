@@ -1,6 +1,6 @@
 import Button from "../../components/commons/button"
-import logo from "../../assets/logo-cible.png"
-import { Icon } from "../../components/commons/icon"
+import logo from "../../assets/app-icon.png"
+
 
 export default function WelcomePage() {
     return (
