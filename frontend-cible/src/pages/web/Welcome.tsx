@@ -1,5 +1,6 @@
 import Button from "../../components/commons/button"
 import logo from "../../assets/logo-cible.png"
+import { Icon } from "../../components/commons/icon"
 
 export default function WelcomePage() {
     return (
@@ -17,7 +18,9 @@ export default function WelcomePage() {
                     <div className="flex flex-col justify-center items-center">
                         <img src={logo} alt="logo" className="size-64"></img>
                         <h1 className="text-white text-4xl text-center mt-4 font-bold">Turn Tasks Into Progress</h1>
-                        <Button text="Get Started" ></Button>
+                    </div>
+                    <div className="pt-10 flex justify-center">
+                        <Button text="Download" iconName="download" ></Button>
                     </div>
 
                 </div>
