@@ -17,6 +17,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +40,7 @@ public class User {
     @NotBlank(message = "The username is mandatory")
     @Size(min = 3, max = 30, message = "The username must contains between 3 and 30 caracters")
     @Column(nullable = false, unique = true, length = 30)
+    @Pattern(regexp = "[0-9a-zA-Z]+")
     private String username;
 
     @NotBlank(message = "The mail is mandatory")

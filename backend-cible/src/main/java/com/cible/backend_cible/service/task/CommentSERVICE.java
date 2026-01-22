@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.CommentDB;
+import com.cible.backend_cible.db.task.CommentDB;
 import com.cible.backend_cible.model.task.Comment;
 import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.task.User;

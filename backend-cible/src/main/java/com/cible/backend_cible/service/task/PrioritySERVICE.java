@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.PriorityDB;
+import com.cible.backend_cible.db.task.PriorityDB;
 import com.cible.backend_cible.model.task.Priority;
 
 @Service

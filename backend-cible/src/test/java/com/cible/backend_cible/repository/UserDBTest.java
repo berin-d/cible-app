@@ -2,14 +2,13 @@ package com.cible.backend_cible.repository;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.cible.backend_cible.db.UserDB;
+import com.cible.backend_cible.db.task.UserDB;
 import com.cible.backend_cible.model.task.Role;
 import com.cible.backend_cible.model.task.User;
 

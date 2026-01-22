@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.ActivityDB;
+import com.cible.backend_cible.db.task.ActivityDB;
 import com.cible.backend_cible.model.task.Activity;
 import com.cible.backend_cible.model.task.User;
 
@@ -28,3 +28,4 @@ public class ActivitySERVICE {
         }
     
 }
+

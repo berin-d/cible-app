@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.cible.backend_cible.db")
-@EntityScan(basePackages = "com.cible.backend_cible.model.task")
+@EntityScan(basePackages = "com.cible.backend_cible.model")
 public class BackendCibleApplication {
 
 	public static void main(String[] args) {

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.TaskAssignmentDB;
+import com.cible.backend_cible.db.task.TaskAssignmentDB;
 import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.task.TaskAssignment;
 import com.cible.backend_cible.model.task.User;
