@@ -96,13 +96,13 @@ public class Settings {
     }
 }
 
-// Enums associés
+// ENUM
 enum Theme {
     LIGHT, DARK, AUTO
 }
 
 enum Language {
-    FR, EN, ES, DE, IT
+    FR, EN, DE
 }
 
 enum DateFormat {
