@@ -1,6 +1,7 @@
 package com.cible.backend_cible.service.task;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,11 @@ public class ReminderSERVICE {
         return reminderDB.findByTask(task);
     }
 
-    public Reminder saveReminder(Reminder reminder) {
+    public Optional<Reminder> getReminderById(Integer id){
+        return reminderDB.findById(id);
+    }
+
+    public Reminder createReminder(Reminder reminder) {
         return reminderDB.save(reminder);
     }
 

@@ -15,9 +15,9 @@ public class ActivitySERVICE {
     @Autowired
     private ActivityDB activityDB;
 
-    public Iterable<Activity> getAllActivities(){
-        return activityDB.findAll();
-    }
+        public Iterable<Activity> getAllActivities(){
+            return activityDB.findAll();
+        }
 
         public List<Activity> getActivitiesByUser(User user) {
             return activityDB.findByUser(user);
@@ -25,6 +25,10 @@ public class ActivitySERVICE {
     
         public List<Activity> getActivitiesByUserId(Integer userId) {
             return activityDB.findByUser_Id(userId);
+        }
+
+        public Activity createActivity(Activity activity){
+            return activityDB.save(activity);
         }
     
 }

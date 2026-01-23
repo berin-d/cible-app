@@ -41,6 +41,7 @@ public class UserSERVICE {
     public boolean usernameExists(String username) {
         return userDB.existsByUsername(username);
     }
+    
 
     public void deleteUser(Integer id) {
         userDB.deleteById(id);
