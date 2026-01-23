@@ -1,6 +1,7 @@
 package com.cible.backend_cible.service.task;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class CommentSERVICE {
         return commentDB.findAll();
     }
 
+    public Optional<Comment> getCommentById(Integer id){
+        return commentDB.findById(id);
+    }
+
       public List<Comment> getCommentsByUser(User user) {
         return commentDB.findByUser(user);
     }
@@ -34,6 +39,10 @@ public class CommentSERVICE {
 
     public List<Comment> getCommentsByTaskId(Integer taskId) {
         return commentDB.findByTask_Id(taskId);
+    }
+
+    public Comment createComment(Comment comment) {
+        return commentDB.save(comment);
     }
 
 }

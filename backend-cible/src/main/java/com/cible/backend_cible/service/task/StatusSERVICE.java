@@ -18,7 +18,7 @@ public class StatusSERVICE {
         return statusDB.findAll();
     }
 
-    public Optional<Status> getById(Integer id) {
+    public Optional<Status> getStatusById(Integer id) {
         return statusDB.findById(id);
     }
 
@@ -26,12 +26,16 @@ public class StatusSERVICE {
         return statusDB.findByName(name);
     }
 
-    public Status save(Status status) {
+    public Status createStatus(Status status) {
         return statusDB.save(status);
     }
 
     public boolean existsByName(String name) {
         return statusDB.existsByName(name);
+    }
+
+    public void deleteStatus(Integer id) {
+        statusDB.deleteById(id);
     }
     
 }

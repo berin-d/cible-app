@@ -26,7 +26,7 @@ public class PrioritySERVICE {
         return priorityDB.findByName(name);
     }
 
-    public Priority savePriority(Priority priority) {
+    public Priority createPriority(Priority priority) {
         return priorityDB.save(priority);
     }
 
