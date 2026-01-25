@@ -1,13 +1,13 @@
 import Button from "../../components/commons/button"
 import logo from "../../assets/app-icon.png"
 import { useRef, useState, useEffect } from 'react';
+import { NavLink } from "react-router-dom";
 
 
 
 export default function WelcomePage() {
     const [taskDoneCount, setTaskDoneCount] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
-    const sectionsRef = useRef([]);
 
     const handleLogoClick = () => {
         setTaskDoneCount(taskDoneCount + 1);
@@ -19,50 +19,25 @@ export default function WelcomePage() {
 
     };
 
-    useEffect(() => {
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-12');
-                }
-            });
-        }, observerOptions);
-
-        sectionsRef.current.forEach(section => {
-            if (section) observer.observe(section);
-        });
-
-        return () => observer.disconnect();
-    }, []);
 
     return (
-        <div className="min-h-screen overflow-x-hidden">
+        <div className="min-h-screen bg-[#1A1A1E]">
             {/* Navigation Section */}
-            <header className="fixed top-0 w-full px-8 md:px-12 py-5 flex items-center z-50">
+            <header className="fixed top-0 w-full px-8 md:px-12 flex items-center z-50 bg-[#242429]/80 backdrop-blur-sm">
                 <nav className="flex gap-2 items-center p-2 w-full justify-between">
                     <Button text="Download" label="" iconName="download"></Button>
-                    <a className="font-medium hover:text-green-400 transition-colors hover:cursor-pointer text-white">LOGIN / SIGN UP</a>
+                    <NavLink className="font-medium hover:text-green-400 transition-colors hover:cursor-pointer text-white" to="/login">LOGIN / SIGN UP </NavLink>
+
                 </nav>
             </header>
 
-
-            <main className="bg-[#1A1A1E] min-h-screen flex flex-col justify-center items-center">
+            <main className="min-h-screen flex flex-col pt-24 md:pt-32">
                 {/* Hero Section */}
-                <section>
+                <section className="flex flex-col flex items-center justify-center py-12">
                     <div className="flex flex-col justify-center items-center animation">
-                        <p className={`
-                            ${isVisible ? 'opacity-100' : 'opacity-0'}
-                            text-white font-medium uppercase
-                            transition-opacity duration-200 ease-in-out
-                            `}>✅ {taskDoneCount}</p>
+                        <p className={` ${isVisible ? 'opacity-100' : 'opacity-0'} text-white font-medium uppercase transition-opacity duration-200 ease-in-out `}>✅ {taskDoneCount}</p>
                         <img src={logo} alt="logo"
-                            className="size-64 transform transition-transform duration-200 cursor-pointer hover:-translate-y-1  active:scale-95"
+                            className="size-64 transform transition-transform duration-200 cursor-pointer hover:-translate-y-1 active:scale-95"
                             onClick={handleLogoClick} ></img>
                         <h1 className="text-white text-4xl text-center mt-4 font-bold uppercase">Turn Tasks Into Progress</h1>
                     </div>
@@ -71,12 +46,11 @@ export default function WelcomePage() {
                     </div>
                 </section>
 
-
                 {/* Create Task */}
                 <section
-                    ref={el => sectionsRef.current[0] = el}
-                    className="relative max-w-7xl mx-auto px-6 md:px-12 py-24 grid md:grid-cols-2 gap-16 items-center opacity-0 translate-y-12 transition-all duration-700"
+                    className="max-w-7xl mx-auto px-6 md:px-12 py-24 grid md:grid-cols-2 gap-16 items-center"
                 >
+
                     <div className="space-y-6">
                         <h2 className="text-4xl md:text-5xl font-bold text-white">Créez vos tâches en un clic</h2>
                         <p className="text-lg leading-relaxed text-white">
@@ -117,6 +91,13 @@ export default function WelcomePage() {
 
                 </section>
             </main >
+
+
+            <footer>
+                <div>
+                    <p className="text-center text-white p-5">© 2026</p>
+                </div>
+            </footer>
 
         </div >
 
