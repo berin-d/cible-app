@@ -1,5 +1,9 @@
 package com.cible.backend_cible.model.system;
 
+import java.time.LocalDateTime;
+
+import com.cible.backend_cible.model.task.User;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,11 +21,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
-
-import com.cible.backend_cible.model.task.User;
-
-
 
 @Entity
 @NoArgsConstructor
@@ -94,25 +93,4 @@ public class Settings {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
-}
-
-// ENUM
-enum Theme {
-    LIGHT, DARK, AUTO
-}
-
-enum Language {
-    FR, EN, DE
-}
-
-enum DateFormat {
-    DD_MM_YYYY, MM_DD_YYYY, YYYY_MM_DD
-}
-
-enum TimeFormat {
-    HOURS_12, HOURS_24
-}
-
-enum ViewType {
-    LIST, GRID, CALENDAR, KANBAN
 }

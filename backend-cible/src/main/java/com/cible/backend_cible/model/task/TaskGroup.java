@@ -37,7 +37,7 @@ public class TaskGroup {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "User is mandatory")
-    private User user; // owner of group
+    private Integer userId; // owner of group
 
     @OneToMany(mappedBy = "taskGroup")
     private List<Task> tasks = new ArrayList<>();
