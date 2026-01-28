@@ -1,7 +1,6 @@
 package com.cible.backend_cible.controller.task;
 
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -98,19 +97,21 @@ public class PriorityControllerTest {
         when(prioritySERVICE.createPriority(p)).thenReturn(p);
 
         mockMvc.perform(post("/api/priorities/")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(p)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value("High"));
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(p)))
+        .andExpect(status().isCreated())
+        .andExpect(jsonPath("$.id").value(1))
+        .andExpect(jsonPath("$.name").value("High"));
+
     }
 
     @Test
     void testDeletePriority() throws Exception {
-        doNothing().when(prioritySERVICE).deletePriority(1);
-
+        when(prioritySERVICE.deletePriority(1)).thenReturn(true);
+    
         mockMvc.perform(delete("/api/priorities/1")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
     }
+    
 }

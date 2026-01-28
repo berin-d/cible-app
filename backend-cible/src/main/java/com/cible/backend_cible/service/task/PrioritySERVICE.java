@@ -30,7 +30,12 @@ public class PrioritySERVICE {
         return priorityDB.save(priority);
     }
 
-    public void deletePriority(Integer id) {
+    public boolean deletePriority(Integer id) {
+        if (!priorityDB.existsById(id)) {
+            return false;
+        }
         priorityDB.deleteById(id);
+        return true;
     }
+    
 }

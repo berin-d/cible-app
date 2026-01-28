@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,24 +66,25 @@ public class TaskControllerTest {
         Task t1 = new Task();
         t1.setId(1);
         t1.setTitle("Important Task");
-
-        when(taskSERVICE.getTaskById(1)).thenReturn(t1);
-
+    
+        when(taskSERVICE.getTaskByIdOptional(1)).thenReturn(Optional.of(t1));
+    
         mockMvc.perform(get("/api/tasks/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.title").value("Important Task"));
     }
+    
 
 
     @Test
     void testGetTaskById_NotFound() throws Exception {
-        when(taskSERVICE.getTaskById(999))
-                .thenThrow(new RuntimeException("Task not found"));
-
+        when(taskSERVICE.getTaskByIdOptional(999)).thenReturn(Optional.empty());
+    
         mockMvc.perform(get("/api/tasks/999")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
+               .andExpect(status().isNotFound());
     }
+    
 }

@@ -3,11 +3,13 @@ package com.cible.backend_cible.service.system;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cible.backend_cible.db.system.SettingsDB;
 import com.cible.backend_cible.model.system.Settings;
 import com.cible.backend_cible.model.task.User;
 
+@Service
 public class SettingsSERVICE {
  
    @Autowired

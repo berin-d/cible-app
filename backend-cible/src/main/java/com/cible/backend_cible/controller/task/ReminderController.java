@@ -22,24 +22,30 @@ public class ReminderController {
     private ReminderSERVICE reminderSERVICE;
 
     @GetMapping("/all")
-    public Iterable<Reminder> getAllReminders() {
-        return reminderSERVICE.getAllReminders();
+    public ResponseEntity<Iterable<Reminder>> getAllReminders() {
+        return ResponseEntity.ok(reminderSERVICE.getAllReminders());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Reminder> getReminderById(@PathVariable Integer id) {
         return reminderSERVICE.getReminderById(id)
-                .map(reminder -> ResponseEntity.ok(reminder))
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
-    }    
+    }  
 
     @PostMapping("/")
-    public Reminder createReminder(@RequestBody Reminder reminder) {
-        return reminderSERVICE.createReminder(reminder);
+    public ResponseEntity<Reminder> createReminder(@RequestBody Reminder reminder) {
+        Reminder created = reminderSERVICE.createReminder(reminder);
+        return ResponseEntity.ok(created);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteReminder(@PathVariable Integer id) {
-        reminderSERVICE.deleteReminder(id);
+    public ResponseEntity<Void> deleteReminder(@PathVariable Integer id) {
+        boolean deleted = reminderSERVICE.deleteReminder(id);
+
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

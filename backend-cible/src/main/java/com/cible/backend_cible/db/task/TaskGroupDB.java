@@ -16,4 +16,6 @@ public interface TaskGroupDB extends CrudRepository<TaskGroup, Integer> {
         List<TaskGroup> findByNameContainingIgnoreCase(String name);
     
         boolean existsByUserAndName(User user, String name);
+
+        List<TaskGroup> findByUserId(Integer userId);
 }

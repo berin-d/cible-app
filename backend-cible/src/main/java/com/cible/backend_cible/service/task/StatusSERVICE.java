@@ -34,8 +34,12 @@ public class StatusSERVICE {
         return statusDB.existsByName(name);
     }
 
-    public void deleteStatus(Integer id) {
+    public boolean deleteStatus(Integer id) {
+        if (!statusDB.existsById(id)) {
+            return false;
+        }
         statusDB.deleteById(id);
+        return true;
     }
     
 }

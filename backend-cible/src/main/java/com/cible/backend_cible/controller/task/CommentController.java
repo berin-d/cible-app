@@ -2,9 +2,11 @@ package com.cible.backend_cible.controller.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +22,9 @@ public class CommentController {
     private CommentSERVICE commentSERVICE;
 
     @GetMapping("/all")
-    public Iterable<Comment> getAllComments() {
-        return commentSERVICE.getAllComments();
+    public ResponseEntity<Iterable<Comment>> getAllComments() {
+        Iterable<Comment> comments = commentSERVICE.getAllComments();
+        return ResponseEntity.ok(comments);
     }
 
     @GetMapping("/{id}")
@@ -32,17 +35,36 @@ public class CommentController {
     }
 
     @PostMapping("/")
-    public Comment createComment(@RequestBody Comment comment) {
-        return commentSERVICE.createComment(comment);
+    public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
+        Comment saved = commentSERVICE.createComment(comment);
+        return ResponseEntity.status(201).body(saved);
     }
 
     @GetMapping("/user/{userId}")
-    public Iterable<Comment> getCommentsByUser(@PathVariable Integer userId) {
-        return commentSERVICE.getCommentsByUserId(userId);
+    public ResponseEntity<Iterable<Comment>> getCommentsByUser(@PathVariable Integer userId) {
+        Iterable<Comment> comments = commentSERVICE.getCommentsByUserId(userId);
+        return ResponseEntity.ok(comments);
     }
 
     @GetMapping("/task/{taskId}")
-    public Iterable<Comment> getCommentsByTask(@PathVariable Integer taskId) {
-        return commentSERVICE.getCommentsByTaskId(taskId);
+    public ResponseEntity<Iterable<Comment>> getCommentsByTask(@PathVariable Integer taskId) {
+        Iterable<Comment> comments = commentSERVICE.getCommentsByTaskId(taskId);
+        return ResponseEntity.ok(comments);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Comment> updateComment(@PathVariable Integer id,
+                                                 @RequestBody Comment comment) {
+        return commentSERVICE.updateComment(id, comment)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Integer id) {
+        if (commentSERVICE.deleteComment(id)) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.notFound().build();
     }
 }

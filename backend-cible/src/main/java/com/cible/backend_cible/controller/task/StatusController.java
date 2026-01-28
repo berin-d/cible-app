@@ -20,25 +20,32 @@ public class StatusController {
     private StatusSERVICE statusSERVICE;
 
     @GetMapping("/all")
-    public Iterable<Status> getAllStatuses() {
-        return statusSERVICE.getAllStatus();
+    public ResponseEntity<Iterable<Status>> getAllStatuses() {
+        return ResponseEntity.ok(statusSERVICE.getAllStatus());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Status> getStatusById(@PathVariable Integer id) {
         return statusSERVICE.getStatusById(id)
-                .map(status -> ResponseEntity.ok(status))
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
     @PostMapping("/")
-    public Status createStatus(@RequestBody Status status) {
-        return statusSERVICE.createStatus(status);
+    public ResponseEntity<Status> createStatus(@RequestBody Status status) {
+        Status created = statusSERVICE.createStatus(status);
+        return ResponseEntity.ok(created);
     }
 
+
     @DeleteMapping("/{id}")
-    public void deleteStatus(@PathVariable Integer id) {
-        statusSERVICE.deleteStatus(id);
+    public ResponseEntity<Void> deleteStatus(@PathVariable Integer id) {
+        boolean deleted = statusSERVICE.deleteStatus(id);
+
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

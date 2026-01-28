@@ -1,8 +1,6 @@
 package com.cible.backend_cible.controller.task;
 
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,7 +22,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.cible.backend_cible.model.task.TaskGroup;
-import com.cible.backend_cible.model.task.User;
 import com.cible.backend_cible.service.task.TaskGroupSERVICE;
 import com.cible.backend_cible.service.task.UserSERVICE;
 
@@ -74,49 +71,46 @@ public class TaskGroupControllerTest {
     void testGetGroupById_Found() throws Exception {
         TaskGroup group = new TaskGroup();
         group.setId(1);
-
-        when(taskGroupSERVICE.getGroupById(1)).thenReturn(group);
-
-        mockMvc.perform(get("/api/task-groups/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1));
+    
+        when(taskGroupSERVICE.getGroupByIdOptional(1)).thenReturn(Optional.of(group));
+    
+        mockMvc.perform(get("/api/task-groups/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id").value(1));
     }
+    
 
 
     @Test
     void testGetGroupById_NotFound() throws Exception {
-        when(taskGroupSERVICE.getGroupById(999))
-                .thenThrow(new RuntimeException("TaskGroup not found"));
-
-        mockMvc.perform(get("/api/task-groups/999"))
-                .andExpect(status().isNotFound());
+        when(taskGroupSERVICE.getGroupByIdOptional(999)).thenReturn(Optional.empty());
+    
+        mockMvc.perform(get("/api/task-groups/999")
+                        .contentType(MediaType.APPLICATION_JSON))
+               .andExpect(status().isNotFound());
     }
+    
 
 
 
     @Test
     void testGetGroupsByUser() throws Exception {
-        User user = new User();
-        user.setId(1);
-        user.setUsername("Ben");
-
         TaskGroup g1 = new TaskGroup();
         g1.setId(10);
-
+    
         TaskGroup g2 = new TaskGroup();
         g2.setId(20);
-
-        lenient().when(userSERVICE.getUserById(1)).thenReturn(Optional.of(user));
-
-        when(taskGroupSERVICE.getGroupsByUser(
-            argThat(u -> u.getId() != null && u.getId() == 1)))
-        .thenReturn(List.of(g1, g2));
-
-        mockMvc.perform(get("/api/task-groups/user/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(10))
-                .andExpect(jsonPath("$[1].id").value(20));
+    
+        when(taskGroupSERVICE.getGroupsByUserId(1)).thenReturn(List.of(g1, g2));
+    
+        mockMvc.perform(get("/api/task-groups/user/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$[0].id").value(10))
+               .andExpect(jsonPath("$[1].id").value(20));
     }
+    
 
 
 
@@ -137,9 +131,11 @@ public class TaskGroupControllerTest {
 
     @Test
     void testDeleteGroup() throws Exception {
+        when(taskGroupSERVICE.existsById(1)).thenReturn(true);
         doNothing().when(taskGroupSERVICE).deleteGroup(1);
-
+    
         mockMvc.perform(delete("/api/task-groups/1"))
-                .andExpect(status().isOk());
+               .andExpect(status().isNoContent());
     }
+    
 }

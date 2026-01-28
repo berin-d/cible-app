@@ -90,22 +90,23 @@ public class TaskAssignmentControllerTest {
     void testGetByTask() throws Exception {
         Task task = new Task();
         task.setId(5);
-
+    
         TaskAssignment ta1 = new TaskAssignment();
         ta1.setId(30);
         TaskAssignment ta2 = new TaskAssignment();
         ta2.setId(40);
-
-        lenient().when(taskSERVICE.getTaskById(5)).thenReturn(task);
-
+    
+        when(taskSERVICE.getTaskByIdOptional(5)).thenReturn(Optional.of(task));
+    
         when(taskAssignmentSERVICE.getByTask(
             argThat(t -> t.getId() != null && t.getId() == 5)
         )).thenReturn(List.of(ta1, ta2));
-
+    
         mockMvc.perform(get("/api/task-assignments/task/5"))
                .andExpect(status().isOk())
                .andExpect(jsonPath("$[0].id").value(30))
                .andExpect(jsonPath("$[1].id").value(40));
     }
+    
 
 }
