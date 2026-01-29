@@ -2,7 +2,7 @@ import Button from "../../components/commons/button";
 import Input from "../../components/commons/input";
 import logo from "../../assets/app-icon.png"
 
-function LoginPage() {
+export default function LoginPage() {
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen l bg-[#1A1A1E] gap-2 p-5">
             <div className="pb-5">
@@ -18,4 +18,4 @@ function LoginPage() {
 }
 
 
-export default LoginPage;
+

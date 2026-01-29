@@ -6,6 +6,9 @@ import LoginPage from './pages/auth/login';
 import WelcomePage from './pages/web/Welcome';
 import DashboardPage from './pages/dashboard/dashboard';
 
+// Layouts
+import AuthLayout from './components/layouts/authLayout';
+
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     if (!isAuthenticated()) {
@@ -26,14 +29,16 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-
-                {/* Welcome page - seulement pour web */}
+                {/* Routes */}
                 <Route path="/" element={<WelcomeRedirect />} />
 
-                {/* Authentication */}
-                <Route path="/login" element={<LoginPage />} />
+                <Route element={<AuthLayout />}>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<LoginPage />} />
+                </Route>
 
-                {/* Application protégée */}
+                {/* Portected Routes */}
+
                 <Route
                     path="/dashboard"
                     element={
@@ -43,7 +48,7 @@ export default function App() {
                     }
                 />
 
-                {/* Route par défaut */}
+                {/* Default Routes */}
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </BrowserRouter>
