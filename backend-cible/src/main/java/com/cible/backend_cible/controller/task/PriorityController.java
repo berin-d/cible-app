@@ -22,26 +22,32 @@ public class PriorityController {
     private PrioritySERVICE prioritySERVICE;
 
     @GetMapping("/all")
-    public Iterable<Priority> getAllPriorities() {
-        return prioritySERVICE.getAllPriorities();
+    public ResponseEntity<Iterable<Priority>> getAllPriorities() {
+        return ResponseEntity.ok(prioritySERVICE.getAllPriorities());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Priority> getPriorityById(@PathVariable Integer id) {
         return prioritySERVICE.getPriorityById(id)
-                .map(priority -> ResponseEntity.ok(priority))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-
     @PostMapping("/")
-    public Priority createPriority(@RequestBody Priority priority) {
-        return prioritySERVICE.createPriority(priority);
+    public ResponseEntity<Priority> createPriority(@RequestBody Priority priority) {
+        Priority created = prioritySERVICE.createPriority(priority);
+        return ResponseEntity.status(201).body(created);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePriority(@PathVariable Integer id) {
-        prioritySERVICE.deletePriority(id);
+    public ResponseEntity<Void> deletePriority(@PathVariable Integer id) {
+        boolean deleted = prioritySERVICE.deletePriority(id);
+    
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
+    
 }
 

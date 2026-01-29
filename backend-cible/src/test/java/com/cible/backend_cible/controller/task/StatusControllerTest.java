@@ -103,7 +103,9 @@ public class StatusControllerTest {
 
     @Test
     void testDeleteStatus() throws Exception {
+        when(statusSERVICE.deleteStatus(1)).thenReturn(true);
+
         mockMvc.perform(delete("/api/statuses/1"))
-               .andExpect(status().isOk());
+               .andExpect(status().isNoContent()); 
     }
 }

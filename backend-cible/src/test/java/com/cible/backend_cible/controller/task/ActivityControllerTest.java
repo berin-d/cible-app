@@ -42,15 +42,16 @@ public class ActivityControllerTest {
         a1.setId(1);
         Activity a2 = new Activity();
         a2.setId(2);
-
+    
         when(activitySERVICE.getAllActivities()).thenReturn(List.of(a1, a2));
-
-        mockMvc.perform(get("/api/activities/all")
+    
+        mockMvc.perform(get("/api/activities") 
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].id").value(1))
             .andExpect(jsonPath("$[1].id").value(2));
     }
+    
 
     @Test
     void testGetActivitiesByUser() throws Exception {
@@ -74,13 +75,14 @@ public class ActivityControllerTest {
         a1.setId(100);
         Activity a2 = new Activity();
         a2.setId(200);
-
+    
         when(activitySERVICE.getActivitiesByUserId(42)).thenReturn(List.of(a1, a2));
-
-        mockMvc.perform(get("/api/activities/42")
+    
+        mockMvc.perform(get("/api/activities/user/42")
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].id").value(100))
             .andExpect(jsonPath("$[1].id").value(200));
     }
+    
 }

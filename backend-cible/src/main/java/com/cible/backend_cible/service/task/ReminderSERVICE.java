@@ -33,7 +33,11 @@ public class ReminderSERVICE {
         return reminderDB.save(reminder);
     }
 
-    public void deleteReminder(Integer id) {
-        reminderDB.deleteById(id);
+    public boolean deleteReminder(Integer id) {
+        if (reminderDB.existsById(id)) {
+            reminderDB.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

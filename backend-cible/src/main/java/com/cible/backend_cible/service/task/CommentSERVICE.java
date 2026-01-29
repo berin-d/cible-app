@@ -45,4 +45,20 @@ public class CommentSERVICE {
         return commentDB.save(comment);
     }
 
+    public Optional<Comment> updateComment(Integer id, Comment newData) {
+        return commentDB.findById(id).map(existing -> {
+            existing.setContent(newData.getContent());    
+            return commentDB.save(existing);
+        });
+    }
+    
+    public boolean deleteComment(Integer id) {
+        if (!commentDB.existsById(id)) {
+            return false;
+        }
+        commentDB.deleteById(id);
+        return false;
+    }
+    
+
 }

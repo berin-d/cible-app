@@ -1,6 +1,7 @@
 package com.cible.backend_cible.service.task;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,17 @@ public class TaskGroupSERVICE {
     public void deleteGroup(Integer id) {
         taskGroupDB.deleteById(id);
     }
+
+    public Optional<TaskGroup> getGroupByIdOptional(Integer id) {
+        return taskGroupDB.findById(id);
+    }
+    
+    public boolean existsById(Integer id) {
+        return taskGroupDB.existsById(id);
+    }
+
+    public List<TaskGroup> getGroupsByUserId(Integer userId) {
+        return taskGroupDB.findByUserId(userId);
+    }
+    
 }

@@ -1,6 +1,7 @@
 package com.cible.backend_cible.service.task;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,11 @@ public class TaskSERVICE {
     public List<Task> getTasksByPriority(Priority priority) {
         return taskDB.findByPriority(priority);
     }
+    
+    public Optional<Task> getTaskByIdOptional(Integer id) {
+        return taskDB.findById(id);
+    }
+    
 
     public List<Task> searchTasksByTitle(String keyword) {
         return taskDB.findByTitleContainingIgnoreCase(keyword);
@@ -43,5 +49,9 @@ public class TaskSERVICE {
 
     public void deleteTask(Integer id) {
         taskDB.deleteById(id);
+    }
+
+    public boolean existsById(Integer id) {
+        return taskDB.existsById(id);
     }
 }

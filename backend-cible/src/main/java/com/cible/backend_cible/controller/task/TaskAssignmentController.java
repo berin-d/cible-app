@@ -2,10 +2,9 @@ package com.cible.backend_cible.controller.task;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.task.TaskAssignment;
-import com.cible.backend_cible.model.task.User;
 import com.cible.backend_cible.service.task.TaskAssignmentSERVICE;
 import com.cible.backend_cible.service.task.TaskSERVICE;
 import com.cible.backend_cible.service.task.UserSERVICE;
@@ -24,20 +23,24 @@ public class TaskAssignmentController {
     private TaskSERVICE taskSERVICE;
 
     @GetMapping("/all")
-    public Iterable<TaskAssignment> getAllTaskAssignments() {
-        return taskAssignmentSERVICE.getAllTaskAssignments();
+    public ResponseEntity<Iterable<TaskAssignment>> getAllTaskAssignments() {
+        return ResponseEntity.ok(taskAssignmentSERVICE.getAllTaskAssignments());
     }
 
     @GetMapping("/user/{userId}")
-    public List<TaskAssignment> getByUser(@PathVariable Integer userId) {
-        User user = userSERVICE.getUserById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        return taskAssignmentSERVICE.getByUser(user);
+    public ResponseEntity<List<TaskAssignment>> getByUser(@PathVariable Integer userId) {
+
+        return userSERVICE.getUserById(userId)
+                .map(user -> ResponseEntity.ok(taskAssignmentSERVICE.getByUser(user)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
 
     @GetMapping("/task/{taskId}")
-    public List<TaskAssignment> getByTask(@PathVariable Integer taskId) {
-        Task task = taskSERVICE.getTaskById(taskId);
-        return taskAssignmentSERVICE.getByTask(task);
-    }
+    public ResponseEntity<List<TaskAssignment>> getByTask(@PathVariable Integer taskId) {
 
+        return taskSERVICE.getTaskByIdOptional(taskId)
+                .map(task -> ResponseEntity.ok(taskAssignmentSERVICE.getByTask(task)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }

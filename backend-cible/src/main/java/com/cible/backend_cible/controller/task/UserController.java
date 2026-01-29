@@ -1,7 +1,6 @@
 
 package com.cible.backend_cible.controller.task;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,24 +22,20 @@ public class UserController {
     private UserSERVICE userSERVICE;
 
     @GetMapping("/all")
-    public Iterable<User> getAllUsers() {
-        return userSERVICE.getAllUsers();
+    public ResponseEntity<Iterable<User>> getAllUsers() {
+        return ResponseEntity.ok(userSERVICE.getAllUsers());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-        Optional<User> user = userSERVICE.getUserById(id);
-
-        if (user.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(user.get());
+        return userSERVICE.getUserById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-
     @PostMapping("/")
-    public User createUser(@RequestBody User user) {
-        return userSERVICE.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User saved = userSERVICE.createUser(user);
+        return ResponseEntity.ok(saved);
     }
 }

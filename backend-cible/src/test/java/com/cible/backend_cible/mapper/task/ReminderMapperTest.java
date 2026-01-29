@@ -43,6 +43,6 @@ public class ReminderMapperTest {
         assertThat(reminder).isNotNull();
         assertThat(reminder.getId()).isEqualTo(2);
         assertThat(reminder.getRemindAt()).isEqualTo(LocalDateTime.of(2026, 2, 1, 9, 0));
-        assertThat(reminder.getTask()).isNull(); // task est ignoré dans le mapper
+        assertThat(reminder.getTask()).isNull();
     }
 }
