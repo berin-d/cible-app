@@ -3,7 +3,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 // solid
 import { 
   faUser,
-  faDownload
+  faDownload,
+  faCircleUser,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { 
@@ -15,5 +16,7 @@ library.add(
   // User
   faUser,
   // Download
-  faDownload
+  faDownload,
+  // User Circle
+  faCircleUser
 );
