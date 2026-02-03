@@ -5,6 +5,8 @@ import {
   faUser,
   faDownload,
   faCircleUser,
+  faChartLine,
+  faGripHorizontal
 } from '@fortawesome/free-solid-svg-icons';
 
 import { 
@@ -18,5 +20,11 @@ library.add(
   // Download
   faDownload,
   // User Circle
-  faCircleUser
+  faCircleUser,
+  // Chart Line
+  faChartLine,
+  // Grip Horizontal
+  faGripHorizontal
+  
+
 );
