@@ -9,13 +9,9 @@ export interface IconProps {
   className?: string;
   rotation?: 90 | 180 | 270;
   flip?: 'horizontal' | 'vertical' | 'both';
-  /** Animation de spin */
   spin?: boolean;
-  /** Animation de pulse */
   pulse?: boolean;
-  /** Fonction appelée au clic */
   onClick?: () => void;
-  /** Aria label pour l'accessibilité */
   ariaLabel?: string;
 }
 

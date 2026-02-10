@@ -1,6 +1,6 @@
 import Button from "../../components/commons/button"
 import logo from "../../assets/app-icon.png"
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 import { NavLink } from "react-router-dom";
 
 
