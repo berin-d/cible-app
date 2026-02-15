@@ -9,6 +9,7 @@ import DashboardPage from './pages/dashboard/dashboard';
 // Layouts
 import AuthLayout from './components/layouts/authLayout';
 import AppLayout from './components/layouts/appLayout';
+import TaskPage from './pages/task/task';
 
 
 /*
@@ -43,6 +44,7 @@ export default function App() {
 
                 <Route element={<AppLayout/>}>
                   <Route path="/dashboard" element={<DashboardPage />} />
+                  <Route path="/tasks" element={<TaskPage />} />
                 </Route>
               
                 {/* Default Routes */}

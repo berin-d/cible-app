@@ -22,8 +22,8 @@ export default function Button(
             <button className=
             {`button ${color ? `button--${color}` : ''} 
             flex gap-2
-            bg-[#50C878] border-0 rounded-md p-1 pl-5 pr-5 
-            hover:bg-[#2c7544] 
+            bg-primary border-0 rounded-md p-1 pl-5 pr-5 
+            hover:bg-primary-hover hover:cursor-pointer
             items-center justify-between 
                 `} disabled={disabled}>
                 <div>
