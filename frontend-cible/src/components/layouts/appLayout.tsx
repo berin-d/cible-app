@@ -1,8 +1,15 @@
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 import { Icon } from "../commons/icon";
 const AppLayout = () => {
+
+    const [selectedLink, setSelectedLink] = useState(false)
+
+    function handleclick() {
+        setSelectedLink(!selectedLink)
+    }
     return (
         <div className="min-h-screen flex">
             <aside className="flex flex-col space-y-4 bg-[#242429] p-4 md:text-xl text-xs md:w-60 w-20 text-white">
@@ -14,14 +21,30 @@ const AppLayout = () => {
                 <div>
                     <ul className="flex flex-col space-y-2 pt-5">
                         <li>
-                            <NavLink className="flex hover:text-primary-400 hover:cursor-pointer items-center gap-2 bg hover:bg-gray-100/5 p-2 rounded-xl" to="/dashboard">
+                            <NavLink
+                                to="/dashboard"
+                                className={({ isActive }) =>
+                                    `flex items-center gap-2 p-2 rounded-xl cursor-pointer
+        transform transition-all duration-300 ease-in-out
+        hover:text-primary-400 hover:bg-gray-100/5 hover:scale-[1.03] hover:translate-x-1
+        ${isActive ? 'text-primary-500 bg-gray-100/10 text-primary-400 scale-[1.03] translate-x-1' : 'scale-100'}`
+                                }
+                            >
                                 <Icon icon="grip" size="lg" />
                                 <p>Dashboard</p>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink className="flex hover:text-primary-400 hover:cursor-pointer items-center gap-2 bg hover:bg-gray-100/5 p-2 rounded-xl" to="/tasks">
+                            <NavLink
+                                to="/tasks"
+                                className={({ isActive }) =>
+                                    `flex items-center gap-2 p-2 rounded-xl cursor-pointer
+        transform transition-all duration-300 ease-in-out
+        hover:text-primary-400 hover:bg-gray-100/5 hover:scale-[1.03] hover:translate-x-1
+        ${isActive ? 'text-primary-500 bg-gray-100/10 text-primary-400 scale-[1.03] translate-x-1' : 'scale-100'}`
+                                }
+                            >
                                 <Icon icon="chart-line" size="lg" />
                                 <p>Task</p>
                             </NavLink>
@@ -33,10 +56,7 @@ const AppLayout = () => {
             </aside>
 
             <main className="bg-[#1A1A1E] w-screen">
-                <div>
-                    <p>header</p>
-                </div>
-                <div>
+                <div className="p-2">
                     <Outlet />
                 </div>
             </main>

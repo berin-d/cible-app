@@ -35,18 +35,18 @@ export default function App() {
                 {/* Routes */}
                 <Route path="/" element={<WelcomeRedirect />} />
 
-                <Route element={<AuthLayout/>}>
+                <Route element={<AuthLayout />}>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<LoginPage />} />
                 </Route>
 
                 {/* Portected Routes */}
 
-                <Route element={<AppLayout/>}>
-                  <Route path="/dashboard" element={<DashboardPage />} />
-                  <Route path="/tasks" element={<TaskPage />} />
+                <Route element={<AppLayout />}>
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/tasks" element={<TaskPage />} />
                 </Route>
-              
+
                 {/* Default Routes */}
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

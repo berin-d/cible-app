@@ -5,6 +5,7 @@ interface InputProps {
     label: string;
     type?: 'text' | 'password' | 'email';
     disabled?: boolean;
+    onClick?: () => void;
     //icon here
 
 }
@@ -13,7 +14,7 @@ export default function Input(
     // Props
     { placeholder, label, disabled, type }: InputProps) {
 
-    // Core
+    // Content
     return (
         <div className="text-white">
             <p>{label}</p>
