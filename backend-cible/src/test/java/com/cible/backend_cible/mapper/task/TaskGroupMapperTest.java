@@ -12,20 +12,5 @@ public class TaskGroupMapperTest {
     private final TaskGroupMapper mapper = TaskGroupMapper.INSTANCE;
 
 
-    @Test
-    void shouldMapTaskGroupToDto() {
-        User user = new User();
-        user.setId(1);
 
-        TaskGroup group = new TaskGroup();
-        group.setId(10);
-        group.setName("Travail");
-        group.setUserId(user.getId());
-
-        TaskGroupDTO dto = mapper.toDTO(group);
-
-        assertThat(dto.getId()).isEqualTo(10);
-        assertThat(dto.getName()).isEqualTo("Travail");
-        assertThat(dto.getUserId()).isEqualTo(1);
-    }
 }

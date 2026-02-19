@@ -17,5 +17,5 @@ public interface TaskGroupDB extends CrudRepository<TaskGroup, Integer> {
     
         boolean existsByUserAndName(User user, String name);
 
-        List<TaskGroup> findByUserId(Integer userId);
+        List<TaskGroup> findByUser_Id(Integer userId);
 }
