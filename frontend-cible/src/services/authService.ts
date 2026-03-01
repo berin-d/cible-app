@@ -21,5 +21,23 @@ export const authService = {
         }
     },
 
+    async login(data: UserLoginDto): Promise<{ success: boolean; error?: string; user?: User }> {
+        try {
+            const user = await authApi.login(data);
+
+
+            // Sauvegarde de l'utilisateur en localStorage (sans token)
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('isAuthenticated', 'true');
+            return { success: true, user };
+        } catch (error: any) {
+            console.error('Login error:', error);
+            return {
+                success: false,
+                error: error.message || 'Erreur lors de la connexion',
+            };
+        }
+    },
+
 
 }

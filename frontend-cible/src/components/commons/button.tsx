@@ -4,16 +4,18 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 interface ButtonProps {
     text: string;
     label?: string;
+    type?: 'button' | 'submit' | 'reset';
     color?: 'primary' | 'secondary' | 'danger';
     disabled?: boolean;
     iconName?: IconProp;
+
     onClick?: () => void;
 }
 
 
 export default function Button(
     // Props
-    { text, label, color, disabled, iconName, onClick }: ButtonProps)
+    { text, label, type, color, disabled, iconName, onClick }: ButtonProps)
 
 // Core
 {
@@ -22,6 +24,7 @@ export default function Button(
             <p>{label}</p>
             <button
                 onClick={onClick}
+                type={type || 'button'}
                 className=
                 {`button ${color ? `button--${color}` : ''} 
             flex gap-2

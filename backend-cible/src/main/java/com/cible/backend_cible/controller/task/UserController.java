@@ -2,6 +2,7 @@
 package com.cible.backend_cible.controller.task;
 
 
+import com.cible.backend_cible.model.dtos.auth.AuthDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,14 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return userSERVICE.getUserById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody AuthDTO authDTO) {
+        System.out.println("auth: " + authDTO);
+        return userSERVICE.getUserByEmailAndPassword(authDTO.getEmail(), authDTO.getPassword())
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
