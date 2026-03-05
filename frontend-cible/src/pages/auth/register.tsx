@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { NavLink } from "react-router-dom";
 import Input from "../../components/commons/input";
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 export default function RegisterPage() {
     const { register, loading, error, clearError } = useAuth();
@@ -36,12 +36,8 @@ export default function RegisterPage() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="flex flex-col items-center justify-center w-screen h-screen bg-[#1A1A1E] gap-2 p-5"
+            className="flex flex-col items-center justify-center w-screen h-screen gap-2 p-5"
         >
-            <div className="pb-5">
-                <img src="/src/assets/app-icon.png" className="size-48" alt="App icon" />
-            </div>
-
             <div className="w-full max-w-md">
                 {error && (
                     <div className="bg-red-500/20 border border-red-500 text-red-500 p-3 rounded-md mb-4 text-center">
@@ -75,12 +71,12 @@ export default function RegisterPage() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="bg-[#50C878] p-2 px-8 rounded-md hover:bg-[#45b368] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="bg-primary p-2 px-8 rounded-md  disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                         {loading ? 'Chargement...' : 'Register'}
                     </button>
                     <NavLink
-                        className="text-gray-400 mt-2 hover:text-primary-hover transition-colors"
+                        className="text-gray-400 mt-2 hover:text-primary-400 transition-colors"
                         to="/login"
                     >
                         Already have an account? Login

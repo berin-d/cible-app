@@ -13,9 +13,11 @@ export default function TaskPage() {
                 <Button onClick={() => setModalOpen(!modalOpen)} text="New task" iconName="plus"></Button>
             </header>
 
-
             <main>
-                <Modal enable={modalOpen} onClose={() => setModalOpen(false)} />
+                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Welcome back" >
+                    <form>
+                    </form>
+                </Modal>
             </main>
         </div >
     )

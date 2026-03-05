@@ -9,8 +9,7 @@ export const apiClient = ky.create({
     },
     hooks: {
         afterResponse: [
-            async (request, options, response) => {
-                console.log('API Response:', response.status, request.url);
+            async (_request, _options, response) => {
                 return response;
             },
         ],

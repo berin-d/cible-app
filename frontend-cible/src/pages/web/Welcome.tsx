@@ -1,49 +1,62 @@
 import Button from "../../components/commons/button"
-import logo from "../../assets/app-icon.png"
-import { useState } from 'react';
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import Modal from "../../components/commons/modal";
+import LoginForm from "../../components/form/loginForm";
 
 
 
 export default function WelcomePage() {
-    const [taskDoneCount, setTaskDoneCount] = useState(0);
-    const [isVisible, setIsVisible] = useState(false);
-
-    const handleLogoClick = () => {
-        setTaskDoneCount(taskDoneCount + 1);
-        setIsVisible(true);
-
-        setTimeout(() => {
-            setIsVisible(false);
-        }, 3000);
-
-    };
-
+    const [modalOpen, setModalOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-[#1A1A1E]">
-            {/* Navigation Section */}
-            <header className="fixed top-0 w-full px-8 md:px-12 flex items-center z-50 bg-[#242429]/80 backdrop-blur-sm">
-                <nav className="flex gap-2 items-center p-2 w-full justify-between">
-                    <Button text="Download" label="" iconName="download"></Button>
-                    <NavLink className="font-medium hover:text-green-400 transition-colors hover:cursor-pointer text-white" to="/login">LOGIN / SIGN UP </NavLink>
+        <div className="min-h-screen bg-[#09090b]">
+            <header className="flex w-full px-6 md:px-12 items-center bg-[#090a0c]/80 border-b border-white/5">
 
+                <div className="flex-1">
+                    <p className="text-white">image</p>
+                </div>
+
+                <nav className="flex-1 flex justify-center">
+                    <NavLink
+                        className="font-medium text-white hover:text-green-400 transition-colors hover:cursor-pointer"
+                        to="/"
+                    >
+                        Changelog
+                    </NavLink>
+                </nav>
+
+                <nav className="flex-1 flex justify-end items-center p-2 space-x-4">
+                    <p className="font-medium text-white hover:text-green-400 transition-colors hover:cursor-pointer" onClick={() => setModalOpen(!modalOpen)}>Log in</p>
+                    <Button text="Download" iconName="download" />
                 </nav>
             </header>
 
             <main className="min-h-screen flex flex-col pt-24 md:pt-32">
                 {/* Hero Section */}
-                <section className="flex flex-col flex items-center justify-center py-12">
-                    <div className="flex flex-col justify-center items-center animation">
-                        <p className={` ${isVisible ? 'opacity-100' : 'opacity-0'} text-white font-medium uppercase transition-opacity duration-200 ease-in-out `}>✅ {taskDoneCount}</p>
-                        <img src={logo} alt="logo"
-                            className="size-64 transform transition-transform duration-200 cursor-pointer hover:-translate-y-1 active:scale-95"
-                            onClick={handleLogoClick} ></img>
-                        <h1 className="text-white text-4xl text-center mt-4 font-bold uppercase">Turn Tasks Into Progress</h1>
+                <section className="flex flex-col flex items-center justify-center">
+                    <div className="text-center max-w-4xl mx-auto pr-6 pl-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border mb-8 border-white/10 bg-white/5">
+                            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span className="text-[10px] uppercase tracking-wider font-medium text-zinc-300">v1.0 is now live</span>
+                        </div>
+
+                        <h1 className="md:text-7xl leading-[1.15] text-5xl font-medium text-white  mb-6">
+                            Structure your chaos into <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">clarity</span>
+                        </h1>
+
+                        <p className="text-lg text-zinc-500 max-w-xl mx-auto mb-10 font-light leading-relaxed">
+                            A minimal workspace designed for high-leverage individuals. Connect your daily tasks to your life's actual purpose without the noise.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <button className="group h-10 px-6 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-primary text-zinc-950 hover:bg-primary-400 hover:shadow-lg hover:shadow-green-500/10 hover:cursor-pointer">
+                                Get Started
+
+                            </button>
+                        </div>
                     </div>
-                    <div className="pt-10 flex justify-center">
-                        <Button text="Download" iconName="download" label="" ></Button>
-                    </div>
+
                 </section>
 
                 {/* Create Task */}
@@ -51,45 +64,11 @@ export default function WelcomePage() {
                     className="max-w-7xl mx-auto px-6 md:px-12 py-24 grid md:grid-cols-2 gap-16 items-center"
                 >
 
-                    <div className="space-y-6">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white">Créez vos tâches en un clic</h2>
-                        <p className="text-lg leading-relaxed text-white">
-                            Ajoutez rapidement vos tâches avec des descriptions détaillées, des dates limites et des priorités.
-                            Organisez votre travail de manière intuitive et efficace.
-                        </p>
-                    </div>
-
-                    <div className="rounded-2xl p-8 border-2 hover:shadow-purple-500/20 backdrop-blur-sm">
-                        <div className="space-y-4">
-                            <div className="bg-white/5 p-5 rounded-r-xl border-l-4 border-green-500 backdrop-blur-md animate-slide-in-left">
-                                <div className="font-semibold mb-1 text-white">✅ Designer la page d'accueil</div>
-                                <div className="text-sm text-gray-400">Priorité: Haute • Due: 25 Jan</div>
-                            </div>
-                            <div className="bg-white/5 p-5 rounded-r-xl border-l-4 border-green-500 backdrop-blur-md animate-slide-in-left animation-delay-200">
-                                <div className="font-semibold mb-1 text-white">📱 Développer l'app mobile</div>
-                                <div className="text-sm text-gray-400">Priorité: Moyenne • Due: 30 Jan</div>
-                            </div>
-                            <div className="bg-white/5 p-5 rounded-r-xl border-l-4 border-green-500 backdrop-blur-md animate-slide-in-left animation-delay-400">
-                                <div className="font-semibold mb-1 text-white">🚀 Lancer la v1.0</div>
-                                <div className="text-sm text-gray-400">Priorité: Haute • Due: 15 Fév</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* kanban */}
-                <section className="">
-                    <div className="flex items-center justify-between">
-                        <div>
-
-                        </div>
-                        <div>
-
-                        </div>
-
-                    </div>
 
                 </section>
+                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Welcome Back" >
+                    <LoginForm></LoginForm>
+                </Modal>
             </main >
 
 

@@ -1,30 +1,72 @@
+import { ReactNode } from "react";
 import Button from "./button";
+import { Icon } from "./icon";
 
-interface ModelProps {
-    enable?: boolean;
+interface ModalProps {
+    // Props
+    isOpen?: boolean;
+    title?: string;
+    children: ReactNode;
+    size?: 'sm' | 'md' | 'lg' | 'xl';
+    showCloseButton?: boolean;
+    // Callbacks
     onClose: () => void;
 }
 
 export default function Modal(
     // Props
-    { enable, onClose }: ModelProps) {
+    { isOpen,
+        onClose,
+        title,
+        children,
+        size = 'md',
+        showCloseButton = true,
+    }: ModalProps) {
+    if (!isOpen) return null;
+
+    const sizeClasses = {
+        sm: 'max-w-sm',
+        md: 'max-w-md',
+        lg: 'max-w-lg',
+        xl: 'max-w-xl',
+    };
 
     // State
 
 
     // Content
-    if (!enable) return null;
+    if (!isOpen) return null;
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center"
+        <div
+            className="fixed inset-0 bg-black/75 flex items-center justify-center z-50 p-4"
             onClick={onClose}
         >
-            <div className="bg-[#1A1A1E] p-5 rounded-lg w-96"
+            <div
+                className={`bg-[#121215] border border-white/5 rounded-lg ${sizeClasses[size]} w-full shadow-xl`}
                 onClick={(e) => e.stopPropagation()}
             >
-                <h2 className="text-xl font-bold text-white mb-4">Modal Title</h2>
-                <p className="text-gray-400 mb-4">This is a modal content. You can put any information here.</p>
-                <Button text="Close" color="secondary" onClick={onClose} />
+                {/* Header */}
+                {showCloseButton && (
+                    <div className="flex items-center justify-end p-4">
+                        <Icon icon="circle-xmark" size="lg" className="text-zinc-400 hover:text-zinc-200 transition-colors hover:cursor-pointer" onClick={onClose}>
+
+                        </Icon>
+                    </div>
+                )}
+
+                {title && (
+                    <div className="flex flex-col justify-center items-center">
+                        <Icon icon="circle-user" size="2x" color="#4ade80" />
+                        <h2 className="text-2xl font-semibold text-white tracking-tight">{title}</h2>
+                        <p className="text-xs text-zinc-500 mt-2">Enter your credentials to access your roadmap.</p>
+                    </div>
+                )}
+
+                {/* Content */}
+                <div className="p-6">
+                    {children}
+                </div>
             </div>
         </div>
-    )
+    );
 }

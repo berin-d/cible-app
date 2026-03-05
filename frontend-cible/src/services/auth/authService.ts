@@ -1,16 +1,11 @@
-import { authApi } from '../api/authApi';
-import { UserRegisterDto, UserLoginDto, User } from '../models/User';
+import { authApi } from '../../api/auth/authApi';
+import { UserRegisterDto, UserLoginDto, User } from '../../models/User';
 
 export const authService = {
 
     async register(data: UserRegisterDto): Promise<{ success: boolean; error?: string; user?: User }> {
         try {
             const user = await authApi.register(data);
-
-            // Sauvegarde de l'utilisateur en localStorage (sans token)
-            localStorage.setItem('user', JSON.stringify(user));
-            localStorage.setItem('isAuthenticated', 'true');
-
             return { success: true, user };
         } catch (error: any) {
             console.error('Register error:', error);
@@ -24,11 +19,7 @@ export const authService = {
     async login(data: UserLoginDto): Promise<{ success: boolean; error?: string; user?: User }> {
         try {
             const user = await authApi.login(data);
-
-
-            // Sauvegarde de l'utilisateur en localStorage (sans token)
             localStorage.setItem('user', JSON.stringify(user));
-            localStorage.setItem('isAuthenticated', 'true');
             return { success: true, user };
         } catch (error: any) {
             console.error('Login error:', error);

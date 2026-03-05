@@ -1,15 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+
 
 import { Icon } from "../commons/icon";
 const AppLayout = () => {
 
-    const [selectedLink, setSelectedLink] = useState(false)
 
-    function handleclick() {
-        setSelectedLink(!selectedLink)
-    }
     return (
         <div className="min-h-screen flex">
             <aside className="flex flex-col space-y-4 bg-[#242429] p-4 md:text-xl text-xs md:w-60 w-20 text-white">
@@ -52,7 +48,12 @@ const AppLayout = () => {
                     </ul>
                 </div>
 
-
+                <div className="flex h-full justify-center items-end">
+                    <NavLink to="/welcome" className="flex items-center gap-2 p-2 rounded-xl cursor-pointer mt-10 text-sm text-zinc-500 hover:text-zinc-300 transition-colors">
+                        <Icon icon="arrow-right-from-bracket" size="lg" />
+                        <p>Logout</p>
+                    </NavLink>
+                </div>
             </aside>
 
             <main className="bg-[#1A1A1E] w-screen">
