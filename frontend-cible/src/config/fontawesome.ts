@@ -10,7 +10,8 @@ import {
   faPlus,
   faCircleXmark,
   faArrowRight,
-  faLock
+  faLock,
+  faEnvelope
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -36,7 +37,9 @@ library.add(
   // Arrow Right
   faArrowRight,
   // Lock
-  faLock
+  faLock,
+  // Envelope
+  faEnvelope
 
 
 );

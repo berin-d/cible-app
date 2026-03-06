@@ -3,18 +3,21 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../../components/commons/modal";
 import LoginForm from "../../components/form/loginForm";
+import RegisterForm from "../../components/form/registerForm";
+import icon from "../../assets/app-icon.png";
 
 
 
 export default function WelcomePage() {
     const [modalOpen, setModalOpen] = useState(false);
+    const [isLogin, setIsLogin] = useState(true);
 
     return (
         <div className="min-h-screen bg-[#09090b]">
             <header className="flex w-full px-6 md:px-12 items-center bg-[#090a0c]/80 border-b border-white/5">
 
-                <div className="flex-1">
-                    <p className="text-white">image</p>
+                <div className="flex-1 flex items-center">
+                    <img src={icon} alt="Logo" className="h-10 w-auto" />
                 </div>
 
                 <nav className="flex-1 flex justify-center">
@@ -27,7 +30,7 @@ export default function WelcomePage() {
                 </nav>
 
                 <nav className="flex-1 flex justify-end items-center p-2 space-x-4">
-                    <p className="font-medium text-white hover:text-green-400 transition-colors hover:cursor-pointer" onClick={() => setModalOpen(!modalOpen)}>Log in</p>
+                    <p className="font-medium text-white hover:text-green-400 transition-colors hover:cursor-pointer" onClick={() => { setModalOpen(!modalOpen); setIsLogin(true) }}>Log in</p>
                     <Button text="Download" iconName="download" />
                 </nav>
             </header>
@@ -66,8 +69,28 @@ export default function WelcomePage() {
 
 
                 </section>
-                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Welcome Back" >
-                    <LoginForm></LoginForm>
+                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Welcome Back">
+                    {isLogin ? (
+                        <>
+                            <LoginForm />
+                            <div className="text-center p-2">
+                                <span className="text-gray-400">Don't have an account? </span>
+                                <p onClick={() => setIsLogin(false)} className="text-primary-400 hover:text-primary-300 hover:cursor-pointer">
+                                    Sign up
+                                </p>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <RegisterForm />
+                            <div className="text-center p-2">
+                                <span className="text-gray-400">Already have an account? </span>
+                                <p onClick={() => setIsLogin(true)} className="text-primary-400 hover:text-primary-300 hover:cursor-pointer">
+                                    Log in
+                                </p>
+                            </div>
+                        </>
+                    )}
                 </Modal>
             </main >
 

@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Button from "./button";
 import { Icon } from "./icon";
 
 interface ModalProps {

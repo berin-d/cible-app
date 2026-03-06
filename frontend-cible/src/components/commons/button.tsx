@@ -3,7 +3,6 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface ButtonProps {
     text: string;
-    label?: string;
     type?: 'button' | 'submit' | 'reset';
     variant?: 'primary' | 'secondary' | 'danger';
     disabled?: boolean;
@@ -16,7 +15,7 @@ interface ButtonProps {
 
 export default function Button(
     // Props
-    { text, label, type, variant = 'primary', disabled, iconName, onClick, fullWidth }: ButtonProps)
+    { text, type, variant = 'primary', disabled, iconName, onClick, fullWidth }: ButtonProps)
 
 
 
