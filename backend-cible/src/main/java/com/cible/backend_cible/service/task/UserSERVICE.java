@@ -22,7 +22,12 @@ public class UserSERVICE {
         return userDB.findById(id);
     }
 
+    public Optional<User> getUserByEmailAndPassword(String email, String password) {
+        return userDB.findByEmailAndPassword(email, password);
+    }
+
     public Optional<User> getUserByEmail(String email) {
+
         return userDB.findByEmail(email);
     }
 
@@ -46,5 +51,7 @@ public class UserSERVICE {
     public void deleteUser(Integer id) {
         userDB.deleteById(id);
     }
+
+
 
 }

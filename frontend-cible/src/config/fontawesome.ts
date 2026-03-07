@@ -1,15 +1,20 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 // solid
-import { 
+import {
   faUser,
   faDownload,
   faCircleUser,
   faChartLine,
-  faGripHorizontal
+  faGripHorizontal,
+  faPlus,
+  faCircleXmark,
+  faArrowRight,
+  faLock,
+  faEnvelope
 } from '@fortawesome/free-solid-svg-icons';
 
-import { 
+import {
 } from '@fortawesome/free-regular-svg-icons';
 import { } from '@fortawesome/free-brands-svg-icons';
 
@@ -24,7 +29,17 @@ library.add(
   // Chart Line
   faChartLine,
   // Grip Horizontal
-  faGripHorizontal
-  
+  faGripHorizontal,
+  // Plus
+  faPlus,
+  // Circle Xmark
+  faCircleXmark,
+  // Arrow Right
+  faArrowRight,
+  // Lock
+  faLock,
+  // Envelope
+  faEnvelope
+
 
 );

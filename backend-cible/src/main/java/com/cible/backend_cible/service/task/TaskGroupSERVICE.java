@@ -46,7 +46,7 @@ public class TaskGroupSERVICE {
     }
 
     public List<TaskGroup> getGroupsByUserId(Integer userId) {
-        return taskGroupDB.findByUserId(userId);
+        return taskGroupDB.findByUser_Id(userId);
     }
     
 }

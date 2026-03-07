@@ -1,20 +1,20 @@
-import Input from "../../components/commons/input";
-import logo from "../../assets/app-icon.png"
 import { NavLink } from "react-router-dom";
+import LoginForm from "../../components/form/loginForm";
 
 export default function LoginPage() {
     return (
-        <div className="flex flex-col items-center justify-center w-screen h-screen l bg-[#1A1A1E] gap-2 p-5">
-            <div className="pb-5">
-                <img src={logo} className="size-48"></img>
-            </div>
+        <div className="flex flex-col items-center justify-center w-screen h-screen gap-2 p-5">
+            <LoginForm />
             <div>
-                <Input label="Username" placeholder="Your username..." />
-                <Input label="Password" placeholder="Your password.." />
-                <div className="flex flex-col justify-center items-center p-5">
-                    <NavLink className="bg-[#50C878] p-1 pl-5 pr-5 rounded-md" to="/dashboard">Login</NavLink>
-                </div>
+                <span className="text-gray-400">Don't have an account ? </span>
+                <NavLink
+                    className="text-primary-400 hover:text-primary-600 mt-2 hover:text-primary-400 transition-colors"
+                    to="/register"
+                >
+                    Register
+                </NavLink>
             </div>
+
         </div>
     );
 }
