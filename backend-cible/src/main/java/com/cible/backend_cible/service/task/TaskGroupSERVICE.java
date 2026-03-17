@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cible.backend_cible.db.task.TaskGroupDB;
+import com.cible.backend_cible.mapper.task.TaskGroupMapper;
+import com.cible.backend_cible.model.dtos.task.TaskGroupDTO;
 import com.cible.backend_cible.model.task.TaskGroup;
 import com.cible.backend_cible.model.task.User;
 
@@ -16,8 +18,13 @@ public class TaskGroupSERVICE {
     @Autowired
     private TaskGroupDB taskGroupDB;
 
-    public Iterable<TaskGroup> getAllTaskGroups(){
-        return taskGroupDB.findAll();
+    @Autowired
+    private TaskGroupMapper taskGroupMapper;
+
+    public List<TaskGroupDTO> getAllTaskGroups(){
+        return taskGroupDB.findAll().stream()
+            .map(taskGroupMapper::toDTO)
+            .toList();
     }
 
     public TaskGroup getGroupById(Integer id) {
@@ -45,8 +52,5 @@ public class TaskGroupSERVICE {
         return taskGroupDB.existsById(id);
     }
 
-    public List<TaskGroup> getGroupsByUserId(Integer userId) {
-        return taskGroupDB.findByUserId(userId);
-    }
     
 }

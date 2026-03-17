@@ -6,8 +6,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.cible.backend_cible.model.dtos.task.TaskDTO;
 import com.cible.backend_cible.model.task.Task;
-
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TaskMapper {
 
     TaskMapper INSTANCE = Mappers.getMapper(TaskMapper.class);

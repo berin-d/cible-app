@@ -20,7 +20,7 @@ public class TaskGroupMapperTest {
         TaskGroup group = new TaskGroup();
         group.setId(10);
         group.setName("Travail");
-        group.setUserId(user.getId());
+        group.setUser(user);
 
         TaskGroupDTO dto = mapper.toDTO(group);
 

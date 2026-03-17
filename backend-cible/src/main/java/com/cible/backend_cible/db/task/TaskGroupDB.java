@@ -11,11 +11,13 @@ import com.cible.backend_cible.model.task.User;
 @Repository
 public interface TaskGroupDB extends CrudRepository<TaskGroup, Integer> {
     
+        List<TaskGroup> findAll();
+
+
         List<TaskGroup> findByUser(User user);
 
         List<TaskGroup> findByNameContainingIgnoreCase(String name);
     
         boolean existsByUserAndName(User user, String name);
-
-        List<TaskGroup> findByUserId(Integer userId);
+        List<TaskGroup> findByUser_Id(Integer userId); // traversal explicite
 }
