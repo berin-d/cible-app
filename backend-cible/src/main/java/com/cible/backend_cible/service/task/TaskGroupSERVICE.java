@@ -52,5 +52,8 @@ public class TaskGroupSERVICE {
         return taskGroupDB.existsById(id);
     }
 
+    public List<TaskGroup> getGroupsByUserId(Integer userId) {
+        return taskGroupDB.findByUser_Id(userId);
+    }
     
 }

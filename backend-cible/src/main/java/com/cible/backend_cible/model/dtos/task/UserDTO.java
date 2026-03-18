@@ -16,6 +16,7 @@ public class UserDTO {
     private Integer id;
     private String username;
     private String email;
+    private String password;
     private Role role;
     private Boolean isActive;
     private Boolean emailVerified;

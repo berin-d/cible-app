@@ -9,6 +9,8 @@ import DashboardPage from './pages/dashboard/dashboard';
 // Layouts
 import AuthLayout from './components/layouts/authLayout';
 import AppLayout from './components/layouts/appLayout';
+import TaskPage from './pages/task/task';
+import RegisterPage from './pages/auth/register';
 
 
 /*
@@ -34,17 +36,19 @@ export default function App() {
                 {/* Routes */}
                 <Route path="/" element={<WelcomeRedirect />} />
 
-                <Route element={<AuthLayout/>}>
+                <Route element={<AuthLayout />}>
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+
                 </Route>
 
                 {/* Portected Routes */}
 
-                <Route element={<AppLayout/>}>
-                  <Route path="/dashboard" element={<DashboardPage />} />
+                <Route element={<AppLayout />}>
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/tasks" element={<TaskPage />} />
                 </Route>
-              
+
                 {/* Default Routes */}
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

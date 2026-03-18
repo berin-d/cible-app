@@ -15,9 +15,11 @@ public interface UserDB extends
 
     Optional<User> findByEmail(String email);
 
-    Optional<User> findByUsername(String username);
+      Optional<User> findByUsername(String username);
 
-    boolean existsByEmail(String email);
-
-    boolean existsByUsername(String username);
+      Optional<User> findByEmailAndPassword(String email, String password);
+  
+      boolean existsByEmail(String email);
+  
+      boolean existsByUsername(String username);
 }

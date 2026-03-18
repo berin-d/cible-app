@@ -12,10 +12,6 @@ public class TaskGroupMapperTest {
     private final TaskGroupMapper mapper = TaskGroupMapper.INSTANCE;
 
 
-    @Test
-    void shouldMapTaskGroupToDto() {
-        User user = new User();
-        user.setId(1);
 
         TaskGroup group = new TaskGroup();
         group.setId(10);
