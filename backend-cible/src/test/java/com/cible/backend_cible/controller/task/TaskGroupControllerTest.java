@@ -21,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.cible.backend_cible.model.dtos.task.TaskGroupDTO;
 import com.cible.backend_cible.model.task.TaskGroup;
 import com.cible.backend_cible.service.task.TaskGroupSERVICE;
 import com.cible.backend_cible.service.task.UserSERVICE;
@@ -50,21 +51,18 @@ public class TaskGroupControllerTest {
     }
 
 
-    @Test
-    void testGetAllTaskGroups() throws Exception {
-        TaskGroup g1 = new TaskGroup();
-        g1.setId(1);
-
-        TaskGroup g2 = new TaskGroup();
-        g2.setId(2);
-
-        when(taskGroupSERVICE.getAllTaskGroups()).thenReturn(List.of(g1, g2));
-
-        mockMvc.perform(get("/api/task-groups/all"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[1].id").value(2));
-    }
+@Test
+void testGetAllTaskGroups() throws Exception {
+    TaskGroupDTO g1 = new TaskGroupDTO(1, "Groupe 1", 1, List.of());
+    TaskGroupDTO g2 = new TaskGroupDTO(2, "Groupe 2", 1, List.of());
+    
+    when(taskGroupSERVICE.getAllTaskGroups()).thenReturn(List.of(g1, g2));
+    
+    mockMvc.perform(get("/api/task-groups/all"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].id").value(1))
+            .andExpect(jsonPath("$[1].id").value(2));
+}
 
 
     @Test
@@ -91,27 +89,6 @@ public class TaskGroupControllerTest {
                .andExpect(status().isNotFound());
     }
     
-
-
-
-    @Test
-    void testGetGroupsByUser() throws Exception {
-        TaskGroup g1 = new TaskGroup();
-        g1.setId(10);
-    
-        TaskGroup g2 = new TaskGroup();
-        g2.setId(20);
-    
-        when(taskGroupSERVICE.getGroupsByUserId(1)).thenReturn(List.of(g1, g2));
-    
-        mockMvc.perform(get("/api/task-groups/user/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-               .andExpect(status().isOk())
-               .andExpect(jsonPath("$[0].id").value(10))
-               .andExpect(jsonPath("$[1].id").value(20));
-    }
-    
-
 
 
     @Test

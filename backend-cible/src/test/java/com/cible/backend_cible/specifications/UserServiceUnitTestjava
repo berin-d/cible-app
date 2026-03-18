@@ -1,0 +1,79 @@
+package com.cible.backend_cible.specifications;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+
+import java.util.List;
+import java.util.stream.StreamSupport;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+
+import com.cible.backend_cible.db.task.UserDB;
+import com.cible.backend_cible.model.filterDtos.UserFilterDTO;
+import com.cible.backend_cible.model.task.Role;
+import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.service.task.UserSERVICE;
+
+
+
+class UserServiceUnitTest {
+
+    @Mock
+    private UserDB userDB;
+
+    @InjectMocks
+    private UserSERVICE userService;
+
+    private User u1;
+    private User u2;
+
+    @BeforeEach
+    void setup() {
+        // Initialiser les mocks
+        MockitoAnnotations.openMocks(this);
+
+        u1 = new User();
+        u1.setUsername("john");
+        u1.setEmail("john@test.com");
+        u1.setRole(Role.USER);
+        u1.setIsActive(true);
+        u1.setEmailVerified(true);
+        u1.setAccountLocked(false);
+        u1.setFailedLoginAttempts(1);
+
+        u2 = new User();
+        u2.setUsername("admin");
+        u2.setEmail("admin@test.com");
+        u2.setRole(Role.ADMIN);
+        u2.setIsActive(true);
+        u2.setEmailVerified(false);
+        u2.setAccountLocked(false);
+        u2.setFailedLoginAttempts(5);
+    }
+
+    @Test
+    void shouldFilterByUsername() {
+        // Mock : userDB.findAll retourne u1
+        when(userDB.findAll(any(Example.class))).thenReturn(List.of(u1));
+
+        UserFilterDTO filter = new UserFilterDTO();
+        filter.setUsername("john");
+
+        Iterable<User> result = userService.filterUsers(filter);
+
+        List<User> users = StreamSupport.stream(result.spliterator(), false).toList();
+
+        System.out.println("Nombre d'utilisateurs filtrés : " + users.size());
+        users.forEach(u -> System.out.println("Utilisateur : " + u.getUsername()));
+
+        assertEquals(1, users.size());
+        assertEquals("john", users.get(0).getUsername());
+    }
+}

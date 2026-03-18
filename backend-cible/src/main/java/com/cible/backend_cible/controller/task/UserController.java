@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.cible.backend_cible.model.filterDtos.UserFilterDTO;
 import com.cible.backend_cible.model.task.User;
 import com.cible.backend_cible.service.task.UserSERVICE;
 
@@ -43,4 +44,12 @@ public class UserController {
         User saved = userSERVICE.createUser(user);
         return ResponseEntity.ok(saved);
     }
+
+    @PostMapping("/filter")
+    public ResponseEntity<Iterable<User>> filterUsers(
+        @RequestBody UserFilterDTO filter) {
+
+    return ResponseEntity.ok(userSERVICE.filterUsers(filter));
+}
+
 }

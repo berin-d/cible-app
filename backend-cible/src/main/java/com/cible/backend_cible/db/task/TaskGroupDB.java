@@ -11,6 +11,9 @@ import com.cible.backend_cible.model.task.User;
 @Repository
 public interface TaskGroupDB extends CrudRepository<TaskGroup, Integer> {
     
+        List<TaskGroup> findAll();
+
+
         List<TaskGroup> findByUser(User user);
 
         List<TaskGroup> findByNameContainingIgnoreCase(String name);
