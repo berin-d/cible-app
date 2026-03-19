@@ -1,5 +1,6 @@
 import js_icon from "../../assets/js-icon.png";
 import Button from "./button";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -18,8 +19,16 @@ type Props = {
         <h1 className="text-4xl font-bold mb-2 text-white">
           Tasks
         </h1>
-
-        <Button text="NEW TASK" iconName="arrow-left" /> {/*I think we have to do a better reusable button with the size of button and clickable function */}
+      
+        <Button
+          text="NEW TASK"
+          iconName={faPlus}
+          variant="primary"
+          size="lg"
+          animation="scale"
+          // onClick={onBack} 
+          />  
+     
       </div>
 
       <h2 className="text-2xl font-bold mb-3 text-white">
@@ -48,9 +57,13 @@ type Props = {
           </div>
         ))}
   
-        <button onClick={onBack} className="mt-4 px-4 py-2 bg-[#10B981] text-white rounded-lg">
-          Back
-        </button>
+  
+        <Button
+          text="Back"
+          variant="primary"
+          size="md"
+          onClick={onBack}
+      />
       </div>
     );
   }

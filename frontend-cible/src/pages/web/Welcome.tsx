@@ -5,7 +5,7 @@ import Modal from "../../components/commons/modal";
 import LoginForm from "../../components/form/loginForm";
 import RegisterForm from "../../components/form/registerForm";
 import icon from "../../assets/app-icon.png";
-
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function WelcomePage() {
@@ -31,7 +31,12 @@ export default function WelcomePage() {
 
                 <nav className="flex-1 flex justify-end items-center p-2 space-x-4">
                     <p className="font-medium text-white hover:text-green-400 transition-colors hover:cursor-pointer" onClick={() => { setModalOpen(!modalOpen); setIsLogin(true) }}>Log in</p>
-                    <Button text="Download" iconName="download" />
+                    <Button
+                        text="Download"
+                        iconName={faDownload}
+                        variant="primary"
+                        size="md"
+                        />
                 </nav>
             </header>
 
@@ -53,10 +58,12 @@ export default function WelcomePage() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <button className="group h-10 px-6 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-primary text-zinc-950 hover:bg-primary-400 hover:shadow-lg hover:shadow-green-500/10 hover:cursor-pointer">
-                                Get Started
-
-                            </button>
+                        <Button
+                            text="Get Started"
+                            variant="primary"
+                            size="md"
+                            animation="scale"
+                            />
                         </div>
                     </div>
 

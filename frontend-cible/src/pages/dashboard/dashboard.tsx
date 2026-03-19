@@ -25,7 +25,7 @@ type TaskDTO = {
   type TaskGroupDTO = {
     id: number;
     name: string;
-    task: TaskDTO[];
+    tasks: TaskDTO[];
   }
   
 
