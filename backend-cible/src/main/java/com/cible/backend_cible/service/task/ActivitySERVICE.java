@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.task.ActivityDB;
+import com.cible.backend_cible.db.task.ActivityRepository;
 import com.cible.backend_cible.model.task.Activity;
 import com.cible.backend_cible.model.task.User;
 
@@ -14,46 +14,46 @@ import com.cible.backend_cible.model.task.User;
 public class ActivitySERVICE {
     
     @Autowired
-    private ActivityDB activityDB;
+    private ActivityRepository activityRepository;
 
         public Iterable<Activity> getAllActivities(){
-            return activityDB.findAll();
+            return activityRepository.findAll();
         }
 
         public Optional<Activity> getActivityById(Integer id){
-            return activityDB.findById(id);
+            return activityRepository.findById(id);
         }
 
         public List<Activity> getActivitiesByUser(User user) {
-            return activityDB.findByUser(user);
+            return activityRepository.findByUser(user);
         }
     
         public List<Activity> getActivitiesByUserId(Integer userId) {
-            return activityDB.findByUser_Id(userId);
+            return activityRepository.findByUser_Id(userId);
         }
 
         public Activity createActivity(Activity activity){
-            return activityDB.save(activity);
+            return activityRepository.save(activity);
         }
 
         
     public Optional<Activity> updateActivity(Integer id, Activity newData) {
 
-        return activityDB.findById(id).map(existing -> {
+        return activityRepository.findById(id).map(existing -> {
 
             existing.setUser(newData.getUser());
             existing.setAction(newData.getAction());
             existing.setEntityType(newData.getEntityType());
             existing.setEntityId(newData.getEntityId());
 
-            return activityDB.save(existing);
+            return activityRepository.save(existing);
         });
     }
 
     public boolean deleteActivity(Integer id) {
 
-        if (activityDB.existsById(id)) {
-            activityDB.deleteById(id);
+        if (activityRepository.existsById(id)) {
+            activityRepository.deleteById(id);
             return true;
         }
         return false;

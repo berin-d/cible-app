@@ -1,8 +1,11 @@
 package com.cible.backend_cible.seeder;
 
-import com.cible.backend_cible.db.task.UserDB;
+import com.cible.backend_cible.db.task.PriorityRepository;
+import com.cible.backend_cible.db.task.StatusRepository;
+import com.cible.backend_cible.db.task.TaskGroupRepository;
+import com.cible.backend_cible.db.task.TaskRepository;
+import com.cible.backend_cible.db.task.UserRepository;
 import com.cible.backend_cible.model.task.*;
-import com.cible.backend_cible.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -19,7 +22,7 @@ import java.util.List;
 @Profile("!prod") // ⚠️ Ne s'exécute JAMAIS en production
 public class DataSeeder implements CommandLineRunner {
 
-    private final UserDB userRepository;
+    private final UserRepository userRepository;
     private final StatusRepository     statusRepository;
     private final PriorityRepository   priorityRepository;
     private final TaskGroupRepository  taskGroupRepository;
@@ -51,9 +54,9 @@ public class DataSeeder implements CommandLineRunner {
         priorityRepository.saveAll(List.of(low, medium, high, urgent));
 
         // ── 3. UTILISATEURS ───────────────────────────────────────────────────────
-        User alice = user("Alice",  "Dupont",  "alice@example.com",  "hashed_pwd_alice");
-        User bob   = user("Bob",    "Martin",  "bob@example.com",    "hashed_pwd_bob");
-        User clara = user("Clara",  "Bernard", "clara@example.com",  "hashed_pwd_clara");
+        User alice = user("Alice",   "alice@example.com",  "hashed_pwd_alice");
+        User bob   = user("Bob",      "bob@example.com",    "hashed_pwd_bob");
+        User clara = user("Clara",  "clara@example.com",  "hashed_pwd_clara");
         userRepository.saveAll(List.of(alice, bob, clara));
 
         // ── 4. GROUPES DE TÂCHES ──────────────────────────────────────────────────
@@ -145,20 +148,19 @@ public class DataSeeder implements CommandLineRunner {
 
     private Status status(String label) {
         Status s = new Status();
-        s.setLabel(label);
+        s.setName(label);
         return s;
     }
 
     private Priority priority(String label) {
         Priority p = new Priority();
-        p.setLabel(label);
+        p.setName(label);
         return p;
     }
 
-    private User user(String firstName, String lastName, String email, String password) {
+    private User user(String username, String email, String password) {
         User u = new User();
-        u.setFirstName(firstName);
-        u.setLastName(lastName);
+        u.setUsername(username);
         u.setEmail(email);
         u.setPassword(password); // ⚠️ en prod : utiliser BCryptPasswordEncoder
         return u;
@@ -189,7 +191,7 @@ public class DataSeeder implements CommandLineRunner {
         t.setTaskGroup(group);   // peut être null
         t.setTaskOrder(order);
         // completedAt rempli seulement si la tâche est "Terminée"
-        if ("Terminé".equals(status.getLabel())) {
+        if ("Terminé".equals(status.getName())) {
             t.setCompletedAt(LocalDateTime.now().minusHours(2));
         }
         return t;

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.task.TaskGroupDB;
+import com.cible.backend_cible.db.task.TaskGroupRepository;
 import com.cible.backend_cible.mapper.task.TaskGroupMapper;
 import com.cible.backend_cible.model.dtos.task.TaskGroupDTO;
 import com.cible.backend_cible.model.task.TaskGroup;
@@ -16,44 +16,44 @@ import com.cible.backend_cible.model.task.User;
 public class TaskGroupSERVICE {
     
     @Autowired
-    private TaskGroupDB taskGroupDB;
+    private TaskGroupRepository taskGroupRepository;
 
     @Autowired
     private TaskGroupMapper taskGroupMapper;
 
     public List<TaskGroupDTO> getAllTaskGroups(){
-        return taskGroupDB.findAll().stream()
+        return taskGroupRepository.findAll().stream()
             .map(taskGroupMapper::toDTO)
             .toList();
     }
 
     public TaskGroup getGroupById(Integer id) {
-        return taskGroupDB.findById(id)
+        return taskGroupRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("TaskGroup not found"));
     }
 
     public List<TaskGroup> getGroupsByUser(User user) {
-        return taskGroupDB.findByUser(user);
+        return taskGroupRepository.findByUser(user);
     }
 
     public TaskGroup createGroup(TaskGroup group) {
-        return taskGroupDB.save(group);
+        return taskGroupRepository.save(group);
     }
 
     public void deleteGroup(Integer id) {
-        taskGroupDB.deleteById(id);
+        taskGroupRepository.deleteById(id);
     }
 
     public Optional<TaskGroup> getGroupByIdOptional(Integer id) {
-        return taskGroupDB.findById(id);
+        return taskGroupRepository.findById(id);
     }
     
     public boolean existsById(Integer id) {
-        return taskGroupDB.existsById(id);
+        return taskGroupRepository.existsById(id);
     }
 
     public List<TaskGroup> getGroupsByUserId(Integer userId) {
-        return taskGroupDB.findByUser_Id(userId);
+        return taskGroupRepository.findByUser_Id(userId);
     }
     
 }
