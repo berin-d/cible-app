@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.PredicateSpecification;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.task.UserDB;
+import com.cible.backend_cible.db.task.UserRepository;
 import com.cible.backend_cible.model.filterDtos.UserFilterDTO;
 import com.cible.backend_cible.model.task.User;
 import com.cible.backend_cible.specification.UserSpecifications;
@@ -15,44 +15,44 @@ import com.cible.backend_cible.specification.UserSpecifications;
 public class UserSERVICE {
 
     @Autowired
-    private UserDB userDB;
+    private UserRepository userRepository;
 
     public Iterable<User> getAllUsers(){
-        return userDB.findAll();
+        return userRepository.findAll();
     }
 
     public Optional<User> getUserById(Integer id) {
-        return userDB.findById(id);
+        return userRepository.findById(id);
     }
 
     public Optional<User> getUserByEmailAndPassword(String email, String password) {
-        return userDB.findByEmailAndPassword(email, password);
+        return userRepository.findByEmailAndPassword(email, password);
     }
 
     public Optional<User> getUserByEmail(String email) {
 
-        return userDB.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     public Optional<User> getUserByUsername(String username) {
-        return userDB.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     public User createUser(User user) {
-        return userDB.save(user);
+        return userRepository.save(user);
     }
 
     public boolean emailExists(String email) {
-        return userDB.existsByEmail(email);
+        return userRepository.existsByEmail(email);
     }
 
     public boolean usernameExists(String username) {
-        return userDB.existsByUsername(username);
+        return userRepository.existsByUsername(username);
     }
     
 
     public void deleteUser(Integer id) {
-        userDB.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     public Iterable<User> filterUsers(UserFilterDTO filter) {
@@ -91,7 +91,7 @@ public class UserSERVICE {
         );
     }
 
-    return userDB.findAll(spec);
+    return userRepository .findAll(spec);
 }
 
 }

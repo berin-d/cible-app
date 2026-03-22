@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.system.NotificationDB;
+import com.cible.backend_cible.db.system.NotificationRepository;
 import com.cible.backend_cible.model.system.Notification;
 import com.cible.backend_cible.model.task.User;
 
@@ -14,14 +14,14 @@ public class NotificationSERVICE {
     
 
     @Autowired
-    private NotificationDB notificationDB;
+    private NotificationRepository notificationRepository;
 
     public Iterable<Notification> getAllNotifications(){
-        return notificationDB.findAll();
+        return notificationRepository.findAll();
     }
 
         public List<Notification> getNotificationsByUser(User user) {
-            return notificationDB.findByUser(user);
+            return notificationRepository.findByUser(user);
         }
     
 }
