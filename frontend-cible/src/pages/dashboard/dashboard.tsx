@@ -48,8 +48,7 @@ export default function DashboardPage() {
     
   
     return (
-      <div>
-        <p>test</p>
+      <div className="m-4">
         <ExpandableList data={taskGroups} />
       </div>
     );
