@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cible.backend_cible.db.task.TaskGroupDB;
+import com.cible.backend_cible.db.task.TaskGroupRepository;
 import com.cible.backend_cible.mapper.task.TaskGroupMapper;
 import com.cible.backend_cible.model.dtos.task.TaskGroupDTO;
 import com.cible.backend_cible.model.task.TaskGroup;
@@ -22,7 +22,7 @@ import com.cible.backend_cible.model.task.TaskGroup;
 public class TaskGroupSERVICETest {
 
     @Mock
-    private TaskGroupDB taskGroupDB;
+    private TaskGroupRepository taskGroupRepository;
 
     @Mock
     private TaskGroupMapper taskGroupMapper;
@@ -35,11 +35,11 @@ public class TaskGroupSERVICETest {
         TaskGroup g1 = new TaskGroup();
         TaskGroup g2 = new TaskGroup();
 
-        when(taskGroupDB.findAll()).thenReturn(List.of(g1, g2));
+        when(taskGroupRepository.findAll()).thenReturn(List.of(g1, g2));
 
         List<TaskGroupDTO> groups = taskGroupSERVICE.getAllTaskGroups();
 
         assertNotNull(groups);
-        verify(taskGroupDB, times(1)).findAll();
+        verify(taskGroupRepository, times(1)).findAll();
     }
 }

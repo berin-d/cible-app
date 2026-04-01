@@ -9,7 +9,7 @@ import com.cible.backend_cible.model.task.TaskGroup;
 import com.cible.backend_cible.model.task.User;
 
 @Repository
-public interface TaskGroupDB extends CrudRepository<TaskGroup, Integer> {
+public interface TaskGroupRepository extends CrudRepository<TaskGroup, Integer> {
     
         List<TaskGroup> findAll();
 

@@ -1,60 +1,54 @@
 import { useEffect, useState } from "react";
 import ExpandableList from "../../components/commons/ExpandableList";
-
+import { useGroupContext } from "../../components/layouts/appLayout";
 
 type TaskDTO = {
-    id: number;
-    title: string;
-    description: string;
-    dueDate: string;
-    userId: number;
-    username: string;
-    statusId: number | null;
-    statusName: string | null;
-    priorityId: number | null;
-    priorityName: string | null;
-    taskGroupId: number;
-    taskGroupName: string;
-    createdAt: string;
-    updatedAt: string;
-    completedAt: string | null;
-    taskOrder: number;
-  };
+  id: number;
+  title: string;
+  description: string;
+  dueDate: string;
+  userId: number;
+  username: string;
+  statusId: number | null;
+  statusName: string | null;
+  priorityId: number | null;
+  priorityName: string | null;
+  taskGroupId: number;
+  taskGroupName: string;
+  createdAt: string;
+  updatedAt: string;
+  completedAt: string | null;
+  taskOrder: number;
+};
 
-
-  type TaskGroupDTO = {
-    id: number;
-    name: string;
-    tasks: TaskDTO[];
-  }
-  
-
-
-    
-
+type TaskGroupDTO = {
+  id: number;
+  name: string;
+  tasks: TaskDTO[];
+};
 
 export default function DashboardPage() {
+  const [taskGroups, setTaskGroups] = useState<TaskGroupDTO[]>([]);
+  const { setTaskGroups: setContextTaskGroups } = useGroupContext();
 
-    const [taskGroups, setTaskGroup] = useState<TaskGroupDTO[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:8081/api/task-groups/all")
+      .then((response) => response.json())
+      .then((data) => {
+        setTaskGroups(data);         // state local pour ExpandableList
+        setContextTaskGroups(data);  // context pour la sidebar
+        console.log(data);
+        
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
-    useEffect(() => {
-      fetch("http://localhost:8081/api/task-groups/all")
-        .then((response) => response.json())
-        .then((data) => {
-          setTaskGroup(data);
-        })
-        .catch((error) => console.error(error));
-    }, []);
-    
-  
-    return (
-      <div className="m-4">
-        <ExpandableList data={taskGroups} />
-      </div>
-    );
-  }
-
-
+  return (
+    <div className="m-4">
+      <ExpandableList data={taskGroups} />
+    </div>
+  );
+}
 
 
 

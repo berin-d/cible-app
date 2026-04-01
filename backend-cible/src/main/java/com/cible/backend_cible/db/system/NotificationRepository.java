@@ -9,7 +9,7 @@ import com.cible.backend_cible.model.system.Notification;
 import com.cible.backend_cible.model.task.User;
 
 @Repository
-public interface NotificationDB extends CrudRepository<Notification, Integer> {
+public interface NotificationRepository extends CrudRepository<Notification, Integer> {
 
     List<Notification> findByUser(User user);    
     

@@ -45,8 +45,7 @@ export default function App() {
                 {/* Portected Routes */}
 
                 <Route element={<AppLayout />}>
-                    <Route path="/dashboard" element={<DashboardPage />} />
-                    <Route path="/tasks" element={<TaskPage />} />
+                    <Route path="/dashboard" element={<DashboardPage />} /> {/* child page */}
                 </Route>
 
                 {/* Default Routes */}

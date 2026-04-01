@@ -9,7 +9,7 @@ import com.cible.backend_cible.model.task.Reminder;
 import com.cible.backend_cible.model.task.Task;
 
 @Repository
-public interface ReminderDB extends CrudRepository<Reminder, Integer> {
+public interface ReminderRepository extends CrudRepository<Reminder, Integer> {
 
 
         List<Reminder> findByTask(Task task);

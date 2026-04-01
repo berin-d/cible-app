@@ -13,14 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cible.backend_cible.db.task.ReminderDB;
+import com.cible.backend_cible.db.task.ReminderRepository;
 import com.cible.backend_cible.model.task.Reminder;
 
 @ExtendWith(MockitoExtension.class)
 public class ReminderSERVICETest {
 
     @Mock
-    private ReminderDB reminderDB;
+    private ReminderRepository reminderRepository;
 
     @InjectMocks
     private ReminderSERVICE reminderSERVICE;
@@ -30,11 +30,11 @@ public class ReminderSERVICETest {
         Reminder r1 = new Reminder();
         Reminder r2 = new Reminder();
 
-        when(reminderDB.findAll()).thenReturn(List.of(r1, r2));
+        when(reminderRepository.findAll()).thenReturn(List.of(r1, r2));
 
         Iterable<Reminder> reminders = reminderSERVICE.getAllReminders();
 
         assertNotNull(reminders);
-        verify(reminderDB, times(1)).findAll();
+        verify(reminderRepository, times(1)).findAll();
     }
 }

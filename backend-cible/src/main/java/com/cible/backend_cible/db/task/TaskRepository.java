@@ -10,7 +10,7 @@ import com.cible.backend_cible.model.task.Status;
 import com.cible.backend_cible.model.task.Task;
 
 @Repository
-public interface TaskDB extends CrudRepository<Task, Integer> {
+public interface TaskRepository extends CrudRepository<Task, Integer> {
     
     List<Task> findByStatus(Status status);
 

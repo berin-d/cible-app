@@ -9,7 +9,7 @@ import com.cible.backend_cible.model.task.Activity;
 import com.cible.backend_cible.model.task.User;
 
 @Repository
-public interface ActivityDB extends CrudRepository<Activity, Integer> {
+public interface ActivityRepository extends CrudRepository<Activity, Integer> {
 
     List<Activity> findByUser(User user);
 

@@ -13,14 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cible.backend_cible.db.task.CommentDB;
+import com.cible.backend_cible.db.task.CommentRepository;
 import com.cible.backend_cible.model.task.Comment;
 
 @ExtendWith(MockitoExtension.class)
 public class CommentSERVICETest {
     
     @Mock
-    private CommentDB commentDB;
+    private CommentRepository commentRepository;
 
     @InjectMocks
     private CommentSERVICE commentSERVICE;
@@ -30,11 +30,11 @@ public class CommentSERVICETest {
         Comment a1 = new Comment();
         Comment a2 = new Comment();
 
-        when(commentDB.findAll()).thenReturn(List.of(a1, a2));
+        when(commentRepository.findAll()).thenReturn(List.of(a1, a2));
 
         Iterable<Comment> comments = commentSERVICE.getAllComments();
 
         assertNotNull(comments);
-        verify(commentDB, times(1)).findAll();
+        verify(commentRepository, times(1)).findAll();
     }
 }
