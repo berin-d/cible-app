@@ -1,69 +1,70 @@
-import js_icon from "../../assets/js-icon.png";
-import Button from "./button";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { TaskGroupDTO } from "../types/Types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import TaskGroupHooks from "../../hooks/TaskGroupHooks";
 
+export default function TaskGroupList() {
+  const { year } = useParams();
+  const navigate = useNavigate();
+  const [taskGroups, setTaskGroups] = useState<TaskGroupDTO[]>([]);
 
-
-type Props = {
-    data: TaskGroupDTO[];
-    year: string;
-    onSelect: (group: TaskGroupDTO) => void;
-    onBack: () => void;
+  const onLoad = async () => {
+    if (!year) return;
+    const data = await TaskGroupHooks.loadTaskGroupsByYear(year);
+    setTaskGroups(data);
   };
-  
-  export default function TaskGroupList({ data, year, onSelect, onBack }: Props) {
-    return (
-      <div className="p-4">
 
-      <div className="flex justify-between items-center">
-        <h1 className="text-4xl font-bold mb-2 text-white">
-          Tasks
-        </h1>
-      
-        <Button
-          text="NEW TASK"
-          iconName={faPlus}
-          variant="primary"
-          size="lg"
-          animation="scale"
-          // onClick={onBack} 
-          />  
-     
+  useEffect(() => {
+    onLoad();
+  }, [year]);
+
+  return (
+    <div>
+      <div className="flex items-center gap-4">
+        <button
+          onClick={() => navigate("/dashboard")}
+          className="text-slate-400 hover:text-white transition-colors"
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+        <div className="text-3xl font-bold tracking-tight md:text-4xl text-white">
+          {year}
+        </div>
+      </div>
+      <div className="text-3xl text-[#71717a] mt-4">
+        Select a group to view tasks.
       </div>
 
-      <h2 className="text-2xl font-bold mb-3 text-white">
-        {year}
-      </h2>
-
-
-
-
-
-
-  
-        {data.map((tg) => (
+      <div className="flex flex-row flex-wrap items-stretch gap-4 p-4 py-10">
+        {taskGroups.map((tg) => (
           <div
             key={tg.id}
-            onClick={() => onSelect(tg)}
-            className="bg-gray-100 rounded-md cursor-pointer mb-3 transition hover:bg-[#10B981] hover:text-white font-semibold max-w-md flex overflow-hidden group"
+            onClick={() => navigate(`/dashboard/taskGroup/${year}/${tg.id}`)}
+            className="relative flex flex-col bg-zinc-900 shadow-sm border border-slate-700 rounded-lg w-80 cursor-pointer hover:border-slate-500 transition-colors"
           >
-            <img src={js_icon} alt="" className="w-1/5 object-cover" />
-            <div className="p-4 flex-1">
-              {tg.name}
-              <div className="flex h-3.5 w-full overflow-hidden rounded-full bg-gray-200 mt-4">
-                <div className="w-1/2 h-full bg-[#10B981] group-hover:bg-[#065F46] rounded-full transition-colors"></div>
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-8">
+                <h5 className="text-white text-2xl font-semibold">{tg.name}</h5>
+                <span className="text-slate-400 text-sm">↗</span>
               </div>
+
+              <p className="text-slate-400 text-sm">
+                {tg.tasks?.length ?? 0} Tasks
+              </p>
             </div>
           </div>
         ))}
-  
-  
-        <Button
-          text="Back"
-          variant="primary"
-          size="md"
-          onClick={onBack}
-      />
+        <div
+          onClick={() => console.log("Add group")}
+          className="relative flex flex-col items-center justify-center bg-zinc-900 border border-dashed border-slate-700 rounded-lg w-80 cursor-pointer hover:border-slate-500 transition-colors group"
+        >
+          <FontAwesomeIcon icon={faCirclePlus} className="text-3xl mb-3 text-slate-700 group-hover:text-slate-500" />
+          <div className="text-slate-700 font-medium group-hover:text-slate-500">Add Group</div>
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
+}

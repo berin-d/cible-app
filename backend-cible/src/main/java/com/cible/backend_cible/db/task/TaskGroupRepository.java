@@ -2,7 +2,9 @@ package com.cible.backend_cible.db.task;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cible.backend_cible.model.task.TaskGroup;
@@ -21,4 +23,7 @@ public interface TaskGroupRepository extends CrudRepository<TaskGroup, Integer> 
         boolean existsByUserAndName(User user, String name);
 
         List<TaskGroup> findByUser_Id(Integer userId);
+
+        @Query("SELECT tg FROM TaskGroup tg JOIN tg.tasks t WHERE YEAR(t.dueDate) = :year")
+        List<TaskGroup> findByYear(@Param("year") int year);
 }

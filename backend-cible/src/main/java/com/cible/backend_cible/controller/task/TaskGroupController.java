@@ -18,10 +18,11 @@ public class TaskGroupController {
     @Autowired
     private TaskGroupSERVICE taskGroupSERVICE;
 
-@GetMapping("/all")
-public ResponseEntity<List<TaskGroupDTO>> getAllTaskGroups() {
-    return ResponseEntity.ok(taskGroupSERVICE.getAllTaskGroups());
-}
+    @GetMapping("/all")
+    public ResponseEntity<List<TaskGroupDTO>> getAllTaskGroups() {
+        return ResponseEntity.ok(taskGroupSERVICE.getAllTaskGroups());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<TaskGroup> getGroupById(@PathVariable Integer id) {
         return taskGroupSERVICE.getGroupByIdOptional(id)
@@ -42,5 +43,10 @@ public ResponseEntity<List<TaskGroupDTO>> getAllTaskGroups() {
         }
         taskGroupSERVICE.deleteGroup(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/year/{year}")
+    public ResponseEntity<List<TaskGroupDTO>> getTaskGroupsByYear(@PathVariable int year) {
+        return ResponseEntity.ok(taskGroupSERVICE.getTaskGroupsByYear(year));
     }
 }
