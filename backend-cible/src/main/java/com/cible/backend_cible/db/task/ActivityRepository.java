@@ -1,15 +1,14 @@
 package com.cible.backend_cible.db.task;
 
-import java.util.List;
-
+import com.cible.backend_cible.model.task.Activity;
+import com.cible.backend_cible.model.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cible.backend_cible.model.task.Activity;
-import com.cible.backend_cible.model.task.User;
+import java.util.List;
 
 @Repository
-public interface ActivityDB extends CrudRepository<Activity, Integer> {
+public interface ActivityRepository extends CrudRepository<Activity, Integer> {
 
     List<Activity> findByUser(User user);
 

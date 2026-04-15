@@ -1,18 +1,16 @@
 package com.cible.backend_cible.mapper.task;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import java.time.LocalDateTime;
-
-import org.junit.jupiter.api.Test;
 
 import com.cible.backend_cible.model.dtos.task.TaskDTO;
 import com.cible.backend_cible.model.task.Priority;
 import com.cible.backend_cible.model.task.Status;
 import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.task.TaskGroup;
-import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.model.user.User;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskMapperTest {
 

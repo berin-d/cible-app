@@ -1,15 +1,14 @@
 package com.cible.backend_cible.mapper.system;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import com.cible.backend_cible.model.dtos.system.NotificationDTO;
+import com.cible.backend_cible.model.system.Notification;
+import com.cible.backend_cible.model.user.User;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import org.junit.jupiter.api.Test;
-
-import com.cible.backend_cible.model.dtos.system.NotificationDTO;
-import com.cible.backend_cible.model.system.Notification;
-import com.cible.backend_cible.model.task.User;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class NotificationMapperTest {
 

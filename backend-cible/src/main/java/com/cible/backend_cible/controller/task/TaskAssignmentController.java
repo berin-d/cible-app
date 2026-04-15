@@ -1,13 +1,17 @@
 package com.cible.backend_cible.controller.task;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import com.cible.backend_cible.model.task.TaskAssignment;
 import com.cible.backend_cible.service.task.TaskAssignmentSERVICE;
 import com.cible.backend_cible.service.task.TaskSERVICE;
-import com.cible.backend_cible.service.task.UserSERVICE;
+import com.cible.backend_cible.service.user.UserSERVICE;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/task-assignments")

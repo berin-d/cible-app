@@ -1,16 +1,15 @@
 package com.cible.backend_cible.db.task;
 
-import java.util.List;
-
+import com.cible.backend_cible.model.task.Comment;
+import com.cible.backend_cible.model.task.Task;
+import com.cible.backend_cible.model.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cible.backend_cible.model.task.Comment;
-import com.cible.backend_cible.model.task.Task;
-import com.cible.backend_cible.model.task.User;
+import java.util.List;
 
 @Repository
-public interface CommentDB extends CrudRepository<Comment, Integer> {
+public interface CommentRepository extends CrudRepository<Comment, Integer> {
     
     List<Comment> findByUser(User user);
 

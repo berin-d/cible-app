@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Import;
 import com.cible.backend_cible.db.task.UserDB;
 import com.cible.backend_cible.model.filterDtos.UserFilterDTO;
 import com.cible.backend_cible.model.task.Role;
-import com.cible.backend_cible.model.task.User;
-import com.cible.backend_cible.service.task.UserSERVICE;
+import com.cible.backend_cible.model.user.User;
+import com.cible.backend_cible.service.user.UserSERVICE;
 
 
 

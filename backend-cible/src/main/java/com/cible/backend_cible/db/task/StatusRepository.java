@@ -1,15 +1,14 @@
 package com.cible.backend_cible.db.task;
 
 
-import java.util.Optional;
-
+import com.cible.backend_cible.model.task.Status;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cible.backend_cible.model.task.Status;
+import java.util.Optional;
 
 @Repository
-public interface StatusDB extends CrudRepository<Status, Integer> {
+public interface StatusRepository extends CrudRepository<Status, Integer> {
     
 
     Optional<Status> findByName(String name);

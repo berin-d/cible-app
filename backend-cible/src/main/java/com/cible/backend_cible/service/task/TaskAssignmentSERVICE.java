@@ -1,14 +1,13 @@
 package com.cible.backend_cible.service.task;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.cible.backend_cible.db.task.TaskAssignmentRepository;
 import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.task.TaskAssignment;
-import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.model.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TaskAssignmentSERVICE {

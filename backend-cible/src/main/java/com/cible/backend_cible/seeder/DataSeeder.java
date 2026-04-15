@@ -1,11 +1,11 @@
 package com.cible.backend_cible.seeder;
 
-import com.cible.backend_cible.db.task.PriorityRepository;
-import com.cible.backend_cible.db.task.StatusRepository;
-import com.cible.backend_cible.db.task.TaskGroupRepository;
-import com.cible.backend_cible.db.task.TaskRepository;
-import com.cible.backend_cible.db.task.UserRepository;
-import com.cible.backend_cible.model.task.*;
+import com.cible.backend_cible.db.task.*;
+import com.cible.backend_cible.model.task.Priority;
+import com.cible.backend_cible.model.task.Status;
+import com.cible.backend_cible.model.task.Task;
+import com.cible.backend_cible.model.task.TaskGroup;
+import com.cible.backend_cible.model.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

@@ -1,6 +1,8 @@
 package com.cible.backend_cible.controller.system;
 
-import java.util.List;
+import com.cible.backend_cible.model.system.Settings;
+import com.cible.backend_cible.service.system.SettingsSERVICE;
+import com.cible.backend_cible.service.user.UserSERVICE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cible.backend_cible.model.system.Settings;
-import com.cible.backend_cible.service.system.SettingsSERVICE;
-import com.cible.backend_cible.service.task.UserSERVICE;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/settings")

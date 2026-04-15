@@ -1,13 +1,13 @@
 package com.cible.backend_cible.mapper.task;
 
-import java.time.LocalDateTime;
-
-import org.junit.jupiter.api.Test;
-
 import com.cible.backend_cible.model.dtos.task.TaskAssignmentDTO;
 import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.task.TaskAssignment;
-import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.model.user.User;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TaskAssignmentMapperTest {

@@ -1,26 +1,23 @@
 package com.cible.backend_cible.service.task;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-
+import com.cible.backend_cible.db.task.TaskAssignmentRepository;
+import com.cible.backend_cible.model.task.TaskAssignment;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cible.backend_cible.db.task.TaskAssignmentDB;
-import com.cible.backend_cible.model.task.TaskAssignment;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskAssignmentSERVICETest {
 
     @Mock
-    private TaskAssignmentDB taskAssignmentDB;
+    private TaskAssignmentRepository taskAssignmentDB;
 
     @InjectMocks
     private TaskAssignmentSERVICE taskAssignmentSERVICE;

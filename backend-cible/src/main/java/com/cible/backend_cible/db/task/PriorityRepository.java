@@ -1,15 +1,14 @@
 package com.cible.backend_cible.db.task;
 
-import java.util.Optional;
-
+import com.cible.backend_cible.model.task.Priority;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cible.backend_cible.model.task.Priority;
+import java.util.Optional;
 
 
 @Repository
-public interface PriorityDB extends CrudRepository<Priority, Integer> {
+public interface PriorityRepository extends CrudRepository<Priority, Integer> {
 
     Optional<Priority> findByName(String name);
 

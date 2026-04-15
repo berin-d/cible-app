@@ -1,17 +1,16 @@
 package com.cible.backend_cible.db.task;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.cible.backend_cible.model.task.Task;
+import com.cible.backend_cible.model.task.TaskAssignment;
+import com.cible.backend_cible.model.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cible.backend_cible.model.task.Task;
-import com.cible.backend_cible.model.task.TaskAssignment;
-import com.cible.backend_cible.model.task.User;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface TaskAssignmentDB extends CrudRepository<TaskAssignment, Integer> {
+public interface TaskAssignmentRepository extends CrudRepository<TaskAssignment, Integer> {
     
 
     List<TaskAssignment> findByUser(User user);

@@ -1,13 +1,12 @@
 package com.cible.backend_cible.service.system;
 
-import java.util.List;
-
+import com.cible.backend_cible.db.system.NotificationRepository;
+import com.cible.backend_cible.model.system.Notification;
+import com.cible.backend_cible.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cible.backend_cible.db.system.NotificationRepository;
-import com.cible.backend_cible.model.system.Notification;
-import com.cible.backend_cible.model.task.User;
+import java.util.List;
 
 @Service
 public class NotificationSERVICE {
