@@ -25,7 +25,7 @@ public class TaskGroup {
     @NotBlank(message = "Group name is mandatory")
     @Column(nullable = false, length = 100)
     private String name;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "User is mandatory")

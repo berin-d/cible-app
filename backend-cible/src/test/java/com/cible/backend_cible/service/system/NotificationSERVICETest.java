@@ -1,18 +1,21 @@
 package com.cible.backend_cible.service.system;
 
-import com.cible.backend_cible.db.system.NotificationRepository;
-import com.cible.backend_cible.model.system.Notification;
-import com.cible.backend_cible.model.user.User;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
+import com.cible.backend_cible.db.system.NotificationRepository;
+import com.cible.backend_cible.model.system.Notification;
+import com.cible.backend_cible.model.task.User;
 
 @ExtendWith(MockitoExtension.class)
 public class NotificationSERVICETest {

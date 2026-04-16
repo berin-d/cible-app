@@ -1,51 +1,69 @@
-import Button from "../../components/commons/button"
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { TaskDTO } from "../types/Types";
+import TaskDetailHooks from "../../hooks/TaskDetailHooks";
 
-type Props = {
-    group: TaskGroupDTO;
-    onBack: () => void;
+export default function TaskDetail() {
+  const { year, groupId } = useParams();
+  const navigate = useNavigate();
+  const [tasks, setTasks] = useState<TaskDTO[]>([]);
+
+  const onLoad = async () => {
+    if (!groupId) return;
+    const data = await TaskDetailHooks.loadTasksByGroupId(groupId);
+    setTasks(data);
   };
-  
-  export default function TaskDetail({ group, onBack }: Props) {
-    return (
-      <div className="p-4">
-      <div className="flex justify-between items-center">
-      <h1 className="text-4xl font-bold mb-10 text-white">
-        {group.name}
-      </h1>
 
-        <h2 className="text-4xl font-bold mb-10 text-white">
-        <Button
-          text="NEW OBJECTIF"
-          iconName={faPlus}
-          variant="primary"
-          size="lg"
-          animation="scale"
-          // onClick={onBack}
-        />  
-</h2>
+  useEffect(() => {
+    onLoad();
+  }, [groupId]);
+
+  return (
+    <div>
+      <div className="flex items-center gap-4">
+        <button
+          onClick={() => navigate(`/dashboard/taskGroup/${year}`)}
+          className="text-slate-400 hover:text-white transition-colors"
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+        <div className="text-3xl font-bold tracking-tight md:text-4xl text-white">
+          Group {groupId}
+        </div>
       </div>
-        {group.tasks.length === 0 ? (
-          <p className="text-gray-400">None tasks for this group </p>
-        ) : (
-          group.tasks.map((task) => (
-            <div key={task.id} className="p-4 bg-white rounded-xl m-3 shadow-sm border border-gray-200 hover:shadow-md transition max-w-md">
-              <p className="font-semibold text-gray-800 text-lg mb-2">{task.title}</p>
-              <ul className="space-y-1 text-sm text-gray-600">
-                <li>📅 Due date: {task.dueDate ?? "No date"}</li>
-                <li>✅ Completed: {task.completedAt ?? "Not completed"}</li>
-              </ul>
+      <div className="text-3xl text-[#71717a] mt-4">
+        Select a task to view details.
+      </div>
+
+      <div className="flex flex-row flex-wrap items-stretch gap-4 p-4 py-10">
+        {tasks.map((task) => (
+          <div
+            key={task.id}
+            className="relative flex flex-col bg-zinc-900 shadow-sm border border-slate-700 rounded-lg w-80 cursor-pointer hover:border-slate-500 transition-colors"
+          >
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-8">
+                <h5 className="text-white text-2xl font-semibold">{task.title}</h5>
+                <span className="text-slate-400 text-sm">↗</span>
+              </div>
+              <p className="text-slate-400 text-sm">
+              {task.dueDate
+                ? `Due: ${new Date(task.dueDate).toLocaleDateString("fr-FR")}`
+                : "No due date"}
+              </p>
             </div>
-          ))
-        )}
-  
-        <Button
-          text="Back"
-          variant="primary"
-          size="md"
-          onClick={onBack}
-      />
-
+          </div>
+        ))}
+        <div
+          onClick={() => console.log("Add task")}
+          className="relative flex flex-col items-center justify-center bg-zinc-900 border border-dashed border-slate-700 rounded-lg w-80 cursor-pointer hover:border-slate-500 transition-colors group"
+        >
+          <FontAwesomeIcon icon={faCirclePlus} className="text-3xl mb-3 text-slate-700 group-hover:text-slate-500" />
+          <div className="text-slate-700 font-medium group-hover:text-slate-500">Add Task</div>
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
+}

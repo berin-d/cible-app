@@ -1,24 +1,26 @@
 package com.cible.backend_cible.service.task;
 
-import com.cible.backend_cible.db.task.UserRepository;
-import com.cible.backend_cible.model.user.User;
-import com.cible.backend_cible.service.user.UserSERVICE;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
+import com.cible.backend_cible.db.task.UserRepository;
+import com.cible.backend_cible.model.task.User;
 
 @ExtendWith(MockitoExtension.class)
 public class UserSERVICETest {
 
     @Mock
-    private UserRepository userDB;
+    private UserRepository userRepository;
 
     @InjectMocks
     private UserSERVICE userSERVICE;
@@ -28,11 +30,11 @@ public class UserSERVICETest {
         User u1 = new User();
         User u2 = new User();
 
-        when(userDB.findAll()).thenReturn(List.of(u1, u2));
+        when(userRepository.findAll()).thenReturn(List.of(u1, u2));
 
         Iterable<User> users = userSERVICE.getAllUsers();
 
         assertNotNull(users);
-        verify(userDB, times(1)).findAll();
+        verify(userRepository, times(1)).findAll();
     }
 }

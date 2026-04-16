@@ -1,17 +1,20 @@
 package com.cible.backend_cible.service.system;
 
-import com.cible.backend_cible.db.system.SettingsRepository;
-import com.cible.backend_cible.model.system.Settings;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
+import com.cible.backend_cible.db.system.SettingsRepository;
+import com.cible.backend_cible.model.system.Settings;
 
 @ExtendWith(MockitoExtension.class)
 public class SettingsSERVICETest {

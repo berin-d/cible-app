@@ -4,12 +4,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.cible.backend_cible.mapper.task.TaskMapper;
+import com.cible.backend_cible.model.dtos.task.TaskDTO;
 import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.service.task.PrioritySERVICE;
 import com.cible.backend_cible.service.task.StatusSERVICE;
 import com.cible.backend_cible.service.task.TaskSERVICE;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/tasks")
 public class TaskController {
 
@@ -21,6 +25,9 @@ public class TaskController {
 
     @Autowired
     private PrioritySERVICE prioritySERVICE;
+
+    @Autowired
+    private TaskMapper taskMapper;
 
     @GetMapping("/all")
     public ResponseEntity<Iterable<Task>> getAllTasks() {
@@ -67,5 +74,14 @@ public class TaskController {
         }
         taskSERVICE.deleteTask(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/group/{groupId}")
+    public ResponseEntity<List<TaskDTO>> getTasksByGroupId(@PathVariable Integer groupId) {
+        return ResponseEntity.ok(
+            taskSERVICE.getTasksByGroupId(groupId).stream()
+                .map(taskMapper::toDto)
+                .toList()
+        );
     }
 }
