@@ -13,14 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cible.backend_cible.db.task.TaskDB;
+import com.cible.backend_cible.db.task.TaskRepository;
 import com.cible.backend_cible.model.task.Task;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskSERVICETest {
 
     @Mock
-    private TaskDB taskDB;
+    private TaskRepository taskRepository;
 
     @InjectMocks
     private TaskSERVICE taskSERVICE;
@@ -30,11 +30,11 @@ public class TaskSERVICETest {
         Task t1 = new Task();
         Task t2 = new Task();
 
-        when(taskDB.findAll()).thenReturn(List.of(t1, t2));
+        when(taskRepository.findAll()).thenReturn(List.of(t1, t2));
 
         Iterable<Task> tasks = taskSERVICE.getAllTasks();
 
         assertNotNull(tasks);
-        verify(taskDB, times(1)).findAll();
+        verify(taskRepository, times(1)).findAll();
     }
 }

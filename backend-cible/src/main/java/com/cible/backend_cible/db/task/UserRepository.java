@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.cible.backend_cible.model.task.User;
 
 @Repository
-public interface UserDB extends 
+public interface UserRepository extends 
         JpaRepository<User, Integer>,
         JpaSpecificationExecutor<User> {
 

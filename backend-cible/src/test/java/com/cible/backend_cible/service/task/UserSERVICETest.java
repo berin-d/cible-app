@@ -13,14 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cible.backend_cible.db.task.UserDB;
+import com.cible.backend_cible.db.task.UserRepository;
 import com.cible.backend_cible.model.task.User;
 
 @ExtendWith(MockitoExtension.class)
 public class UserSERVICETest {
 
     @Mock
-    private UserDB userDB;
+    private UserRepository userRepository;
 
     @InjectMocks
     private UserSERVICE userSERVICE;
@@ -30,11 +30,11 @@ public class UserSERVICETest {
         User u1 = new User();
         User u2 = new User();
 
-        when(userDB.findAll()).thenReturn(List.of(u1, u2));
+        when(userRepository.findAll()).thenReturn(List.of(u1, u2));
 
         Iterable<User> users = userSERVICE.getAllUsers();
 
         assertNotNull(users);
-        verify(userDB, times(1)).findAll();
+        verify(userRepository, times(1)).findAll();
     }
 }

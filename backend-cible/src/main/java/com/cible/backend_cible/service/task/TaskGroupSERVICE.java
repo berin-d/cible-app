@@ -55,5 +55,11 @@ public class TaskGroupSERVICE {
     public List<TaskGroup> getGroupsByUserId(Integer userId) {
         return taskGroupRepository.findByUser_Id(userId);
     }
+
+    public List<TaskGroupDTO> getTaskGroupsByYear(int year) {
+        return taskGroupRepository.findByYear(year).stream()
+            .map(taskGroupMapper::toDTO)
+            .toList();
+    }
     
 }

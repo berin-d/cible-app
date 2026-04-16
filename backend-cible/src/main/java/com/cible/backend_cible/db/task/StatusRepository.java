@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.cible.backend_cible.model.task.Status;
 
 @Repository
-public interface StatusDB extends CrudRepository<Status, Integer> {
+public interface StatusRepository extends CrudRepository<Status, Integer> {
     
 
     Optional<Status> findByName(String name);

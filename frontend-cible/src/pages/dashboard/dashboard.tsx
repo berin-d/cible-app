@@ -1,59 +1,48 @@
 import { useEffect, useState } from "react";
-import ExpandableList from "../../components/commons/ExpandableList";
-
-
-type TaskDTO = {
-    id: number;
-    title: string;
-    description: string;
-    dueDate: string;
-    userId: number;
-    username: string;
-    statusId: number | null;
-    statusName: string | null;
-    priorityId: number | null;
-    priorityName: string | null;
-    taskGroupId: number;
-    taskGroupName: string;
-    createdAt: string;
-    updatedAt: string;
-    completedAt: string | null;
-    taskOrder: number;
-  };
-
-
-  type TaskGroupDTO = {
-    id: number;
-    name: string;
-    tasks: TaskDTO[];
-  }
-  
-
-
-    
+import { useNavigate } from "react-router-dom";
+import { TaskGroupDTO } from "../../components/types/Types";
+import ListYears from "../../components/commons/ListYears";
+import DashBoardHooks from "../../hooks/DashBoardHooks"
 
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
+  const [listOfYears, setListOfYears] = useState<string[]>([]);
+  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const [selectedGroup, setSelectedGroup] = useState<TaskGroupDTO | null>(null);
 
-    const [taskGroups, setTaskGroup] = useState<TaskGroupDTO[]>([]);
+  const onLoad = async () => {
+    const data = await DashBoardHooks.loadYears();
+    setListOfYears(data);
+  };
 
-    useEffect(() => {
-      fetch("http://localhost:8081/api/task-groups/all")
-        .then((response) => response.json())
-        .then((data) => {
-          setTaskGroup(data);
-        })
-        .catch((error) => console.error(error));
-    }, []);
-    
-  
-    return (
-      <div>
-        <p>test</p>
-        <ExpandableList data={taskGroups} />
-      </div>
-    );
-  }
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  const handleYearSelect = (year: string) => {
+    setSelectedYear(year);
+    navigate(`/dashboard/taskGroup/${year}`);
+  };
+
+  return (
+    <div className="text-white">
+      <ListYears
+        title="Dashboard"
+        subtitle="Select a timeframe to view nested objectives."
+        options={listOfYears}
+        addLabel="Add Year"
+        onSelect={handleYearSelect}
+        onAddClick={() => console.log("Click works")}
+      />
+    </div>
+  );
+}
+
+    // Selector: ComponentType<{ onSelect: (time: K) => void }>;
+
+
+
 
 
 

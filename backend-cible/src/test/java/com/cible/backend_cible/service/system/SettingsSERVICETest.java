@@ -13,14 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cible.backend_cible.db.system.SettingsDB;
+import com.cible.backend_cible.db.system.SettingsRepository;
 import com.cible.backend_cible.model.system.Settings;
 
 @ExtendWith(MockitoExtension.class)
 public class SettingsSERVICETest {
 
     @Mock
-    private SettingsDB settingsDB;
+    private SettingsRepository settingsDB;
 
     @InjectMocks
     private SettingsSERVICE settingsSERVICE;

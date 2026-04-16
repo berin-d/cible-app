@@ -11,7 +11,7 @@ import com.cible.backend_cible.model.task.TaskAssignment;
 import com.cible.backend_cible.model.task.User;
 
 @Repository
-public interface TaskAssignmentDB extends CrudRepository<TaskAssignment, Integer> {
+public interface TaskAssignmentRepository extends CrudRepository<TaskAssignment, Integer> {
     
 
     List<TaskAssignment> findByUser(User user);

@@ -9,7 +9,7 @@ import com.cible.backend_cible.model.task.Priority;
 
 
 @Repository
-public interface PriorityDB extends CrudRepository<Priority, Integer> {
+public interface PriorityRepository extends CrudRepository<Priority, Integer> {
 
     Optional<Priority> findByName(String name);
 

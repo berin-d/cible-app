@@ -54,4 +54,8 @@ public class TaskSERVICE {
     public boolean existsById(Integer id) {
         return taskRepository.existsById(id);
     }
+    
+    public List<Task> getTasksByGroupId(Integer groupId) {
+        return taskRepository.findByTaskGroup_Id(groupId);
+    }
 }

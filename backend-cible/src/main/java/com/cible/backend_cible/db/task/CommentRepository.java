@@ -10,7 +10,7 @@ import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.task.User;
 
 @Repository
-public interface CommentDB extends CrudRepository<Comment, Integer> {
+public interface CommentRepository extends CrudRepository<Comment, Integer> {
     
     List<Comment> findByUser(User user);
 

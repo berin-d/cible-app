@@ -9,7 +9,7 @@ import com.cible.backend_cible.model.system.Settings;
 import com.cible.backend_cible.model.task.User;
 
 @Repository
-public interface SettingsDB extends CrudRepository<Settings, Integer> {
+public interface SettingsRepository extends CrudRepository<Settings, Integer> {
 
     List<Settings> findByUser(User user);
     

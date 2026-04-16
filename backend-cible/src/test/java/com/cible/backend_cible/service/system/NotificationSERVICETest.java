@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cible.backend_cible.db.system.NotificationDB;
+import com.cible.backend_cible.db.system.NotificationRepository;
 import com.cible.backend_cible.model.system.Notification;
 import com.cible.backend_cible.model.task.User;
 
@@ -21,7 +21,7 @@ import com.cible.backend_cible.model.task.User;
 public class NotificationSERVICETest {
 
     @Mock
-    private NotificationDB notificationDB;
+    private NotificationRepository notificationDB;
 
     @InjectMocks
     private NotificationSERVICE notificationSERVICE;
