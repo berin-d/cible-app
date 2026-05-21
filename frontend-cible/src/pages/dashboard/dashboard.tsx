@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TaskGroupDTO } from "../../components/types/Types";
 import ListYears from "../../components/lists/ListYears";
 import DashBoardHooks from "../../hooks/DashBoardHooks"
 
@@ -8,8 +7,6 @@ import DashBoardHooks from "../../hooks/DashBoardHooks"
 export default function DashboardPage() {
   const navigate = useNavigate();
   const [listOfYears, setListOfYears] = useState<string[]>([]);
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
-  const [selectedGroup, setSelectedGroup] = useState<TaskGroupDTO | null>(null);
 
   const onLoad = async () => {
     const data = await DashBoardHooks.loadYears();
@@ -21,23 +18,19 @@ export default function DashboardPage() {
   }, []);
 
   const handleYearSelect = (year: string) => {
-    setSelectedYear(year);
     navigate(`/dashboard/taskGroup/${year}`);
   };
 
   return (
-
-    <div className="text-white">
-
-      <div>
-        <header>Dashboard</header>
+    <div>
+      <div className="flex items-center gap-4">
+        <div className="text-3xl text-[#71717a]">
+          Dashboard
+        </div>
       </div>
-
       <ListYears
-        options={listOfYears} // list of all data
-        addLabel="Add Year"
-        onSelect={handleYearSelect}
-        onAddClick={() => console.log("Click works")}
+        datas={listOfYears}
+        navigateTo={handleYearSelect}
       />
     </div>
   );

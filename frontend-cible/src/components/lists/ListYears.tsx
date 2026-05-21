@@ -1,29 +1,30 @@
+import { useNavigate } from "react-router-dom";
 import Card from "../commons/cards";
 
 
-type Props<K> = {
-	options: K[];
-	onSelect: (criterion: K) => void;
-	onAddClick?: () => void;
-	addLabel?: string;
+interface Props {
+	datas: [];
 };
 
 
-
-export default function ListYears<K extends string | number>({
-	options,
-	onSelect,
-	onAddClick,
-	addLabel = "Add New"
-}: Props<K>) {
+export default function ListYears({
+	datas
+}: Props) {
+	const navigate = useNavigate();
 	return (
-		<div>
-			{options.map((option) => (
+		<div className="flex flex-row flex-wrap items-stretch gap-4 p-4 py-10">
+			{datas.map((option) => (
 				<Card
-					key={option.toString()}
-					title={option.toString()}
+					key={option}
+					title={option}
+					addCard={false}
+					navigateTo={() => navigate(`/dashboard/taskGroup/${option}`)}
 				/>
 			))}
+
+			<Card
+				addCard={true}
+			/>
 		</div>
 	);
 }
