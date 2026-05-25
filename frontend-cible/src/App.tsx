@@ -10,8 +10,10 @@ import DashboardPage from './pages/dashboard/dashboard';
 import AuthLayout from './components/layouts/authLayout';
 import AppLayout from './components/layouts/appLayout';
 import RegisterPage from './pages/auth/register';
-import TaskGroupList from './components/commons/TaskGroupList';
-import TaskDetail from './components/commons/TaskDetail';
+import TaskGroupList from './components/lists/ListTasksGroup';
+import TaskDetail from './components/lists/ListTasks';
+import TaskGroupPage from './pages/taskGroup/taskGroup';
+import TaskPage from './pages/task/task';
 
 /*
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -46,8 +48,8 @@ export default function App() {
 
                 <Route element={<AppLayout />}>
                     <Route path="/dashboard" element={<DashboardPage />} /> {/* child page */}
-                    <Route path="/dashboard/taskGroup/:year" element={<TaskGroupList />} />
-                    <Route path="/dashboard/taskGroup/:year/:groupId" element={<TaskDetail />} />
+                    <Route path="/dashboard/taskGroup/:year" element={<TaskGroupPage />} />
+                    <Route path="/dashboard/taskGroup/:year/:groupId" element={<TaskPage />} />
                 </Route>
 
                 {/* Default Routes */}

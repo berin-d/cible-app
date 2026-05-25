@@ -1,36 +1,34 @@
-import { useNavigate, useParams } from "react-router-dom";
-import Button from "../../components/commons/button";
-import Modal from "../../components/commons/modal";
-
 import { useEffect, useState } from "react";
-import { TaskDTO } from "../../components/types/Types";
-import TaskDetailHooks from "../../hooks/TaskDetailHooks";
+import { useNavigate, useParams } from "react-router-dom";
+import TaskGroupHooks from "../../hooks/TaskGroupHooks";
+import { TaskGroupDTO } from "../../components/types/Types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import ListTasks from "../../components/lists/ListTasks";
+import TaskGroupList from "../../components/lists/ListTasksGroup";
+import Card from "../../components/commons/cards";
+import ListTaskGroup from "../../components/lists/ListTasksGroup";
 
-export default function TaskPage() {
-    const [modalOpen, setModalOpen] = useState(false);
 
-    const { year, groupId } = useParams();
+export default function TaskGroupPage() {
+    const { year } = useParams();
     const navigate = useNavigate();
-    const [tasks, setTasks] = useState<TaskDTO[]>([]);
+    const [taskGroups, setTaskGroups] = useState<TaskGroupDTO[]>([]);
 
     const onLoad = async () => {
-        if (!groupId) return;
-        const data = await TaskDetailHooks.loadTasksByGroupId(groupId);
-        setTasks(data);
+        if (!year) return;
+        const data = await TaskGroupHooks.loadTaskGroupsByYear(year);
+        setTaskGroups(data);
     };
 
     useEffect(() => {
         onLoad();
-    }, [groupId]);
+    }, [year]);
 
     return (
         <div>
             <div className="flex items-center gap-4">
                 <button
-                    onClick={() => navigate(`/dashboard/taskGroup/${year}`)}
+                    onClick={() => navigate("/dashboard")}
                     className="text-slate-400 hover:text-white transition-colors hover:cursor-pointer"
                 >
                     <FontAwesomeIcon icon={faArrowLeft} />
@@ -40,11 +38,13 @@ export default function TaskPage() {
                 </div>
 
                 <div className="text-3xl text-[#71717a]">
-                    Tasks
+                    TasksGroup
                 </div>
             </div>
 
-            <ListTasks datas={tasks} />
+
+            <ListTaskGroup datas={taskGroups} />
+
         </div>
 
     );
