@@ -1,15 +1,14 @@
 package com.cible.backend_cible.service.task;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.PredicateSpecification;
-import org.springframework.stereotype.Service;
-
 import com.cible.backend_cible.db.task.UserRepository;
 import com.cible.backend_cible.model.filterDtos.UserFilterDTO;
 import com.cible.backend_cible.model.task.User;
 import com.cible.backend_cible.specification.UserSpecifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.PredicateSpecification;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserSERVICE {
@@ -29,15 +28,6 @@ public class UserSERVICE {
         return userRepository.findByEmailAndPassword(email, password);
     }
 
-    public Optional<User> getUserByEmail(String email) {
-
-        return userRepository.findByEmail(email);
-    }
-
-    public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
     public User createUser(User user) {
         return userRepository.save(user);
     }
@@ -49,15 +39,16 @@ public class UserSERVICE {
     public boolean usernameExists(String username) {
         return userRepository.existsByUsername(username);
     }
-    
 
-    public void deleteUser(Integer id) {
-        userRepository.deleteById(id);
-    }
 
     public Iterable<User> filterUsers(UserFilterDTO filter) {
 
-    PredicateSpecification<User> spec = PredicateSpecification.allOf();
+
+        /**
+         * Sepcifications
+         */
+
+        PredicateSpecification<User> spec = PredicateSpecification.allOf();
 
     if (filter.getUsername() != null) {
         spec = spec.and(UserSpecifications.hasUsername(filter.getUsername()));

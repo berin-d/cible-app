@@ -56,6 +56,6 @@ public class TaskSERVICE {
     }
     
     public List<Task> getTasksByGroupId(Integer groupId) {
-        return taskRepository.findByTaskGroup_Id(groupId);
+        return taskRepository.findByGoal_Id(groupId);
     }
 }

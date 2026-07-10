@@ -1,4 +1,4 @@
-import TaskGroupApi from "../api/TaskGroupApi";
+import TaskGroupApi from "../api/goal/GoalApi";
 import { TaskGroupDTO } from "../components/types/Types";
 
 const TaskGroupHooks = {

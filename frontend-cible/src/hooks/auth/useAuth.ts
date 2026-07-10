@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../services/auth/authService';
-import { UserLoginDto, UserRegisterDto } from '../../models/Users/User';
+import { UserLoginDto, UserRegisterDto } from '../../models/users/User';
 
 export const useAuth = () => {
     const navigate = useNavigate();

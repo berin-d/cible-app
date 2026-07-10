@@ -1,25 +1,22 @@
-
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import ListTasks from "../../components/lists/ListTasks";
-import { useTaskStore } from "../../store/task/taskStore";
+import ListTaskGroup from "../../components/lists/ListTasksGroup";
+import { useGoalStore } from "../../store/goal/goalStore";
 
-export default function TaskPage() {
 
-    const { year, groupId } = useParams();
+export default function TaskGroupPage() {
+    const { year } = useParams();
     const navigate = useNavigate();
 
-
-    const tasks = useTaskStore((state) => state.tasks);
-    const fetchTasks = useTaskStore((state) => state.fetchTasks);
-
+    const goals = useGoalStore((state) => state.goals)
+    const fetchGoals = useGoalStore((state) => state.fetchGoals)
 
     const onLoad = useCallback(async () => {
-        if (!groupId) return;
-        await fetchTasks(groupId);
-    }, [groupId, fetchTasks]);
+        if (!year) return;
+        await fetchGoals(year)
+    }, [fetchGoals]);
 
     useEffect(() => {
         onLoad();
@@ -29,7 +26,7 @@ export default function TaskPage() {
         <div>
             <div className="flex items-center gap-4">
                 <button
-                    onClick={() => navigate(`/dashboard/taskGroup/${year}`)}
+                    onClick={() => navigate("/dashboard")}
                     className="text-slate-400 hover:text-white transition-colors hover:cursor-pointer"
                 >
                     <FontAwesomeIcon icon={faArrowLeft} />
@@ -39,12 +36,13 @@ export default function TaskPage() {
                 </div>
 
                 <div className="text-3xl text-[#71717a]">
-                    Tasks
+                    TasksGroup
                 </div>
-
             </div>
 
-            <ListTasks datas={tasks} />
+
+            <ListTaskGroup goals={goals} />
+
         </div>
 
     );

@@ -10,17 +10,19 @@ interface CardProps {
     addLabel?: string;
     addCard?: boolean;
     progressBar?: boolean;
+    currentProgress?: number;
+    maxProgress?: number;
 }
 
-export default function Card({ title, subtitle, onAddClick, addLabel, addCard, navigateTo }: CardProps) {
+export default function Card({ title, subtitle, currentProgress, maxProgress, onAddClick, addLabel, addCard, navigateTo }: CardProps) {
     return (
         !addCard
-            ? CardYear({ title, subtitle, navigateTo })
+            ? CardYear({ title, subtitle, currentProgress, maxProgress, navigateTo })
             : CardAdd({ onAddClick, addLabel })
     );
 }
 
-function CardYear({ title, subtitle, navigateTo }: CardProps) {
+function CardYear({ title, subtitle, currentProgress, maxProgress, navigateTo }: CardProps) {
     return (
         <div
             className="relative flex flex-col bg-zinc-900 shadow-sm border border-slate-700 rounded-lg w-80 h-48 cursor-pointer hover:border-slate-500 transition-colors"
@@ -31,7 +33,7 @@ function CardYear({ title, subtitle, navigateTo }: CardProps) {
                     <span className="text-slate-400 text-sm">↗</span>
                 </div>
 
-                <ProgressBar currentProgress={70} maxProgress={100} label="Progress" />
+                <ProgressBar currentProgress={currentProgress || 0} maxProgress={maxProgress || 1} label="Progress" />
             </div>
         </div >
     );
