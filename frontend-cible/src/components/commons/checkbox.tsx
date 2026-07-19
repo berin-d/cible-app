@@ -1,7 +1,7 @@
 
 interface CheckboxProps {
     onClick: () => void;
-    isChecked: boolean;
+    isChecked: boolean | undefined;
 }
 
 

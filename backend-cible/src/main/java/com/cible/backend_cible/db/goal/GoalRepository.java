@@ -14,7 +14,6 @@ public interface GoalRepository extends CrudRepository<Goal, Integer> {
 
     List<Goal> findAll();
 
-
     List<Goal> findByUser(User user);
 
     List<Goal> findByNameContainingIgnoreCase(String name);
@@ -25,4 +24,7 @@ public interface GoalRepository extends CrudRepository<Goal, Integer> {
 
     @Query("SELECT tg FROM Goal tg JOIN tg.tasks t WHERE YEAR(t.dueDate) = :year")
     List<Goal> findByYear(@Param("year") int year);
+
+
+
 }

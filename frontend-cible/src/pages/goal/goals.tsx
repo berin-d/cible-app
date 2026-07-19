@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import ListTaskGroup from "../../components/lists/ListTasksGroup";
 import { useGoalStore } from "../../store/goal/goalStore";
 
-
 export default function TaskGroupPage() {
+    // Init
     const { year } = useParams();
     const navigate = useNavigate();
 
@@ -21,6 +21,12 @@ export default function TaskGroupPage() {
     useEffect(() => {
         onLoad();
     }, [onLoad]);
+
+    // Functionnal
+    function addCard(title: string) {
+        console.log(title);
+
+    }
 
     return (
         <div>
@@ -41,9 +47,11 @@ export default function TaskGroupPage() {
             </div>
 
 
-            <ListTaskGroup goals={goals} />
+            <ListTaskGroup goals={goals} addCard={addCard} />
 
-        </div>
+
+
+        </div >
 
     );
 }

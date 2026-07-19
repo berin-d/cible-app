@@ -18,7 +18,7 @@ public class GoalController {
 
     @GetMapping("/all")
     public ResponseEntity<List<GoalDTO>> getAllTaskGroups() {
-        return ResponseEntity.ok(goalSERVICE.getAllTaskGroups());
+        return ResponseEntity.ok(goalSERVICE.getAllGoals());
     }
 
     @GetMapping("/{id}")
@@ -46,5 +46,10 @@ public class GoalController {
     @GetMapping("/year/{year}")
     public ResponseEntity<List<GoalDTO>> getTaskGroupsByYear(@PathVariable int year) {
         return ResponseEntity.ok(goalSERVICE.getTaskGroupsByYear(year));
+    }
+
+    @PostMapping("/goal/add")
+    public ResponseEntity<Goal> saveGoal(@RequestBody Goal goal) {
+        return ResponseEntity.ok(goalSERVICE.saveGoal(goal));
     }
 }

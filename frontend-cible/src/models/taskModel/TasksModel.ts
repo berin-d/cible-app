@@ -5,7 +5,7 @@ export default class TaskModel {
     public title: string;
     public dueDate: string | null;
     public completedAt: string | null;
-    public isCompleted: boolean | null;
+    public isCompleted: boolean | undefined;
 
     constructor(dto: TaskModel) {
         this.id = dto.id;

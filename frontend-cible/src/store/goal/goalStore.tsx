@@ -10,8 +10,9 @@ interface GoalStore {
 
 
     fetchGoals: (years: string) => Promise<void>
+    addGoal: (title: string) => Promise<void>
 }
-export const useGoalStore = create<GoalStore>((set, get) => ({
+export const useGoalStore = create<GoalStore>((set) => ({
     goals: [],
     isLoading: false,
     error: null,
@@ -27,7 +28,14 @@ export const useGoalStore = create<GoalStore>((set, get) => ({
             console.error('Error fetching goals:', error);
             set({ error, isLoading: false });
         }
+    },
+
+    addGoal: async (title: string) => {
+
     }
+
+
+
 
 
 })

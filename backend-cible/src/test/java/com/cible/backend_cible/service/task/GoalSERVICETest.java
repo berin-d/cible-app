@@ -29,13 +29,13 @@ public class GoalSERVICETest {
     private GoalSERVICE goalSERVICE;
 
     @Test
-    void testGetAllTaskGroups() {
+    void testGetAllGoals() {
         Goal g1 = new Goal();
         Goal g2 = new Goal();
 
         when(goalRepository.findAll()).thenReturn(List.of(g1, g2));
 
-        List<GoalDTO> groups = goalSERVICE.getAllTaskGroups();
+        List<GoalDTO> groups = goalSERVICE.getAllGoals();
 
         assertNotNull(groups);
         verify(goalRepository, times(1)).findAll();

@@ -10,8 +10,6 @@ import DashboardPage from './pages/dashboard/dashboard';
 import AuthLayout from './components/layouts/authLayout';
 import AppLayout from './components/layouts/appLayout';
 import RegisterPage from './pages/auth/register';
-import TaskGroupList from './components/lists/ListTasksGroup';
-import TaskDetail from './components/lists/ListTasks';
 import TaskGroupPage from './pages/goal/goals';
 import TaskPage from './pages/task/task';
 

@@ -53,7 +53,7 @@ void testGetAllTaskGroups() throws Exception {
     GoalDTO g1 = new GoalDTO(1, "Groupe 1", 1, List.of());
     GoalDTO g2 = new GoalDTO(2, "Groupe 2", 1, List.of());
 
-    when(goalSERVICE.getAllTaskGroups()).thenReturn(List.of(g1, g2));
+    when(goalSERVICE.getAllGoals()).thenReturn(List.of(g1, g2));
     
     mockMvc.perform(get("/api/task-groups/all"))
             .andExpect(status().isOk())
