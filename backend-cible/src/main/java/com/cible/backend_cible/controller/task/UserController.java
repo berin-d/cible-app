@@ -3,17 +3,15 @@ package com.cible.backend_cible.controller.task;
 
 
 import com.cible.backend_cible.model.dtos.auth.AuthDTO;
+import com.cible.backend_cible.model.filterDtos.UserFilterDTO;
+import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.service.task.UserSERVICE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.cible.backend_cible.model.filterDtos.UserFilterDTO;
-import com.cible.backend_cible.model.task.User;
-import com.cible.backend_cible.service.task.UserSERVICE;
-
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:1420"})
 public class UserController {
 
     @Autowired

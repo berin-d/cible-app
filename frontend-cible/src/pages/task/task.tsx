@@ -1,30 +1,29 @@
-import { useNavigate, useParams } from "react-router-dom";
-import Button from "../../components/commons/button";
-import Modal from "../../components/commons/modal";
 
-import { useEffect, useState } from "react";
-import { TaskDTO } from "../../components/types/Types";
-import TaskDetailHooks from "../../hooks/TaskDetailHooks";
+import { useCallback, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import ListTasks from "../../components/lists/ListTasks";
+import { useTaskStore } from "../../store/task/taskStore";
 
 export default function TaskPage() {
-    const [modalOpen, setModalOpen] = useState(false);
 
     const { year, groupId } = useParams();
     const navigate = useNavigate();
-    const [tasks, setTasks] = useState<TaskDTO[]>([]);
 
-    const onLoad = async () => {
+
+    const tasks = useTaskStore((state) => state.tasks);
+    const fetchTasks = useTaskStore((state) => state.fetchTasks);
+
+
+    const onLoad = useCallback(async () => {
         if (!groupId) return;
-        const data = await TaskDetailHooks.loadTasksByGroupId(groupId);
-        setTasks(data);
-    };
+        await fetchTasks(groupId);
+    }, [groupId, fetchTasks]);
 
     useEffect(() => {
         onLoad();
-    }, [groupId]);
+    }, [onLoad]);
 
     return (
         <div>
@@ -42,6 +41,7 @@ export default function TaskPage() {
                 <div className="text-3xl text-[#71717a]">
                     Tasks
                 </div>
+
             </div>
 
             <ListTasks datas={tasks} />

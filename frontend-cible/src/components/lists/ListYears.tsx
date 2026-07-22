@@ -3,7 +3,7 @@ import Card from "../commons/cards";
 
 
 interface Props {
-	datas: [];
+	datas: string[];
 };
 
 

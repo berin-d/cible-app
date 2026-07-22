@@ -1,28 +1,38 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { TaskGroupDTO } from "../types/Types";
 import Card from "../commons/cards";
+import { GoalModel } from "../../models/goalModel/GoalsModel";
+import { useState } from "react";
 
 interface Props {
-  datas: TaskGroupDTO[];
+  goals: GoalModel[];
+  addCard: (title: string) => void;
 };
 
 
-export default function ListTaskGroup({ datas }: Props) {
+export default function ListTaskGroup({ goals, addCard }: Props) {
   const { year } = useParams();
   const navigate = useNavigate();
 
+  const [isOpen, setIsOpen] = useState(false);
+
+
   return (
     <div className="flex flex-row flex-wrap items-stretch gap-4 p-4 py-10">
-      {datas.map((taskGroup) => (
+      {goals.map((goal) => (
         <Card
-          key={taskGroup.id}
-          title={taskGroup.name}
-          navigateTo={() => navigate(`/dashboard/taskGroup/${year}/${taskGroup.id}`)}
+          key={goal.id}
+          title={goal.name}
+          currentProgress={goal.taskCompleted}
+          maxProgress={goal.tasks.length}
+          navigateTo={() => navigate(`/dashboard/taskGroup/${year}/${goal.id}`)}
         />
       ))}
 
       <Card
         addCard={true}
+        onAddClick={() => setIsOpen(true)}
+        openForm={isOpen}
+        onSubmit={addCard}
       />
     </div>
 

@@ -22,5 +22,5 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
     @Query("SELECT DISTINCT YEAR(t.dueDate) FROM Task t WHERE t.dueDate IS NOT NULL ORDER BY 1")
     List<Integer> findDistinctYears();
 
-    List<Task> findByTaskGroup_Id(Integer groupId);
+    List<Task> findByGoal_Id(Integer groupId);
 }

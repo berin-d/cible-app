@@ -55,9 +55,7 @@ export default function Modal(
 
                 {title && (
                     <div className="flex flex-col justify-center items-center">
-                        <Icon icon="circle-user" size="2x" color="#4ade80" />
                         <h2 className="text-2xl font-semibold text-white tracking-tight">{title}</h2>
-                        <p className="text-xs text-zinc-500 mt-2">Enter your credentials to access your roadmap.</p>
                     </div>
                 )}
 

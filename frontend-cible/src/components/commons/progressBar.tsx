@@ -8,11 +8,7 @@ export default function ProgressBar({ currentProgress, maxProgress, label }: Pro
 
     const percentage = Math.min((currentProgress / maxProgress) * 100, 100);
 
-    const getColor = () => {
-        if (percentage >= 90) return "bg-red-500";
-        if (percentage >= 75) return "bg-amber-500";
-        return "bg-emerald-500";
-    };
+
 
     return (
         <div className="w-full">
@@ -26,7 +22,7 @@ export default function ProgressBar({ currentProgress, maxProgress, label }: Pro
             </div>
             <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden bg-slate-700">
                 <div
-                    className={`h-full rounded-full transition-all duration-500 ease-out ${getColor()}`}
+                    className={`h-full rounded-full transition-all duration-500 ease-out bg-emerald-500`}
                     style={{ width: `${percentage}%` }}
                     role="progressbar"
                     aria-valuenow={currentProgress}

@@ -2,8 +2,8 @@ import Button from "../../components/commons/button"
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../../components/commons/modal";
-import LoginForm from "../../components/form/loginForm";
-import RegisterForm from "../../components/form/registerForm";
+import LoginForm from "../../components/form/auth/loginForm";
+import RegisterForm from "../../components/form/auth/registerForm";
 import icon from "../../assets/app-icon.png";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
@@ -36,7 +36,7 @@ export default function WelcomePage() {
                         iconName={faDownload}
                         variant="primary"
                         size="md"
-                        />
+                    />
                 </nav>
             </header>
 
@@ -58,11 +58,11 @@ export default function WelcomePage() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Button
-                            text="Get Started"
-                            variant="primary"
-                            size="md"
-                            animation="scale"
+                            <Button
+                                text="Get Started"
+                                variant="primary"
+                                size="md"
+                                animation="scale"
                             />
                         </div>
                     </div>
