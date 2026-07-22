@@ -1,16 +1,17 @@
 package com.cible.backend_cible.mapper.task;
 
 import com.cible.backend_cible.model.dtos.task.TaskDTO;
+import com.cible.backend_cible.model.goal.Goal;
 import com.cible.backend_cible.model.task.Priority;
 import com.cible.backend_cible.model.task.Status;
 import com.cible.backend_cible.model.task.Task;
-import com.cible.backend_cible.model.task.TaskGroup;
 import com.cible.backend_cible.model.user.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class TaskMapperTest {
 
@@ -28,7 +29,7 @@ public class TaskMapperTest {
         priority.setId(5);
         priority.setName("HIGH");
 
-        TaskGroup group = new TaskGroup();
+        Goal group = new Goal();
         group.setId(3);
         group.setName("Travail");
 
@@ -39,7 +40,7 @@ public class TaskMapperTest {
         task.setUser(user);
         task.setStatus(status);
         task.setPriority(priority);
-        task.setTaskGroup(group);
+        task.setGoal(group);
         task.setCreatedAt(LocalDateTime.now());
         task.setUpdatedAt(LocalDateTime.now());
 
@@ -52,14 +53,14 @@ public class TaskMapperTest {
         assertEquals("IN_PROGRESS", dto.getStatusName());
         assertEquals(5, dto.getPriorityId());
         assertEquals("HIGH", dto.getPriorityName());
-        assertEquals(3, dto.getTaskGroupId());
-        assertEquals("Travail", dto.getTaskGroupName());
+        assertEquals(3, dto.getGoalId());
+        assertEquals("Travail", dto.getGoalName());
 
         Task entity = TaskMapper.INSTANCE.toEntity(dto);
         assertNotNull(entity);
         assertNull(entity.getUser());
         assertNull(entity.getStatus());
         assertNull(entity.getPriority());
-        assertNull(entity.getTaskGroup());
+        assertNull(entity.getGoal());
     }
 }

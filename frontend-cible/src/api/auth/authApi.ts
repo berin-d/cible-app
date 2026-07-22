@@ -1,5 +1,5 @@
 import { apiClient } from "../apiClient";
-import { UserRegisterDto, UserLoginDto, User } from "../../models/User";
+import { UserRegisterDto, UserLoginDto, User } from "../../models/users/User";
 
 export const authApi = {
     register: async function (data: UserRegisterDto): Promise<User> {

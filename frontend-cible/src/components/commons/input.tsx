@@ -5,7 +5,7 @@ interface InputProps {
     placeholder?: string;
     label: string;
     value?: string;
-    type?: 'text' | 'password' | 'email' | 'number';
+    type?: 'text' | 'password' | 'email' | 'number' | 'checkbox';
     disabled?: boolean;
     required?: boolean;
     onChange?: (value: string) => void;
@@ -22,6 +22,8 @@ export default function Input({
     onChange,
     iconName
 }: InputProps) {
+
+
     return (
         <div className="w-full">
             <label className="block uppercase pb-2 text-xs font-semibold text-zinc-500 tracking-wider px-1">
@@ -34,6 +36,7 @@ export default function Input({
                         <Icon icon={iconName} />
                     </div>
                 )}
+
 
                 <input
                     type={type}

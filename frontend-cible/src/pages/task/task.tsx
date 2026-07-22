@@ -1,24 +1,51 @@
-import Button from "../../components/commons/button";
-import Modal from "../../components/commons/modal";
 
-import { useState } from "react";
+import { useCallback, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import ListTasks from "../../components/lists/ListTasks";
+import { useTaskStore } from "../../store/task/taskStore";
 
 export default function TaskPage() {
-    const [modalOpen, setModalOpen] = useState(false);
+
+    const { year, groupId } = useParams();
+    const navigate = useNavigate();
+
+
+    const tasks = useTaskStore((state) => state.tasks);
+    const fetchTasks = useTaskStore((state) => state.fetchTasks);
+
+
+    const onLoad = useCallback(async () => {
+        if (!groupId) return;
+        await fetchTasks(groupId);
+    }, [groupId, fetchTasks]);
+
+    useEffect(() => {
+        onLoad();
+    }, [onLoad]);
 
     return (
         <div>
-            <header className="flex justify-between items-center p-2">
-                <h1 className="text-2xl font-bold text-white">Tasks</h1>
-                <Button onClick={() => setModalOpen(!modalOpen)} text="New task" iconName="plus"></Button>
-            </header>
+            <div className="flex items-center gap-4">
+                <button
+                    onClick={() => navigate(`/dashboard/taskGroup/${year}`)}
+                    className="text-slate-400 hover:text-white transition-colors hover:cursor-pointer"
+                >
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
+                <div className="text-3xl font-bold tracking-tight md:text-4xl text-white">
+                    {year}
+                </div>
 
-            <main>
-                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Welcome back" >
-                    <form>
-                    </form>
-                </Modal>
-            </main>
-        </div >
-    )
+                <div className="text-3xl text-[#71717a]">
+                    Tasks
+                </div>
+
+            </div>
+
+            <ListTasks datas={tasks} />
+        </div>
+
+    );
 }

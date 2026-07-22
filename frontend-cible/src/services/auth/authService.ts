@@ -1,5 +1,5 @@
 import { authApi } from '../../api/auth/authApi';
-import { UserRegisterDto, UserLoginDto, User } from '../../models/User';
+import { UserRegisterDto, UserLoginDto, User } from '../../models/users/User';
 
 export const authService = {
 

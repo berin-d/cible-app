@@ -1,6 +1,5 @@
 package com.cible.backend_cible.model.task;
 
-import com.cible.backend_cible.model.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

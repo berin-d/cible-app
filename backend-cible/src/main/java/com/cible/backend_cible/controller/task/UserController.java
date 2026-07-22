@@ -1,7 +1,6 @@
 
 package com.cible.backend_cible.controller.task;
 
-
 import com.cible.backend_cible.model.filterDtos.UserFilterDTO;
 import com.cible.backend_cible.model.user.User;
 import com.cible.backend_cible.service.user.UserSERVICE;
@@ -11,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:1420"})
 public class UserController {
+
 
     @Autowired
     private UserSERVICE userSERVICE;
@@ -32,9 +31,9 @@ public class UserController {
 
     @PostMapping("/filter")
     public ResponseEntity<Iterable<User>> filterUsers(
-        @RequestBody UserFilterDTO filter) {
+            @RequestBody UserFilterDTO filter) {
 
-    return ResponseEntity.ok(userSERVICE.filterUsers(filter));
-}
+        return ResponseEntity.ok(userSERVICE.filterUsers(filter));
+    }
 
 }

@@ -13,10 +13,8 @@ import java.util.Optional;
 @Service
 public class UserSERVICE {
 
-
     @Autowired
     private UserRepository userRepository;
-
 
     public Iterable<User> getAllUsers(){
         return userRepository.findAll();
@@ -26,47 +24,45 @@ public class UserSERVICE {
         return userRepository.findById(id);
     }
 
-
-
-
-
     public Iterable<User> filterUsers(UserFilterDTO filter) {
 
-    PredicateSpecification<User> spec = PredicateSpecification.allOf();
+        PredicateSpecification<User> spec = PredicateSpecification.allOf();
 
-    if (filter.getUsername() != null) {
-        spec = spec.and(UserSpecifications.hasUsername(filter.getUsername()));
+        if (filter.getUsername() != null) {
+            spec = spec.and(UserSpecifications.hasUsername(filter.getUsername()));
+        }
+
+        if (filter.getEmail() != null) {
+            spec = spec.and(UserSpecifications.hasEmail(filter.getEmail()));
+        }
+
+        if (filter.getRole() != null) {
+            spec = spec.and(UserSpecifications.hasRole(filter.getRole()));
+        }
+
+        if (filter.getIsActive() != null) {
+            spec = spec.and(UserSpecifications.isActive(filter.getIsActive()));
+        }
+
+        if (filter.getEmailVerified() != null) {
+            spec = spec.and(UserSpecifications.isEmailVerified(filter.getEmailVerified()));
+        }
+
+        if (filter.getAccountLocked() != null) {
+            spec = spec.and(UserSpecifications.isAccountLocked(filter.getAccountLocked()));
+        }
+
+        if (filter.getFailedAttemptsGreaterThan() != null) {
+            spec = spec.and(
+                    UserSpecifications.failedAttemptsGreaterThan(
+                            filter.getFailedAttemptsGreaterThan()
+                    )
+            );
+        }
+
+        return userRepository.findAll(spec);
     }
 
-    if (filter.getEmail() != null) {
-        spec = spec.and(UserSpecifications.hasEmail(filter.getEmail()));
-    }
-
-    if (filter.getRole() != null) {
-        spec = spec.and(UserSpecifications.hasRole(filter.getRole()));
-    }
-
-    if (filter.getIsActive() != null) {
-        spec = spec.and(UserSpecifications.isActive(filter.getIsActive()));
-    }
-
-    if (filter.getEmailVerified() != null) {
-        spec = spec.and(UserSpecifications.isEmailVerified(filter.getEmailVerified()));
-    }
-
-    if (filter.getAccountLocked() != null) {
-        spec = spec.and(UserSpecifications.isAccountLocked(filter.getAccountLocked()));
-    }
-
-    if (filter.getFailedAttemptsGreaterThan() != null) {
-        spec = spec.and(
-            UserSpecifications.failedAttemptsGreaterThan(
-                filter.getFailedAttemptsGreaterThan()
-            )
-        );
-    }
-
-    return userRepository .findAll(spec);
 }
 
-}
+
