@@ -32,6 +32,11 @@ public class Goal {
     @NotNull(message = "User is mandatory")
     private User user; // owner of group
 
+    @NotNull(message = "Year is mandatory")
+    private Integer year;
+
     @OneToMany(mappedBy = "goal")
     private List<Task> tasks = new ArrayList<>();
+
+
 }

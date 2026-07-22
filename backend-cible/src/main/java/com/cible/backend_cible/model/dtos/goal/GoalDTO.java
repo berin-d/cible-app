@@ -15,5 +15,7 @@ public class GoalDTO {
     private Integer id;
     private String name;
     private Integer userId;
+    private Integer year;
     private List<TaskDTO> tasks;
+
 }

@@ -64,11 +64,11 @@ public class DataSeeder implements CommandLineRunner {
         userRepository.saveAll(List.of(alice, bob, clara));
 
         // ── 4. GROUPES DE TÂCHES ──────────────────────────────────────────────────
-        Goal work = group("Travail", alice);
-        Goal personal = group("Personnel", alice);
-        Goal studies = group("Études", bob);
-        Goal projects = group("Projets", bob);
-        Goal health = group("Santé", clara);
+        Goal work = group("Travail", alice, 2026);
+        Goal personal = group("Personnel", alice, 2026);
+        Goal studies = group("Études", bob, 2026);
+        Goal projects = group("Projets", bob, 2026);
+        Goal health = group("Santé", clara, 2026);
         goalRepository.saveAll(List.of(work, personal, studies, projects, health));
 
         // ── 5. TÂCHES ─────────────────────────────────────────────────────────────
@@ -170,10 +170,11 @@ public class DataSeeder implements CommandLineRunner {
         return u;
     }
 
-    private Goal group(String name, User owner) {
+    private Goal group(String name, User owner, Integer year) {
         Goal g = new Goal();
         g.setName(name);
         g.setUser(owner);
+        g.setYear(year);
         return g;
     }
 

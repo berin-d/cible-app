@@ -12,21 +12,23 @@ export default function TaskGroupPage() {
 
     const goals = useGoalStore((state) => state.goals)
     const fetchGoals = useGoalStore((state) => state.fetchGoals)
+    const addGoal = useGoalStore((state) => state.addGoal);
 
     const onLoad = useCallback(async () => {
         if (!year) return;
         await fetchGoals(year)
     }, [fetchGoals]);
 
+    const addCard = useCallback((name: string) => {
+        addGoal(name);
+    }, [addGoal]);
+
     useEffect(() => {
         onLoad();
     }, [onLoad]);
 
     // Functionnal
-    function addCard(title: string) {
-        console.log(title);
 
-    }
 
     return (
         <div>

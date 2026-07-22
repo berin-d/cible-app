@@ -41,11 +41,15 @@ public class GoalSERVICE {
         return goalRepository.existsById(id);
     }
 
-    public Goal saveGoal(Goal goal) {
+    public Goal saveGoal(GoalDTO goalDTO) {
+        Goal goal = goalMapper.toEntity(goalDTO);
         return goalRepository.save(goal);
     }
 
 
+    public List<Integer> getDistinctYears(){
+        return goalRepository.findDistinctYears();
+    }
 
     public List<GoalDTO> getTaskGroupsByYear(int year) {
         return goalRepository.findByYear(year).stream()

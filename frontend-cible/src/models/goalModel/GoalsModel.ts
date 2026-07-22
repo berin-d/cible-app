@@ -5,6 +5,7 @@ export class GoalModel {
     public id: number;
     public name: string;
     public user: User;
+    public year: String;
     public tasks: TaskModel[];
 
     // Data calculated
@@ -16,11 +17,19 @@ export class GoalModel {
         this.name = dto.name
         this.user = dto.user
         this.tasks = dto.tasks
+        this.year = dto.year
         //
         this.taskCompleted = this.taskDone()
     }
 
     taskDone(): number {
         return this.tasks.reduce((count, task) => task.isCompleted ? count + 1 : count, 0);
+    }
+
+    static toApi(title: string, currentYear: string | null) {
+        return {
+            name: title,
+            year: currentYear
+        };
     }
 }

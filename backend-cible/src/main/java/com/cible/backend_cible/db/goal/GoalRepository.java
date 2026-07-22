@@ -14,17 +14,9 @@ public interface GoalRepository extends CrudRepository<Goal, Integer> {
 
     List<Goal> findAll();
 
-    List<Goal> findByUser(User user);
-
-    List<Goal> findByNameContainingIgnoreCase(String name);
-
-    boolean existsByUserAndName(User user, String name);
-
-    List<Goal> findByUser_Id(Integer userId);
-
-    @Query("SELECT tg FROM Goal tg JOIN tg.tasks t WHERE YEAR(t.dueDate) = :year")
-    List<Goal> findByYear(@Param("year") int year);
+    List<Goal> findByYear(Integer year);
 
 
-
+    @Query("SELECT DISTINCT g.year FROM Goal g WHERE g.year IS NOT NULL ORDER BY g.year")
+    List<Integer> findDistinctYears();
 }
