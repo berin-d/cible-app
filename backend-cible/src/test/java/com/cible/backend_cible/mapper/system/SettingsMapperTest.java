@@ -1,20 +1,14 @@
 package com.cible.backend_cible.mapper.system;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import com.cible.backend_cible.model.dtos.system.SettingsDTO;
+import com.cible.backend_cible.model.system.*;
+import com.cible.backend_cible.model.user.User;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import org.junit.jupiter.api.Test;
-
-import com.cible.backend_cible.model.dtos.system.SettingsDTO;
-import com.cible.backend_cible.model.system.DateFormat;
-import com.cible.backend_cible.model.system.Language;
-import com.cible.backend_cible.model.system.Settings;
-import com.cible.backend_cible.model.system.Theme;
-import com.cible.backend_cible.model.system.TimeFormat;
-import com.cible.backend_cible.model.system.ViewType;
-import com.cible.backend_cible.model.task.User;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class SettingsMapperTest {
 

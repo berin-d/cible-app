@@ -1,13 +1,9 @@
 package com.cible.backend_cible.controller.system;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
-import java.util.Optional;
-
+import com.cible.backend_cible.model.system.Settings;
+import com.cible.backend_cible.model.user.User;
+import com.cible.backend_cible.service.system.SettingsSERVICE;
+import com.cible.backend_cible.service.user.UserSERVICE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,10 +14,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.cible.backend_cible.model.system.Settings;
-import com.cible.backend_cible.model.task.User;
-import com.cible.backend_cible.service.system.SettingsSERVICE;
-import com.cible.backend_cible.service.task.UserSERVICE;
+import java.util.List;
+import java.util.Optional;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 public class SettingsControllerTest {

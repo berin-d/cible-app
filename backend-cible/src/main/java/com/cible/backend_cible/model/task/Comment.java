@@ -1,6 +1,5 @@
-package com.cible.backend_cible.model.system;
+package com.cible.backend_cible.model.task;
 
-import com.cible.backend_cible.model.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,25 +13,26 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "notifications")
-public class Notification {
+@Table(name = "comments")
+public class Comment {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id", nullable = false)
+    @NotNull(message = "Task is mandatory")
+    private Task task;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "User is mandatory")
     private User user;
     
-    @NotBlank(message = "Message is mandatory")
+    @NotBlank(message = "Content is mandatory")
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String message;
-    
-    @NotNull(message = "Read status is mandatory")
-    @Column(name = "is_read", nullable = false)
-    private Boolean isRead = false;
+    private String content;
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -40,6 +40,5 @@ public class Notification {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
-        if (isRead == null) isRead = false;
     }
 }

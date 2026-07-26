@@ -1,9 +1,8 @@
 package com.cible.backend_cible.specification;
 
-import org.springframework.data.jpa.domain.PredicateSpecification;
-
 import com.cible.backend_cible.model.task.Role;
-import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.model.user.User;
+import org.springframework.data.jpa.domain.PredicateSpecification;
 
 public class UserSpecifications {
     

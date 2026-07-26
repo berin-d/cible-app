@@ -1,6 +1,7 @@
-package com.cible.backend_cible.model.task;
+package com.cible.backend_cible.model.user;
 
 
+import com.cible.backend_cible.model.task.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -49,7 +50,7 @@ public class User {
 
     @NotNull(message = "The email verification status must be defined")
     @Column(name = "email_verified", nullable = false)
-    private Boolean emailVerified = true; // after the signup, we receive a mail to confirm
+    private Boolean isEmailVerified = true; // after the signup, we receive a mail to confirm
 
     @NotNull(message = "The account lock status must be defined")
     @Column(name = "account_locked", nullable = false)
@@ -77,7 +78,7 @@ public class User {
     protected void onCreate() {
         if (this.role == null) this.role = Role.USER;
         if (this.isActive == null) this.isActive = true;
-        if (this.emailVerified == null) this.emailVerified = false;
+        if (this.isEmailVerified == null) this.isEmailVerified = false;
         if (this.accountLocked == null) this.accountLocked = false;
         if (this.failedLoginAttempts == null) this.failedLoginAttempts = 0;
         this.createdAt = LocalDateTime.now();

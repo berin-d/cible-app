@@ -5,7 +5,6 @@ import com.cible.backend_cible.model.dtos.goal.GoalDTO;
 import com.cible.backend_cible.model.goal.Goal;
 import com.cible.backend_cible.service.goal.GoalSERVICE;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +32,7 @@ public class GoalController {
 //                .orElseGet(() -> ResponseEntity.notFound().build());
 //    }
 
-//    @DeleteMapping("/{id}")
+    //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Void> deleteGroup(@PathVariable Integer id) {
 //        if (!goalSERVICE.existsById(id)) {
 //            return ResponseEntity.notFound().build();
@@ -42,18 +41,18 @@ public class GoalController {
 //        return ResponseEntity.noContent().build();
 //    }
     @GetMapping("/years")
-   public List<Integer> getYears() {
+    public List<Integer> getYears() {
         return goalSERVICE.getDistinctYears();
     }
 
-   @GetMapping("/year/{year}")
-   public ResponseEntity<List<GoalDTO>> getTaskGroupsByYear(@PathVariable int year) {
-       return ResponseEntity.ok(goalSERVICE.getTaskGroupsByYear(year));
-   }
+    @GetMapping("/year/{year}")
+    public ResponseEntity<List<GoalDTO>> getTaskGroupsByYear(@PathVariable int year) {
+        return ResponseEntity.ok(goalSERVICE.getTaskGroupsByYear(year));
+    }
 
     @PostMapping("/add")
     public ResponseEntity<GoalDTO> saveGoal(@RequestBody GoalDTO goalDTO) {
-       Goal saved = goalSERVICE.saveGoal(goalDTO);
-       return ResponseEntity.ok(goalMapper.toDTO(saved));
+        Goal saved = goalSERVICE.saveGoal(goalDTO);
+        return ResponseEntity.ok(goalMapper.toDTO(saved));
     }
 }

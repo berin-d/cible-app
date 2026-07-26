@@ -5,12 +5,13 @@ import com.cible.backend_cible.model.goal.Goal;
 import com.cible.backend_cible.model.task.Priority;
 import com.cible.backend_cible.model.task.Status;
 import com.cible.backend_cible.model.task.Task;
-import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.model.user.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class TaskMapperTest {
 

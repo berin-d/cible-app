@@ -1,14 +1,13 @@
 package com.cible.backend_cible.db.task;
 
-import java.util.List;
-
+import com.cible.backend_cible.model.task.Priority;
+import com.cible.backend_cible.model.task.Status;
+import com.cible.backend_cible.model.task.Task;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cible.backend_cible.model.task.Priority;
-import com.cible.backend_cible.model.task.Status;
-import com.cible.backend_cible.model.task.Task;
+import java.util.List;
 
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Integer> {

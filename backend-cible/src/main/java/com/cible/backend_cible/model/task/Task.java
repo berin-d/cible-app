@@ -1,6 +1,7 @@
 package com.cible.backend_cible.model.task;
 
 import com.cible.backend_cible.model.goal.Goal;
+import com.cible.backend_cible.model.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

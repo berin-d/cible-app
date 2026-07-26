@@ -1,12 +1,11 @@
 package com.cible.backend_cible.db.system;
 
-import java.util.List;
-
+import com.cible.backend_cible.model.system.Notification;
+import com.cible.backend_cible.model.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cible.backend_cible.model.system.Notification;
-import com.cible.backend_cible.model.task.User;
+import java.util.List;
 
 @Repository
 public interface NotificationRepository extends CrudRepository<Notification, Integer> {

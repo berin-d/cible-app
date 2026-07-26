@@ -4,7 +4,7 @@ import com.cible.backend_cible.controller.goal.GoalController;
 import com.cible.backend_cible.model.dtos.goal.GoalDTO;
 import com.cible.backend_cible.model.goal.Goal;
 import com.cible.backend_cible.service.goal.GoalSERVICE;
-import com.cible.backend_cible.service.task.UserSERVICE;
+import com.cible.backend_cible.service.task.UserSERVICETest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +34,7 @@ public class GoalControllerTest {
     private GoalSERVICE goalSERVICE;
 
     @Mock
-    private UserSERVICE userSERVICE;
+    private UserSERVICETest userSERVICE;
 
     @InjectMocks
     private GoalController taskGroupController;
@@ -50,8 +50,8 @@ public class GoalControllerTest {
 
 @Test
 void testGetAllTaskGroups() throws Exception {
-    GoalDTO g1 = new GoalDTO(1, "Groupe 1", 1, 2026,List.of());
-    GoalDTO g2 = new GoalDTO(2, "Groupe 2", 1, 2026,List.of());
+    GoalDTO g1 = new GoalDTO(1, "Groupe 1", 1, 2026, List.of());
+    GoalDTO g2 = new GoalDTO(2, "Groupe 2", 1, 2026, List.of());
 
     when(goalSERVICE.getAllGoals()).thenReturn(List.of(g1, g2));
     

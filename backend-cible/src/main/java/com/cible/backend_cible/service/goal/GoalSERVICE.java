@@ -12,17 +12,17 @@ import java.util.Optional;
 
 @Service
 public class GoalSERVICE {
-    
+
     @Autowired
     private GoalRepository goalRepository;
 
     @Autowired
     private GoalMapper goalMapper;
 
-    public List<GoalDTO> getAllGoals(){
+    public List<GoalDTO> getAllGoals() {
         return goalRepository.findAll().stream()
-            .map(goalMapper::toDTO)
-            .toList();
+                .map(goalMapper::toDTO)
+                .toList();
     }
 
     public Goal createGroup(Goal group) {
@@ -36,7 +36,7 @@ public class GoalSERVICE {
     public Optional<Goal> getGroupByIdOptional(Integer id) {
         return goalRepository.findById(id);
     }
-    
+
     public boolean existsById(Integer id) {
         return goalRepository.existsById(id);
     }
@@ -47,14 +47,14 @@ public class GoalSERVICE {
     }
 
 
-    public List<Integer> getDistinctYears(){
+    public List<Integer> getDistinctYears() {
         return goalRepository.findDistinctYears();
     }
 
     public List<GoalDTO> getTaskGroupsByYear(int year) {
         return goalRepository.findByYear(year).stream()
-            .map(goalMapper::toDTO)
-            .toList();
+                .map(goalMapper::toDTO)
+                .toList();
     }
-    
+
 }

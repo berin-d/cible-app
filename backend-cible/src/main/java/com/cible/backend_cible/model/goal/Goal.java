@@ -1,7 +1,7 @@
 package com.cible.backend_cible.model.goal;
 
 import com.cible.backend_cible.model.task.Task;
-import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.model.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
