@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -13,15 +13,20 @@ export default function TaskGroupPage() {
     const goals = useGoalStore((state) => state.goals)
     const fetchGoals = useGoalStore((state) => state.fetchGoals)
     const addGoal = useGoalStore((state) => state.addGoal);
+    const deleteGoal = useGoalStore((state) => state.deleteGoal)
 
     const onLoad = useCallback(async () => {
         if (!year) return;
         await fetchGoals(year)
     }, [fetchGoals]);
 
-    const addCard = useCallback((name: string) => {
+    const onAddGoal = useCallback((name: string) => {
         addGoal(name);
     }, [addGoal]);
+
+    const onDeleteGoal = useCallback((id: number) => {
+        deleteGoal(id)
+    }, [deleteGoal]);
 
     useEffect(() => {
         onLoad();
@@ -47,12 +52,7 @@ export default function TaskGroupPage() {
                     TasksGroup
                 </div>
             </div>
-
-
-            <ListTaskGroup goals={goals} addCard={addCard} />
-
-
-
+            <ListTaskGroup goals={goals} addCard={onAddGoal} deleteGoal={onDeleteGoal} />
         </div >
 
     );

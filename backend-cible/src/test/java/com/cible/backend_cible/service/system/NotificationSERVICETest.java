@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cible.backend_cible.db.system.NotificationRepository;
 import com.cible.backend_cible.model.system.Notification;
-import com.cible.backend_cible.model.task.User;
+import com.cible.backend_cible.model.user.User;
 
 @ExtendWith(MockitoExtension.class)
 public class NotificationSERVICETest {

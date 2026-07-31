@@ -2,7 +2,12 @@ const BASE_URL = "http://localhost:8081/api";
 
 const TaskDetailApi = {
     getTasksByGroupId: async (groupId: string) => {
-        const response = await fetch(`${BASE_URL}/tasks/group/${groupId}`);
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BASE_URL}/tasks/group/${groupId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
         return response.json();
     },
 

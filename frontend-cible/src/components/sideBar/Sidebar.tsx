@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 
 import { Icon } from "../commons/icon";
@@ -6,7 +6,17 @@ import { Icon } from "../commons/icon";
 export default function SideBar({
 
 
+
 }) {
+
+    const navigate = useNavigate();
+
+
+    function logout(): void {
+        localStorage.removeItem('token')
+        navigate("/welcome")
+    }
+
     return (
         <>
             <aside className="flex flex-col space-y-4 bg-[#242429] p-4 md:text-xl text-xs md:w-60 w-20 text-white">
@@ -34,11 +44,9 @@ export default function SideBar({
                     </ul>
                 </div>
 
-                <div className="flex h-full justify-center items-end">
-                    <NavLink to="/welcome" className="flex items-center gap-2 p-2 rounded-xl cursor-pointer mt-10 text-sm text-zinc-500 hover:text-zinc-300 transition-colors">
-                        <Icon icon="arrow-right-from-bracket" size="lg" />
-                        <p>Logout</p>
-                    </NavLink>
+                <div onClick={logout} className="flex items-center gap-2 p-2 rounded-xl cursor-pointer mt-10 text-sm text-zinc-500 hover:text-zinc-300 transition-colors">
+                    <Icon icon="arrow-right-from-bracket" size="lg" />
+                    <p>Logout</p>
                 </div>
             </aside>
 

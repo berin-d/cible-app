@@ -6,10 +6,11 @@ import { useState } from "react";
 interface Props {
   goals: GoalModel[];
   addCard: (title: string) => void;
+  deleteGoal: (id: number) => void;
 };
 
 
-export default function ListTaskGroup({ goals, addCard }: Props) {
+export default function ListTaskGroup({ goals, addCard, deleteGoal }: Props) {
   const { year } = useParams();
   const navigate = useNavigate();
 
@@ -25,6 +26,7 @@ export default function ListTaskGroup({ goals, addCard }: Props) {
           currentProgress={goal.taskCompleted}
           maxProgress={goal.tasks.length}
           navigateTo={() => navigate(`/dashboard/taskGroup/${year}/${goal.id}`)}
+          onDeleteClick={() => deleteGoal(goal.id)}
         />
       ))}
 

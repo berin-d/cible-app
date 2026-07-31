@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { isTauri } from './utils/platforms';
 
 // Pages
@@ -13,14 +13,16 @@ import RegisterPage from './pages/auth/register';
 import TaskGroupPage from './pages/goal/goals';
 import TaskPage from './pages/task/task';
 
-/*
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-    if (!isAuthenticated()) {
-        return <Navigate to="/login" replace />;
+
+function ProtectedRoute() {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        return <Navigate to="/" replace />;
     }
-    return <>{children}</>;
-};
-*/
+
+    return <Outlet />;
+}
 
 const WelcomeRedirect = () => {
     if (isTauri()) {
@@ -44,10 +46,12 @@ export default function App() {
 
                 {/* Portected Routes */}
 
-                <Route element={<AppLayout />}>
-                    <Route path="/dashboard" element={<DashboardPage />} /> {/* child page */}
-                    <Route path="/dashboard/taskGroup/:year" element={<TaskGroupPage />} />
-                    <Route path="/dashboard/taskGroup/:year/:groupId" element={<TaskPage />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route element={<AppLayout />}>
+                        <Route path="/dashboard" element={<DashboardPage />} /> {/* child page */}
+                        <Route path="/dashboard/taskGroup/:year" element={<TaskGroupPage />} />
+                        <Route path="/dashboard/taskGroup/:year/:groupId" element={<TaskPage />} />
+                    </Route>
                 </Route>
 
                 {/* Default Routes */}

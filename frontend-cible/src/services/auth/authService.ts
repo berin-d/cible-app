@@ -16,11 +16,11 @@ export const authService = {
         }
     },
 
-    async login(data: UserLoginDto): Promise<{ success: boolean; error?: string; user?: User }> {
+    async login(data: UserLoginDto): Promise<{ success: boolean; error?: string; token?: string }> {
         try {
-            const user = await authApi.login(data);
-            localStorage.setItem('user', JSON.stringify(user));
-            return { success: true, user };
+            const token = await authApi.login(data);
+            localStorage.setItem('token', token);
+            return { success: true };
         } catch (error: any) {
             console.error('Login error:', error);
             return {

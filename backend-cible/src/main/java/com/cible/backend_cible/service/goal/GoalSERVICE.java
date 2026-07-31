@@ -4,6 +4,7 @@ import com.cible.backend_cible.db.goal.GoalRepository;
 import com.cible.backend_cible.mapper.task.GoalMapper;
 import com.cible.backend_cible.model.dtos.goal.GoalDTO;
 import com.cible.backend_cible.model.goal.Goal;
+import com.cible.backend_cible.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +42,10 @@ public class GoalSERVICE {
         return goalRepository.existsById(id);
     }
 
-    public Goal saveGoal(GoalDTO goalDTO) {
+    public Goal saveGoal(GoalDTO goalDTO, User user) {
         Goal goal = goalMapper.toEntity(goalDTO);
+        System.out.println("Mapping effectuer : " + goal);
+        goal.setUser(user);
         return goalRepository.save(goal);
     }
 

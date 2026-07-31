@@ -8,9 +8,10 @@ interface GoalStore {
     error: unknown;
     goals: GoalModel[];
 
-
+    // crud
     fetchGoals: (years: string) => Promise<void>
     addGoal: (title: string) => Promise<void>
+    deleteGoal: (id: number) => Promise<void>
 }
 export const useGoalStore = create<GoalStore>((set, get) => ({
     goals: [],
@@ -42,6 +43,21 @@ export const useGoalStore = create<GoalStore>((set, get) => ({
             await fetchGoals(currentYear);
         } catch (error) {
             console.error('Error adding goal:', error);
+            set({ error, isLoading: false });
+        }
+    },
+
+    deleteGoal: async (id: number) => {
+        const { currentYear, fetchGoals } = get();
+        if (!currentYear) {
+            console.error('Cannot add goal: no current year set');
+            return;
+        }
+        try {
+            await GoalService.deleteGoal(id)
+            await fetchGoals(currentYear);
+        } catch (error) {
+            console.error('Error delete goal:', error);
             set({ error, isLoading: false });
         }
     }

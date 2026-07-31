@@ -13,9 +13,11 @@ export const GoalService = {
     },
 
     addGoal: async (payload: {}) => {
-        console.log(payload)
         await GoalApi.addGoal(payload);
-    }
+    },
 
+    deleteGoal: async (id: number) => {
+        await GoalApi.deleteGoal(id);
+    }
 
 }
