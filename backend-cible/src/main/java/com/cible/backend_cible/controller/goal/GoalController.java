@@ -30,14 +30,6 @@ public class GoalController {
         return ResponseEntity.ok(goalSERVICE.getAllGoals());
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Goal> getGroupById(@PathVariable Integer id) {
-//        return goalSERVICE.getGroupByIdOptional(id)
-//                .map(ResponseEntity::ok)
-//                .orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-
-
     @GetMapping("/years")
     public List<Integer> getYears() {
         return goalSERVICE.getDistinctYears();
@@ -51,7 +43,6 @@ public class GoalController {
     @PostMapping("/add")
     public ResponseEntity<GoalDTO> saveGoal(@RequestBody GoalDTO goalDTO, @AuthenticationPrincipal UserAuth userAuth) {
         User user = userAuth.getUser();
-        System.out.println("User : " + user);
         Goal saved = goalSERVICE.saveGoal(goalDTO, user);
         return ResponseEntity.ok(goalMapper.toDTO(saved));
     }

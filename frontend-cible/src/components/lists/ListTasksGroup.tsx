@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import Card from "../commons/cards";
+import { Card } from "../commons/cards";
 import { GoalModel } from "../../models/goalModel/GoalsModel";
 import { useState } from "react";
 
@@ -23,6 +23,7 @@ export default function ListTaskGroup({ goals, addCard, deleteGoal }: Props) {
         <Card
           key={goal.id}
           title={goal.name}
+          cardForm={false}
           currentProgress={goal.taskCompleted}
           maxProgress={goal.tasks.length}
           navigateTo={() => navigate(`/dashboard/taskGroup/${year}/${goal.id}`)}
@@ -31,10 +32,11 @@ export default function ListTaskGroup({ goals, addCard, deleteGoal }: Props) {
       ))}
 
       <Card
-        addCard={true}
+        cardForm={true}
         onAddClick={() => setIsOpen(true)}
         openForm={isOpen}
-        onSubmit={addCard}
+        showGoalForm={true}
+        onSubmit={() => addCard}
       />
     </div>
 

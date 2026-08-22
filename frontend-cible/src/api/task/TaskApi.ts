@@ -12,8 +12,12 @@ const TaskDetailApi = {
     },
 
     setTaskCompleted: async (id: number) => {
+        const token = localStorage.getItem('token');
         await fetch(`${BASE_URL}/tasks/${id}/completed`, {
-            method: "PUT"
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
         });
     }
 };

@@ -44,7 +44,6 @@ public class GoalSERVICE {
 
     public Goal saveGoal(GoalDTO goalDTO, User user) {
         Goal goal = goalMapper.toEntity(goalDTO);
-        System.out.println("Mapping effectuer : " + goal);
         goal.setUser(user);
         return goalRepository.save(goal);
     }

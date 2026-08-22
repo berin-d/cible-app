@@ -5,11 +5,13 @@ import com.cible.backend_cible.db.task.PriorityRepository;
 import com.cible.backend_cible.db.task.StatusRepository;
 import com.cible.backend_cible.db.task.TaskRepository;
 import com.cible.backend_cible.db.task.UserRepository;
+import com.cible.backend_cible.db.year.YearRepository;
 import com.cible.backend_cible.model.goal.Goal;
 import com.cible.backend_cible.model.task.Priority;
 import com.cible.backend_cible.model.task.Status;
 import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.user.User;
+import com.cible.backend_cible.model.year.Year;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -31,6 +33,7 @@ public class DataSeeder implements CommandLineRunner {
     private final PriorityRepository   priorityRepository;
     private final GoalRepository goalRepository;
     private final TaskRepository       taskRepository;
+    private final YearRepository yearRepository;
 
     @Override
     @Transactional
@@ -63,12 +66,19 @@ public class DataSeeder implements CommandLineRunner {
         User clara = user("Clara",  "clara@example.com",  "hashed_pwd_clara");
         userRepository.saveAll(List.of(alice, bob, clara));
 
+        // -- 3.5 DATE
+        Year year = year("2026", alice);
+        Year year2 = year("2025", bob);
+        Year year3 = year("2024", clara);
+
+        yearRepository.saveAll(List.of(year, year2, year3));
+
         // ── 4. GROUPES DE TÂCHES ──────────────────────────────────────────────────
-        Goal work = group("Travail", alice, 2026);
-        Goal personal = group("Personnel", alice, 2026);
-        Goal studies = group("Études", bob, 2026);
-        Goal projects = group("Projets", bob, 2026);
-        Goal health = group("Santé", clara, 2026);
+        Goal work = group("Travail", alice, year);
+        Goal personal = group("Personnel", alice, year);
+        Goal studies = group("Études", bob, year2);
+        Goal projects = group("Projets", bob, year2);
+        Goal health = group("Santé", clara, year3);
         goalRepository.saveAll(List.of(work, personal, studies, projects, health));
 
         // ── 5. TÂCHES ─────────────────────────────────────────────────────────────
@@ -170,12 +180,19 @@ public class DataSeeder implements CommandLineRunner {
         return u;
     }
 
-    private Goal group(String name, User owner, Integer year) {
+    private Goal group(String name, User owner, Year year) {
         Goal g = new Goal();
         g.setName(name);
         g.setUser(owner);
         g.setYear(year);
         return g;
+    }
+
+    private Year year(String name, User owner) {
+        Year y = new Year();
+        y.setYear(name);
+        y.setUser(owner);
+        return y;
     }
 
 

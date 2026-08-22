@@ -9,12 +9,12 @@ import SideBar from "../sideBar/Sidebar";
 
 const AppLayout = () => {
   return (
-      <div className="min-h-screen flex">
-        <SideBar />
-        <Main>
-          <Outlet />
-        </Main>
-      </div>
+    <div className="min-h-screen flex">
+      <SideBar />
+      <Main>
+        <Outlet />
+      </Main>
+    </div>
   );
 };
 

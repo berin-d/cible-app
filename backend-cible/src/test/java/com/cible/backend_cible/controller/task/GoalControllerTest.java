@@ -3,6 +3,7 @@ package com.cible.backend_cible.controller.task;
 import com.cible.backend_cible.controller.goal.GoalController;
 import com.cible.backend_cible.model.dtos.goal.GoalDTO;
 import com.cible.backend_cible.model.goal.Goal;
+import com.cible.backend_cible.model.year.Year;
 import com.cible.backend_cible.service.goal.GoalSERVICE;
 import com.cible.backend_cible.service.task.UserSERVICETest;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,8 +51,8 @@ public class GoalControllerTest {
 
 @Test
 void testGetAllTaskGroups() throws Exception {
-    GoalDTO g1 = new GoalDTO(1, "Groupe 1", 1, 2026, List.of());
-    GoalDTO g2 = new GoalDTO(2, "Groupe 2", 1, 2026, List.of());
+    GoalDTO g1 = new GoalDTO(1, "Groupe 1", 1, new Year(), List.of());
+    GoalDTO g2 = new GoalDTO(2, "Groupe 2", 1, new Year(), List.of());
 
     when(goalSERVICE.getAllGoals()).thenReturn(List.of(g1, g2));
     

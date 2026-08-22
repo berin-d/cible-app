@@ -2,6 +2,7 @@ package com.cible.backend_cible.model.goal;
 
 import com.cible.backend_cible.model.task.Task;
 import com.cible.backend_cible.model.user.User;
+import com.cible.backend_cible.model.year.Year;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,10 +31,12 @@ public class Goal {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "User is mandatory")
-    private User user; // owner of group
+    private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "year_id")
     @NotNull(message = "Year is mandatory")
-    private Integer year;
+    private Year year;
 
     @OneToMany(mappedBy = "goal")
     private List<Task> tasks = new ArrayList<>();

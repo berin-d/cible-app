@@ -9,6 +9,26 @@ interface Props {
   datas: TaskModel[];
 }
 
+//mport { WebviewWindow } from '@tauri-apps/api/webviewWindow';
+//
+//function pinToSide() {
+//  const pinned = new WebviewWindow('taches-epinglees', {
+//    url: 'pinned.html',      // idéalement une page dédiée, plus légère
+//    width: 280,
+//    height: 600,
+//    x: 1600,                 // à calculer selon la largeur de l'écran (currentMonitor())
+//    y: 0,
+//    alwaysOnTop: true,
+//    decorations: false,
+//    skipTaskbar: true,
+//    resizable: false,
+//  });
+//
+//  pinned.once('tauri://created', () => console.log('fenêtre épinglée créée'));
+//  pinned.once('tauri://error', (e) => console.error(e));
+
+//}
+
 export default function ListTasks({ datas }: Props) {
   const completedTask = useTaskStore((state) => state.completedTask);
 

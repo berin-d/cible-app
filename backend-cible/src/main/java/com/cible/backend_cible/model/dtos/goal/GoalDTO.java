@@ -1,6 +1,7 @@
 package com.cible.backend_cible.model.dtos.goal;
 
 import com.cible.backend_cible.model.dtos.task.TaskDTO;
+import com.cible.backend_cible.model.year.Year;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ public class GoalDTO {
     private Integer id;
     private String name;
     private Integer userId;
-    private Integer year;
+    private Year year;
     private List<TaskDTO> tasks;
 
 }
