@@ -4,14 +4,14 @@ import { isTauri } from './utils/platforms';
 // Pages
 import LoginPage from './pages/auth/login';
 import WelcomePage from './pages/web/Welcome';
-import DashboardPage from './pages/dashboard/dashboard';
+import DashboardPage from './pages/common/dashboard';
 
 // Layouts
 import AuthLayout from './components/layouts/authLayout';
 import AppLayout from './components/layouts/appLayout';
 import RegisterPage from './pages/auth/register';
-import TaskGroupPage from './pages/goal/goals';
-import TaskPage from './pages/task/task';
+import TaskPage from './pages/common/task';
+import GoalPage from './pages/common/goals';
 
 
 function ProtectedRoute() {
@@ -49,8 +49,8 @@ export default function App() {
                 <Route element={<ProtectedRoute />}>
                     <Route element={<AppLayout />}>
                         <Route path="/dashboard" element={<DashboardPage />} /> {/* child page */}
-                        <Route path="/dashboard/taskGroup/:year" element={<TaskGroupPage />} />
-                        <Route path="/dashboard/taskGroup/:year/:groupId" element={<TaskPage />} />
+                        <Route path="/dashboard/:year/goal" element={<GoalPage />} />
+                        <Route path="/dashboard/:year/goal/:groupId" element={<TaskPage />} />
                     </Route>
                 </Route>
 

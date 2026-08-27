@@ -36,6 +36,7 @@ export const useGoalStore = create<GoalStore>((set, get) => ({
             console.error('Cannot add goal: no current year set');
             return;
         }
+        console.info("add goal")
         set({ isLoading: true, error: null });
         try {
             const payload = GoalModel.toApi(name, currentYear);

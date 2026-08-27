@@ -12,6 +12,7 @@ const GoalApi = {
   },
 
   addGoal: async (payload: {}) => {
+    console.log(payload)
     const token = localStorage.getItem('token');
     await fetch(`${BASE_URL}/goals/add`, {
       method: "POST",

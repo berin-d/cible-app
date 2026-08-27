@@ -16,6 +16,7 @@ export default function YearTimeline({ years }: YearTimelineProps) {
 
     const futureYears = years.filter((y) => Number(y.title) > currentYear);
 
+
     return (
         <div className="p-2">
             <div className="flex items-center ">
@@ -25,7 +26,7 @@ export default function YearTimeline({ years }: YearTimelineProps) {
                             <div className="p-2">
                                 <YearCard
                                     name={year.title}
-                                    navigateTo={() => navigate(`/dashboard/taskGroup/${year.title}`)}
+                                    navigateTo={() => navigate(`/dashboard/${year.title}/goal`)}
                                     status="completed"
                                 />
                             </div>
@@ -42,7 +43,7 @@ export default function YearTimeline({ years }: YearTimelineProps) {
                         <YearCard
                             id={activeYear.id}
                             name={activeYear.title}
-                            navigateTo={() => navigate(`/dashboard/taskGroup/${activeYear.title}`)}
+                            navigateTo={() => navigate(`/dashboard/${activeYear.title}/goal`)}
                             status="active"
                         />
                     </div>
@@ -57,8 +58,9 @@ export default function YearTimeline({ years }: YearTimelineProps) {
                             )}
                             <div className="p-2">
                                 <YearCard
+                                    id={year.id}
                                     name={year.title}
-                                    navigateTo={() => navigate(`/dashboard/taskGroup/${year.title}`)}
+                                    navigateTo={() => navigate(`/dashboard/${year.title}/goal`)}
                                     status="upcoming"
                                 />
                             </div>

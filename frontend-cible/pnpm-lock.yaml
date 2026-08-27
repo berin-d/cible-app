@@ -65,6 +65,9 @@ importers:
       react-router-dom:
         specifier: ^7.12.0
         version: 7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      use-react-router-breadcrumbs:
+        specifier: ^4.0.1
+        version: 4.0.1(react-router-dom@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       zustand:
         specifier: ^5.0.14
         version: 5.0.14(@types/react@18.2.42)(immer@11.1.8)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
@@ -1126,6 +1129,12 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
+  use-react-router-breadcrumbs@4.0.1:
+    resolution: {integrity: sha512-Zbcy0KvWt1JePFcUHJAnTr7Z+AeO9WxmPs6A5Q/xqOVoi8edPKzpqHF87WB2opXwie/QjCxrEyTB7kFg7fgXvQ==}
+    peerDependencies:
+      react: '>=16.8'
+      react-router-dom: '>=6.0.0'
+
   use-sync-external-store@1.6.0:
     resolution: {integrity: sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==}
     peerDependencies:
@@ -2015,6 +2024,11 @@ snapshots:
       browserslist: 4.28.1
       escalade: 3.2.0
       picocolors: 1.1.1
+
+  use-react-router-breadcrumbs@4.0.1(react-router-dom@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3):
+    dependencies:
+      react: 19.2.3
+      react-router-dom: 7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
 
   use-sync-external-store@1.6.0(react@19.2.3):
     dependencies:
