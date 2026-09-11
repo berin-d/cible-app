@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class YearDTO {
     private String year;
     private Integer userId;
+    private Boolean isOpen;
 }

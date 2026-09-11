@@ -51,8 +51,8 @@ public class GoalControllerTest {
 
 @Test
 void testGetAllTaskGroups() throws Exception {
-    GoalDTO g1 = new GoalDTO(1, "Groupe 1", 1, new Year(), List.of());
-    GoalDTO g2 = new GoalDTO(2, "Groupe 2", 1, new Year(), List.of());
+    GoalDTO g1 = new GoalDTO(1, "Groupe 1", 1,"2026", List.of());
+    GoalDTO g2 = new GoalDTO(2, "Groupe 2", 1, "2026", List.of());
 
     when(goalSERVICE.getAllGoals()).thenReturn(List.of(g1, g2));
     

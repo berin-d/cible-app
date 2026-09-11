@@ -23,8 +23,8 @@ public interface TaskMapper {
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "priority", ignore = true)
-    @Mapping(target = "goal", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(source = "goalId", target = "goal.id")
     Task toEntity(TaskDTO dto);
 }

@@ -3,11 +3,14 @@ package com.cible.backend_cible.controller.task;
 import com.cible.backend_cible.mapper.task.TaskMapper;
 import com.cible.backend_cible.model.dtos.task.TaskDTO;
 import com.cible.backend_cible.model.task.Task;
+import com.cible.backend_cible.model.user.User;
+import com.cible.backend_cible.model.user.UserAuth;
 import com.cible.backend_cible.service.task.PrioritySERVICE;
 import com.cible.backend_cible.service.task.StatusSERVICE;
 import com.cible.backend_cible.service.task.TaskSERVICE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,10 +63,12 @@ public class TaskController {
         return ResponseEntity.ok(taskSERVICE.searchTasksByTitle(keyword));
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Task> saveTask(@RequestBody Task task) {
-        Task saved = taskSERVICE.saveTask(task);
-        return ResponseEntity.ok(saved);
+    @PostMapping("/add")
+    public ResponseEntity<Task> add(@RequestBody TaskDTO task, @AuthenticationPrincipal
+    UserAuth userAuth) {
+        User user = userAuth.getUser();
+        Task added = taskSERVICE.save(task, user);
+        return ResponseEntity.ok(added);
     }
 
     @DeleteMapping("/{id}")
@@ -91,7 +96,7 @@ public class TaskController {
             return ResponseEntity.notFound().build();
         }
         task.setIsCompleted(true);
-        Task updated = taskSERVICE.saveTask(task);
+        Task updated = taskSERVICE.update(task);
         return ResponseEntity.ok(updated);
     }
 }

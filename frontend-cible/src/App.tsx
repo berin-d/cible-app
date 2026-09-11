@@ -49,8 +49,10 @@ export default function App() {
                 <Route element={<ProtectedRoute />}>
                     <Route element={<AppLayout />}>
                         <Route path="/dashboard" element={<DashboardPage />} /> {/* child page */}
-                        <Route path="/dashboard/:year/goal" element={<GoalPage />} />
-                        <Route path="/dashboard/:year/goal/:groupId" element={<TaskPage />} />
+                        <Route path="/dashboard/:year" element={<GoalPage />} />
+                        <Route path="/dashboard/:year/:goalId" element={<TaskPage />} />
+
+                        <Route path="/dashboard/:year/kanban"></Route>
                     </Route>
                 </Route>
 

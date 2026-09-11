@@ -32,7 +32,6 @@ public class YearController {
     @PostMapping("/add")
     public ResponseEntity<YearDTO> saveYear(@RequestBody YearDTO yearDTO, @AuthenticationPrincipal UserAuth userAuth) {
         User user = userAuth.getUser();
-        System.out.println(user);
         Year saved = yearSERVICE.saveYear(yearDTO,user);
         return ResponseEntity.ok(yearMapper.toDTO(saved));
     }

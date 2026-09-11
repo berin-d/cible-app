@@ -1,6 +1,5 @@
 import TaskModel from "../taskModel/TasksModel";
 import { User } from "../users/User";
-import YearModel from "../YearsModel";
 
 export class GoalModel {
     public id: number;

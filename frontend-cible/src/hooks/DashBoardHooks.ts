@@ -6,7 +6,7 @@ const DashBoardHooks = {
     try {
       const currentYear = new Date().getFullYear();
       let data = await DashBoardApi.getAllYears();
-      
+
       const existingYears = new Set(
         data.map((year: { year: string }) => Number(year.year)),
       );

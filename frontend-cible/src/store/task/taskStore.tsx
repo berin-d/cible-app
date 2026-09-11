@@ -1,14 +1,16 @@
 import { create } from 'zustand';
 import TaskModel from '../../models/taskModel/TasksModel';
 import { TaskService } from '../../services/task/taskService';
+import { number } from 'framer-motion';
 
 interface TaskStore {
     tasks: TaskModel[];
     isLoading: boolean;
     error: unknown;
-    currentGroupId: string | null;
+    currentGroupId: number | null;
 
-    fetchTasks: (groupId: string) => Promise<void>;
+    fetchTasks: (goalId: number) => Promise<void>;
+    addTask: (task: TaskModel) => Promise<void>;
     completedTask: (id: number) => Promise<void>;
 }
 
@@ -27,16 +29,34 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
     /**
      * Fetch all tasks for a grouptask
      */
-    fetchTasks: async (groupId: string) => {
-        set({ isLoading: true, error: null, currentGroupId: groupId });
+    fetchTasks: async (goalId: number) => {
+        set({ isLoading: true, error: null, currentGroupId: goalId });
         try {
-            const response = await TaskService.loadTasksByGroupId(groupId);
+            const response = await TaskService.loadTasksByGroupId(goalId);
             set({ tasks: response, isLoading: false });
         } catch (error) {
             console.error('Error fetching tasks:', error);
             set({ error, isLoading: false });
         }
     },
+
+    /**
+     * Add a new task
+     */
+    addTask: async (task: TaskModel) => {
+        try {
+            await TaskService.addTask(task);
+
+            const { currentGroupId, fetchTasks } = get();
+            if (currentGroupId) {
+                await fetchTasks(currentGroupId);
+            }
+        } catch (error) {
+            console.error('Error adding task:', error);
+            set({ error });
+        }
+    },
+
 
     /**
      * Update a task to set like completed

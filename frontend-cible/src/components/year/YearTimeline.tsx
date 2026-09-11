@@ -26,7 +26,7 @@ export default function YearTimeline({ years }: YearTimelineProps) {
                             <div className="p-2">
                                 <YearCard
                                     name={year.title}
-                                    navigateTo={() => navigate(`/dashboard/${year.title}/goal`)}
+                                    navigateTo={() => navigate(`/dashboard/${year.title}`)}
                                     status="completed"
                                 />
                             </div>
@@ -43,7 +43,7 @@ export default function YearTimeline({ years }: YearTimelineProps) {
                         <YearCard
                             id={activeYear.id}
                             name={activeYear.title}
-                            navigateTo={() => navigate(`/dashboard/${activeYear.title}/goal`)}
+                            navigateTo={() => navigate(`/dashboard/${activeYear.title}`)}
                             status="active"
                         />
                     </div>
@@ -60,7 +60,7 @@ export default function YearTimeline({ years }: YearTimelineProps) {
                                 <YearCard
                                     id={year.id}
                                     name={year.title}
-                                    navigateTo={() => navigate(`/dashboard/${year.title}/goal`)}
+                                    navigateTo={() => navigate(`/dashboard/${year.title}`)}
                                     status="upcoming"
                                 />
                             </div>

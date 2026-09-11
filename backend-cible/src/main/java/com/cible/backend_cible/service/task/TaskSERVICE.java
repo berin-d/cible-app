@@ -1,9 +1,12 @@
 package com.cible.backend_cible.service.task;
 
 import com.cible.backend_cible.db.task.TaskRepository;
+import com.cible.backend_cible.mapper.task.TaskMapper;
+import com.cible.backend_cible.model.dtos.task.TaskDTO;
 import com.cible.backend_cible.model.task.Priority;
 import com.cible.backend_cible.model.task.Status;
 import com.cible.backend_cible.model.task.Task;
+import com.cible.backend_cible.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +45,13 @@ public class TaskSERVICE {
         return taskRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
-    public Task saveTask(Task task) {
+    public Task save(TaskDTO taskDto, User user) {
+        Task task = TaskMapper.INSTANCE.toEntity(taskDto);
+        task.setUser(user);
+        return taskRepository.save(task);
+    }
+
+    public Task update(Task task) {
         return taskRepository.save(task);
     }
 

@@ -1,8 +1,7 @@
 import TaskModel from "../../models/taskModel/TasksModel";
-import { motion, AnimatePresence } from "framer-motion";
 import { useTaskStore } from "../../store/task/taskStore";
 import Checkbox from "../commons/checkbox";
-import { useMemo } from "react";
+import DataTable, { type DataTableColumn } from "../commons/dataTable";
 
 
 interface Props {
@@ -32,49 +31,33 @@ interface Props {
 export default function ListTasks({ datas }: Props) {
   const completedTask = useTaskStore((state) => state.completedTask);
 
-  const { todoTasks, doneTasks } = useMemo(() => {
-    return {
-      todoTasks: datas.filter((task) => !task.isCompleted),
-      doneTasks: datas.filter((task) => task.isCompleted),
-    };
-  }, [datas]);
-
   function handleCompletedChange(taskId: number) {
     if (taskId == null) return;
     completedTask(taskId);
   }
 
-  function renderTask(task: TaskModel) {
-    return (
-      <motion.div
-        key={task.id}
-        layout
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        className="flex flex-row items-center gap-4 p-2 border border-gray-700 rounded-lg bg-[#181818]"
-      >
+  const columns: DataTableColumn<TaskModel>[] = [
+    {
+      key: "isCompleted",
+      header: "Action",
+      render: (_, task) => (
         <Checkbox
-          onClick={() => handleCompletedChange(task.id)}
+          onClick={() => task.id !== null && handleCompletedChange(task.id)}
           isChecked={task.isCompleted}
         />
-        <p>{task.title}</p>
-      </motion.div>
-    );
-  }
+      ),
+    },
+    {
+      key: "title",
+      header: "Tâche",
+      className: "font-medium text-white",
+    },
+
+  ];
 
   return (
-    <div className="flex flex-col text-white flex-wrap items-stretch gap-4 p-4 py-10">
-      <p>À faire</p>
-      <AnimatePresence mode="popLayout">
-        {todoTasks.map(renderTask)}
-      </AnimatePresence>
-
-      <p>Terminé</p>
-      <AnimatePresence mode="popLayout">
-        {doneTasks.map(renderTask)}
-      </AnimatePresence>
+    <div className="flex flex-col gap-4 p-4 py-10 text-white">
+      <DataTable columns={columns} data={datas} emptyMessage="Aucune tâche pour le moment." />
     </div>
   );
 }

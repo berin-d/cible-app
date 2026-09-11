@@ -7,14 +7,18 @@ import com.cible.backend_cible.model.user.User;
 import com.cible.backend_cible.model.user.UserAuth;
 import com.cible.backend_cible.service.goal.GoalSERVICE;
 import org.apache.commons.logging.Log;
+import org.slf4j.event.LoggingEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/goals")
 public class GoalController {
@@ -36,19 +40,20 @@ public class GoalController {
     }
 
     @GetMapping("/year/{year}")
-    public ResponseEntity<List<GoalDTO>> getTaskGroupsByYear(@PathVariable int year) {
-        return ResponseEntity.ok(goalSERVICE.getTaskGroupsByYear(year));
+    public ResponseEntity<List<GoalDTO>> getTaskGroupsByYear(@PathVariable String year, @AuthenticationPrincipal UserAuth userAuth) {
+        User user = userAuth.getUser();
+        return ResponseEntity.ok(goalSERVICE.getTaskGroupsByYearAndUser(year, user.getId()));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<GoalDTO> saveGoal(@RequestBody GoalDTO goalDTO, @AuthenticationPrincipal UserAuth userAuth) {
+    public ResponseEntity<GoalDTO> addGoal(@RequestBody GoalDTO goalDTO, @AuthenticationPrincipal UserAuth userAuth) {
         User user = userAuth.getUser();
-        Goal saved = goalSERVICE.saveGoal(goalDTO, user);
+        Goal saved = goalSERVICE.addgoal(goalDTO, user);
         return ResponseEntity.ok(goalMapper.toDTO(saved));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGroup(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteGoal(@PathVariable Integer id) {
         if (!goalSERVICE.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

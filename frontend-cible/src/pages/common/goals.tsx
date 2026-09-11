@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 import { useGoalStore } from "../../store/goal/goalStore";
 import { Card } from "../../components/commons/cards";
-import Breadcrumb from "../../components/commons/breadcrumb";
+
 
 export default function GoalPage() {
     // Init
@@ -40,7 +39,7 @@ export default function GoalPage() {
                         cardForm={false}
                         currentProgress={goal.taskCompleted}
                         maxProgress={goal.tasks.length}
-                        navigateTo={() => navigate(`/dashboard/${year}/goal/${goal.id}`)}
+                        navigateTo={() => navigate(`/dashboard/${year}/${goal.id}`)}
                         onDeleteClick={() => deleteGoal(goal.id)}
                     />
                 ))}
