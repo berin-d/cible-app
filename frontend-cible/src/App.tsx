@@ -12,6 +12,7 @@ import AppLayout from './components/layouts/appLayout';
 import RegisterPage from './pages/auth/register';
 import TaskPage from './pages/common/task';
 import GoalPage from './pages/common/goals';
+import KanbanPage from './pages/tools/kanban';
 
 
 function ProtectedRoute() {
@@ -52,7 +53,7 @@ export default function App() {
                         <Route path="/dashboard/:year" element={<GoalPage />} />
                         <Route path="/dashboard/:year/:goalId" element={<TaskPage />} />
 
-                        <Route path="/dashboard/:year/kanban"></Route>
+                        <Route path="/dashboard/:year/kanban" element={<KanbanPage/>}></Route>
                     </Route>
                 </Route>
 

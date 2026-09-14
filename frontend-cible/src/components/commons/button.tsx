@@ -13,14 +13,14 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-// ✅ Styles tailles
+
 const sizeStyles = {
   sm: "text-xs py-1.5 px-3",
   md: "text-sm py-2.5 px-5",
   lg: "text-base py-3 px-6",
 };
 
-// ✅ Styles animations
+
 const animationStyles = {
   none: "",
   scale: "hover:scale-105 active:scale-95",
@@ -38,7 +38,6 @@ export default function Button({
   size = "md",
   animation = "scale",
 }: ButtonProps) {
-  // ✅ Styles selon le variant
   const variantStyles = {
     primary: "bg-emerald-500 hover:bg-emerald-400 text-zinc-950",
     secondary:

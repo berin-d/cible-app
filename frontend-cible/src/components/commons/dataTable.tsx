@@ -24,7 +24,7 @@ export default function DataTable<T extends { id?: string | number | null }>({
 }: DataTableProps<T>) {
     return (
         <div className="w-full overflow-x-auto rounded-lg border border-slate-700 bg-zinc-900">
-            <table className="w-full min-w-[32rem] border-collapse text-left text-sm text-slate-200">
+            <table className="w-full border-collapse text-left text-sm text-slate-200">
                 <thead className="border-b border-slate-700 bg-zinc-800 text-xs uppercase tracking-wide text-slate-400">
                     <tr>
                         {columns.map((column, columnIndex) => (
@@ -45,8 +45,7 @@ export default function DataTable<T extends { id?: string | number | null }>({
                         data.map((row, index) => (
                             <tr
                                 key={row.id ?? index}
-                                onClick={() => onRowClick?.(row)}
-                                className={`transition-colors hover:bg-zinc-800}`}
+                                className={`${rowClassName} transition-colors hover:bg-zinc-800 ${onRowClick ? "cursor-pointer" : ""}`}
                             >
                                 {columns.map((column, columnIndex) => (
                                     <td key={`${String(column.key)}-${columnIndex}`} className={`px-4 py-3 ${column.className ?? ""}`}>
@@ -56,8 +55,18 @@ export default function DataTable<T extends { id?: string | number | null }>({
                             </tr>
                         ))
                     )}
+
+                    <tr>
+                        <td>
+                            {data.length > 0 && (
+                                <p className=" px-3 py-2 text-xs text-slate-500">
+                                    {data.length} tâche{data.length > 1 ? "s" : ""}
+                                </p>
+                            )}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-        </div>
+        </div >
     );
 }

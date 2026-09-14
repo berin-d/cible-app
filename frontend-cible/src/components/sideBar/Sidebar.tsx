@@ -49,7 +49,7 @@ export default function SideBar({ }) {
                             </li>
                             <li>
                                 <NavLink
-                                    to={`/dashboard/${year}`}
+                                    to={`/dashboard/${year}/kanban`}
                                     className={({ isActive }) =>
                                         `flex items-center justify-center md:justify-start gap-3 p-2 md:px-4 rounded-xl cursor-pointer text-sm md:text-base
                                         transform transition-all duration-300 ease-in-out
