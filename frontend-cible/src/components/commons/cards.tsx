@@ -41,7 +41,6 @@ export function Card({ cardForm, ...rest }: CardProps) {
 /* ----------  VIEW ----------------------------------------------------- */
 function CardView({
     title,
-    subtitle,
     currentProgress = 0,
     maxProgress = 1,
     navigateTo,

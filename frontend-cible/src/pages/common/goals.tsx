@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useGoalStore } from "../../store/goal/goalStore";
 import { Card } from "../../components/commons/cards";

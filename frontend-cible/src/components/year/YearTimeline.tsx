@@ -25,6 +25,7 @@ export default function YearTimeline({ years }: YearTimelineProps) {
                         <div key={year.id} className="flex items-center">
                             <div className="p-2">
                                 <YearCard
+                                    id={year.id}
                                     name={year.title}
                                     navigateTo={() => navigate(`/dashboard/${year.title}`)}
                                     status="completed"

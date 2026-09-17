@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import TaskModel from '../../models/taskModel/TasksModel';
 import { TaskService } from '../../services/task/taskService';
-import { number } from 'framer-motion';
 
 interface TaskStore {
     tasks: TaskModel[];
