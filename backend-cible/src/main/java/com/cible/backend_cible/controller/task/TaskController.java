@@ -99,4 +99,13 @@ public class TaskController {
         Task updated = taskSERVICE.update(task);
         return ResponseEntity.ok(updated);
     }
+    
+    @GetMapping("/year/{year}")
+    public ResponseEntity<List<TaskDTO>> getAllTaskByYears(@PathVariable String year) {
+        return ResponseEntity.ok(
+            taskSERVICE.getTasksByYear(year).stream()
+                .map(taskMapper::toDto)
+                .toList()
+        );
+    }
 }

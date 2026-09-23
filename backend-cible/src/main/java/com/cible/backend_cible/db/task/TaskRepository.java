@@ -22,5 +22,7 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
     List<Integer> findDistinctYears();
 
     List<Task> findByGoal_Id(Integer groupId);
+    
+    List<Task> findByGoal_Year_Year(String year);
 
 }

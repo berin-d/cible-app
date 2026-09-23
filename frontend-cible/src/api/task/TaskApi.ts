@@ -1,11 +1,21 @@
 import { type TaskDto } from "../../models/taskModel/TasksModel";
 
-const BASE_URL = "http://localhost:8081/api";
+const BASE_URL = "http://localhost:8081/api/tasks";
 
 const TaskDetailApi = {
     getTasksByGroupId: async (goalId: number) => {
         const token = localStorage.getItem('token');
-        const response = await fetch(`${BASE_URL}/tasks/group/${goalId}`, {
+        const response = await fetch(`${BASE_URL}/group/${goalId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response.json();
+    },
+
+    getAllTaskByYear: async (year: string) => {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BASE_URL}/year/${year}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -16,7 +26,7 @@ const TaskDetailApi = {
     addTask: async (payload: TaskDto) => {
         const token = localStorage.getItem('token');
         console.log(payload)
-        await fetch(`${BASE_URL}/tasks/add`, {
+        await fetch(`${BASE_URL}/add`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -28,7 +38,7 @@ const TaskDetailApi = {
 
     setTaskCompleted: async (id: number) => {
         const token = localStorage.getItem('token');
-        await fetch(`${BASE_URL}/tasks/${id}/completed`, {
+        await fetch(`${BASE_URL}/${id}/completed`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,

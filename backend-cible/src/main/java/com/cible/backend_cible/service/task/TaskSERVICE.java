@@ -66,4 +66,8 @@ public class TaskSERVICE {
     public List<Task> getTasksByGroupId(Integer groupId) {
         return taskRepository.findByGoal_Id(groupId);
     }
+
+    public List<Task> getTasksByYear(String year) {
+        return taskRepository.findByGoal_Year_Year(year);
+    }
 }

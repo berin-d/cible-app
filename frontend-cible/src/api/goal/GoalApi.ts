@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:8081/api";
 
 const GoalApi = {
-  fetchTaskByYears: async (year: string) => {
+  getAllGoalsBy: async (year: string) => {
     const token = localStorage.getItem('token');
     const response = await fetch(`${BASE_URL}/goals/year/${year}`, {
       headers: {

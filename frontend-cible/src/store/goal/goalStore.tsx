@@ -30,6 +30,7 @@ export const useGoalStore = create<GoalStore>((set, get) => ({
         }
     },
 
+
     addGoal: async (name: string) => {
         const { currentYear, fetchGoals } = get();
         if (!currentYear) {

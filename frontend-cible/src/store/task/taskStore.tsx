@@ -11,6 +11,7 @@ interface TaskStore {
     fetchTasks: (goalId: number) => Promise<void>;
     addTask: (task: TaskModel) => Promise<void>;
     completedTask: (id: number) => Promise<void>;
+    fetchAllTaskByYear: (years: string) => Promise<void>
 }
 
 /**
@@ -38,6 +39,18 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
             set({ error, isLoading: false });
         }
     },
+
+    fetchAllTaskByYear: async (years: string) => {
+        set({ isLoading: true, error: null, currentGroupId: null });
+        try {
+            const response = await TaskService.loadAllTasksByYear(years);
+            set({ tasks: response, isLoading: false });
+        } catch (error) {
+            console.error('Error fetching tasks by year:', error);
+            set({ error, isLoading: false });
+        }
+    },
+
 
     /**
      * Add a new task

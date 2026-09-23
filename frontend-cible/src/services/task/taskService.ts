@@ -1,4 +1,5 @@
 import TaskDetailApi from "../../api/task/TaskApi";
+import GoalApi from "../../api/goal/GoalApi";
 import TaskModel, { type TaskDto } from "../../models/taskModel/TasksModel";
 
 export const TaskService = {
@@ -10,6 +11,14 @@ export const TaskService = {
             console.error("Error fetching tasks:", error);
             return [];
         }
+    },
+
+    loadAllTasksByYear: async (year: string): Promise<TaskModel[]> => {
+        const goals = await GoalApi.fetchTaskByYears(year);
+
+        return goals.flatMap((goal: { tasks?: TaskDto[] }) =>
+            (goal.tasks ?? []).map((task) => TaskModel.fromApi(task))
+        );
     },
 
     addTask: async (task: TaskModel): Promise<void> => {
