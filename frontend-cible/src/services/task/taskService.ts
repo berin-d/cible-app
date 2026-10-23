@@ -1,6 +1,5 @@
 import TaskDetailApi from "../../api/task/TaskApi";
-import GoalApi from "../../api/goal/GoalApi";
-import TaskModel, { type TaskDto } from "../../models/taskModel/TasksModel";
+import TaskModel, { type TaskDto } from "../../models/TasksModel";
 
 export const TaskService = {
     loadTasksByGroupId: async (groupId: number): Promise<TaskModel[]> => {
@@ -14,15 +13,14 @@ export const TaskService = {
     },
 
     loadAllTasksByYear: async (year: string): Promise<TaskModel[]> => {
-        const goals = await GoalApi.fetchTaskByYears(year);
+        const tasks = await TaskDetailApi.getAllTaskByYear(year);
 
-        return goals.flatMap((goal: { tasks?: TaskDto[] }) =>
-            (goal.tasks ?? []).map((task) => TaskModel.fromApi(task))
-        );
+        return tasks.map((task: TaskDto) => TaskModel.fromApi(task));
     },
 
     addTask: async (task: TaskModel): Promise<void> => {
         const payload = TaskModel.toApi(task);
+        console.log("Adding task with payload:", payload); // Log the payload before sending
         await TaskDetailApi.addTask(payload);
     },
 
@@ -32,5 +30,23 @@ export const TaskService = {
         } catch (error) {
             console.error("Error completed tasks:", error);
         }
-    }
+    },
+
+    deleteTask: async (id: number): Promise<void> => {
+        try {
+            await TaskDetailApi.deleteTask(id);
+        } catch (error) {
+            console.error("Error deleting task:", error);
+        }
+    },
+
+    updateTaskStatus: async (id: number, status: 'TODO' | 'IN_PROGRESS' | 'DONE'): Promise<TaskModel> => {
+        try {
+            const data = await TaskDetailApi.updateTaskStatus(id, status);
+            return TaskModel.fromApi(data);
+        } catch (error) {
+            console.error("Error updating task status:", error);
+            throw error;
+        }
+    },
 };

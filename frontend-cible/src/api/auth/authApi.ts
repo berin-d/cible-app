@@ -1,4 +1,5 @@
-import { User, UserLoginDto, UserRegisterDto } from "../../models/users/User";
+
+import { User, UserLoginDto, UserRegisterDto } from "../../models/UserModel";
 import { apiClient } from "../apiClient";
 
 export const authApi = {

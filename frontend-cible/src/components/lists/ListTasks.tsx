@@ -1,4 +1,4 @@
-import TaskModel from "../../models/taskModel/TasksModel";
+import TaskModel from "../../models/TasksModel";
 import { useTaskStore } from "../../store/task/taskStore";
 import Checkbox from "../commons/checkbox";
 import DataTable, { type DataTableColumn } from "../commons/dataTable";

@@ -1,5 +1,5 @@
 import GoalApi from "../../api/goal/GoalApi";
-import { GoalModel } from "../../models/goalModel/GoalsModel";
+import { GoalModel } from "../../models/GoalsModel";
 
 export const GoalService = {
     fetchGoals: async (years: string): Promise<GoalModel[]> => {
@@ -18,6 +18,17 @@ export const GoalService = {
 
     deleteGoal: async (id: number) => {
         await GoalApi.deleteGoal(id);
-    }
+    },
+
+
+    getGoalById: async (id: number): Promise<GoalModel | null> => {
+        try {
+            const data = await GoalApi.getGoalById(id);
+            return new GoalModel(data);
+        } catch (error) {
+            console.error("Error fetching goal by ID:", error);
+            return null;
+        }
+    },
 
 }

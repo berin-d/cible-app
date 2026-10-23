@@ -1,17 +1,21 @@
 
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import ListTasks from "../../components/lists/ListTasks";
 import { useTaskStore } from "../../store/task/taskStore";
 import Button from "../../components/commons/button";
 import Modal from "../../components/commons/modal";
-import TaskModel from "../../models/taskModel/TasksModel";
+import TaskModel from "../../models/TasksModel";
 import { ToastContainer, toast } from 'react-toastify';
+import { useGoalStore } from "../../store/goal/goalStore";
 
 export default function TaskPage() {
     // route & data
     const { goalId } = useParams();
+    const navigate = useNavigate();
+
 
     // form
     const [isOpen, setIsOpen] = useState(false);
@@ -21,13 +25,14 @@ export default function TaskPage() {
     const tasks = useTaskStore((state) => state.tasks);
     const fetchTasks = useTaskStore((state) => state.fetchTasks);
     const addTask = useTaskStore((state) => state.addTask);
+    const goal = useGoalStore((state) => state.goal);
+    const getGoalById = useGoalStore((state) => state.getGoalById);
 
     // toast
     const notify = () => toast("Task created !");
 
 
     const onLoad = useCallback(async () => {
-        console.log(goalId)
         if (!goalId) return;
         await fetchTasks(Number(goalId));
     }, [goalId, fetchTasks]);
@@ -36,11 +41,14 @@ export default function TaskPage() {
         onLoad();
     }, [onLoad]);
 
+    useEffect(() => {
+        if (!goalId) return;
+        void getGoalById(Number(goalId));
+    }, [goalId, getGoalById]);
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(goalId)
         if (!goalId) return;
-        console.log("create taskmodel")
         const newTask = new TaskModel({
             id: null,
             title: title,
@@ -49,8 +57,6 @@ export default function TaskPage() {
             completedAt: null,
             isCompleted: false,
         });
-
-        console.log("addTask")
         notify()
         await addTask(newTask);
         setTitle("");
@@ -59,9 +65,14 @@ export default function TaskPage() {
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-6">
-                <div>
-                    <h1 className="text-2xl font-bold">Tasks</h1>
+            <div className="flex justify-between items-center mb-6 pl-4">
+                <div className="flex items-center gap-4">
+                    <button className="text-white hover:text-emerald-500 hover:cursor-pointer transition hover:-translate-x-1 " type="button" aria-label="Retour" onClick={() => navigate(-1)}>
+                        <ArrowLeft size={20} />
+                    </button>
+                    <h1 className="text-2xl font-bold text-white">
+                        {goal?.id === Number(goalId) ? goal.name : ""}
+                    </h1>
                 </div>
                 <div>
                     <Button

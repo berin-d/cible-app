@@ -35,6 +35,16 @@ const GoalApi = {
     if (!res.ok) {
       throw new Error(`Erreur lors de la suppression du goal ${id}`);
     }
+  },
+
+  getGoalById: async (id: number) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${BASE_URL}/goals/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.json();
   }
 };
 

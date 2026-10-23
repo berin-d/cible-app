@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { GoalModel } from '../../models/goalModel/GoalsModel';
+import { GoalModel } from '../../models/GoalsModel';
 import { GoalService } from '../../services/goal/goalService';
 
 interface GoalStore {
@@ -7,14 +7,17 @@ interface GoalStore {
     isLoading: boolean;
     error: unknown;
     goals: GoalModel[];
+    goal: GoalModel | null;
 
     // crud
     fetchGoals: (years: string) => Promise<void>
     addGoal: (title: string) => Promise<void>
     deleteGoal: (id: number) => Promise<void>
+    getGoalById: (id: number) => Promise<GoalModel | null>;
 }
 export const useGoalStore = create<GoalStore>((set, get) => ({
     goals: [],
+    goal: null,
     isLoading: false,
     error: null,
     currentYear: null,
@@ -27,6 +30,17 @@ export const useGoalStore = create<GoalStore>((set, get) => ({
         } catch (error) {
             console.error('Error fetching goals:', error);
             set({ error, isLoading: false });
+        }
+    },
+
+    getGoalById: async (id: number) => {
+        try {
+            const response = await GoalService.getGoalById(id);
+            set({ goal: response });
+            return response;
+        } catch (error) {
+            console.error('Error fetching goal by ID:', error);
+            return null;
         }
     },
 

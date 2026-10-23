@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import TaskModel from '../../models/taskModel/TasksModel';
+import TaskModel from '../../models/TasksModel';
 import { TaskService } from '../../services/task/taskService';
 
 interface TaskStore {
@@ -12,6 +12,7 @@ interface TaskStore {
     addTask: (task: TaskModel) => Promise<void>;
     completedTask: (id: number) => Promise<void>;
     fetchAllTaskByYear: (years: string) => Promise<void>
+    updateTaskStatus: (id: number, status: 'TODO' | 'IN_PROGRESS' | 'DONE') => Promise<void>;
 }
 
 /**
@@ -45,6 +46,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
         try {
             const response = await TaskService.loadAllTasksByYear(years);
             set({ tasks: response, isLoading: false });
+            console.log('Tasks fetched for year:', years, response);
         } catch (error) {
             console.error('Error fetching tasks by year:', error);
             set({ error, isLoading: false });
@@ -85,6 +87,41 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
         } catch (error) {
             console.error('Error updating task completion:', error);
             set({ error });
+        }
+    },
+
+    /**
+     * 
+     */
+    deleteTask: async (id: number) => {
+        try {
+            await TaskService.deleteTask(id);
+            const { currentGroupId, fetchTasks } = get();
+            if (currentGroupId) {
+                await fetchTasks(currentGroupId);
+            }
+        } catch (error) {
+            console.error('Error deleting task:', error);
+            set({ error });
+        }
+    },
+
+    updateTaskStatus: async (id: number, status: 'TODO' | 'IN_PROGRESS' | 'DONE') => {
+        try {
+            await TaskService.updateTaskStatus(id, status);
+            
+            // Mise à jour de l'état local dans le store
+            set((state) => ({
+                tasks: state.tasks.map((task) =>
+                    task.id === id
+                        ? new TaskModel({ ...task, status, isCompleted: status === 'DONE' })
+                        : task
+                ),
+            }));
+        } catch (error) {
+            console.error('Error updating task status in store:', error);
+            set({ error });
+            throw error; 
         }
     },
 }));

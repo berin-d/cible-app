@@ -24,6 +24,7 @@ export default function SideBar({ }) {
                     <li>
                         <NavLink
                             to="/dashboard"
+                            end
                             className={({ isActive }) =>
                                 `flex items-center justify-center md:justify-start gap-3 p-2 md:px-4 rounded-xl cursor-pointer text-sm md:text-base
                                 transform transition-all duration-300 ease-in-out
@@ -47,9 +48,26 @@ export default function SideBar({ }) {
                             <li className="hidden md:block text-primary-400 text-xs font-semibold py-1 uppercase tracking-wider">
                                 Workspace {year}
                             </li>
+
+                            <li>
+                                <NavLink
+                                    to={`/dashboard/${year}`}
+                                    end
+                                    className={({ isActive }) =>
+                                        `flex items-center justify-center md:justify-start gap-3 p-2 md:px-4 rounded-xl cursor-pointer text-sm md:text-base
+                                        transform transition-all duration-300 ease-in-out
+                                        hover:text-primary-400 hover:bg-gray-100/5 hover:scale-[1.03] md:hover:translate-x-1
+                                        ${isActive ? 'text-primary-500 bg-gray-100/10 text-primary-400 scale-[1.03] md:translate-x-1' : 'scale-100'}`
+                                    }
+                                >
+                                    <Icon icon="list" size="lg" />
+                                    <p className="hidden md:block">Tasks</p>
+                                </NavLink>
+                            </li>
                             <li>
                                 <NavLink
                                     to={`/dashboard/${year}/kanban`}
+                                    end
                                     className={({ isActive }) =>
                                         `flex items-center justify-center md:justify-start gap-3 p-2 md:px-4 rounded-xl cursor-pointer text-sm md:text-base
                                         transform transition-all duration-300 ease-in-out
