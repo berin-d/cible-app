@@ -26,10 +26,10 @@ export const useAuth = () => {
         }
     };
 
-    const login = async (data: UserLoginDto) => {
+    const login = async (data: UserLoginDto, rememberMe: boolean) => {
         setLoading(true);
         setError(null);
-        const result = await authService.login(data);
+        const result = await authService.login(data, rememberMe);
         setLoading(false);
 
         if (result.success) {

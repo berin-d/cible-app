@@ -1,8 +1,10 @@
+import { getAuthToken } from "../../services/auth/authTokenStorage";
+
 const BASE_URL = "http://localhost:8081/api";
 
 const GoalApi = {
   getAllGoalsBy: async (year: string) => {
-    const token = localStorage.getItem('token');
+    const token = getAuthToken();
     const response = await fetch(`${BASE_URL}/goals/year/${year}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -13,7 +15,7 @@ const GoalApi = {
 
   addGoal: async (payload: {}) => {
     console.log(payload)
-    const token = localStorage.getItem('token');
+    const token = getAuthToken();
     await fetch(`${BASE_URL}/goals/add`, {
       method: "POST",
       headers: {
@@ -25,7 +27,7 @@ const GoalApi = {
   },
 
   deleteGoal: async (id: number) => {
-    const token = localStorage.getItem('token');
+    const token = getAuthToken();
     const res = await fetch(`${BASE_URL}/goals/${id}`, {
       method: "DELETE",
       headers: {
@@ -38,7 +40,7 @@ const GoalApi = {
   },
 
   getGoalById: async (id: number) => {
-    const token = localStorage.getItem('token');
+    const token = getAuthToken();
     const response = await fetch(`${BASE_URL}/goals/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,

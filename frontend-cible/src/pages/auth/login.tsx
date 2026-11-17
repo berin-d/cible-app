@@ -1,7 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import LoginForm from "../../components/form/auth/loginForm";
+import { getRememberedAuthToken } from "../../services/auth/authTokenStorage";
 
 export default function LoginPage() {
+    if (getRememberedAuthToken()) {
+        return <Navigate to="/dashboard" replace />;
+    }
+
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen gap-2 p-5">
             <LoginForm />

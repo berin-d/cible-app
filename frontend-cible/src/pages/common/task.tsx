@@ -1,6 +1,6 @@
 
 import { useCallback, useEffect, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import ListTasks from "../../components/lists/ListTasks";

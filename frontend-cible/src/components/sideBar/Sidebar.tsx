@@ -1,13 +1,20 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Icon } from "../commons/icon";
+import { clearAuthToken } from "../../services/auth/authTokenStorage";
+import { isTauri } from '@tauri-apps/api/core';
 
 export default function SideBar({ }) {
     const navigate = useNavigate();
     const { year } = useParams();
 
     function logout(): void {
-        localStorage.removeItem('token');
-        navigate("/welcome");
+        clearAuthToken();
+        if(isTauri()) {
+            navigate("/login", { replace: true });
+        } else {
+            console.log("Redirecting to welcome page");
+            navigate("/welcome", { replace: true });
+        }
     }
 
     return (
@@ -83,7 +90,7 @@ export default function SideBar({ }) {
                     )}
                 </ul>
 
-                {/* Déconnexion (poussé vers le bas via le flex-grow du parent si h-screen est utilisé) */}
+               
                 <div
                     onClick={logout}
                     className="flex items-center justify-center md:justify-start gap-3 p-2 md:px-4 rounded-xl cursor-pointer mt-10 text-sm md:text-base text-zinc-500 hover:text-zinc-300 hover:bg-gray-100/5 transition-all"

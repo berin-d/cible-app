@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import { isTauri } from './utils/platforms';
-
+import { isTauri } from '@tauri-apps/api/core';
 // Pages
 import LoginPage from './pages/auth/login';
 import WelcomePage from './pages/web/Welcome';
@@ -13,10 +12,11 @@ import RegisterPage from './pages/auth/register';
 import TaskPage from './pages/common/task';
 import GoalPage from './pages/common/goals';
 import KanbanPage from './pages/tools/kanban';
+import { getAuthToken } from './services/auth/authTokenStorage';
 
 
 function ProtectedRoute() {
-    const token = localStorage.getItem("token");
+    const token = getAuthToken();
 
     if (!token) {
         return <Navigate to="/" replace />;

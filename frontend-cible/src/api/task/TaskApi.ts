@@ -1,10 +1,11 @@
 import { type TaskDto } from "../../models/TasksModel";
+import { getAuthToken } from "../../services/auth/authTokenStorage";
 
 const BASE_URL = "http://localhost:8081/api/tasks";
 
 const TaskDetailApi = {
     getTasksByGroupId: async (goalId: number) => {
-        const token = localStorage.getItem('token');
+        const token = getAuthToken();
         const response = await fetch(`${BASE_URL}/group/${goalId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -14,7 +15,7 @@ const TaskDetailApi = {
     },
 
     getAllTaskByYear: async (year: string) => {
-        const token = localStorage.getItem('token');
+        const token = getAuthToken();
         const response = await fetch(`${BASE_URL}/year/${year}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -24,7 +25,7 @@ const TaskDetailApi = {
     },
 
     addTask: async (payload: TaskDto) => {
-        const token = localStorage.getItem('token');
+        const token = getAuthToken();
         await fetch(`${BASE_URL}/add`, {
             method: "POST",
             headers: {
@@ -36,7 +37,7 @@ const TaskDetailApi = {
     },
 
     setTaskCompleted: async (id: number) => {
-        const token = localStorage.getItem('token');
+        const token = getAuthToken();
         await fetch(`${BASE_URL}/${id}/completed`, {
             method: "PUT",
             headers: {
@@ -46,7 +47,7 @@ const TaskDetailApi = {
     },
 
     deleteTask: async (id: number) => {
-        const token = localStorage.getItem('token');
+        const token = getAuthToken();
         await fetch(`${BASE_URL}/${id}`, {
             method: "DELETE",
             headers: {
@@ -56,7 +57,7 @@ const TaskDetailApi = {
     },
 
     updateTaskStatus: async (id: number, status: 'TODO' | 'IN_PROGRESS' | 'DONE') => {
-        const token = localStorage.getItem('token');
+        const token = getAuthToken();
         const response = await fetch(`${BASE_URL}/${id}/status?status=${status}`, {
             method: "PATCH",
             headers: {

@@ -1,10 +1,12 @@
 
 
+import { getAuthToken } from "../services/auth/authTokenStorage";
+
 const BASE_URL = "http://localhost:8081/api";
 
 const DashBoardApi = {
   getAllYears: async () => {
-    const token = localStorage.getItem('token');
+    const token = getAuthToken();
     const response = await fetch(`${BASE_URL}/years`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -19,7 +21,7 @@ const DashBoardApi = {
   },
 
   addYear: async (year: string) => {
-    const token = localStorage.getItem('token');
+    const token = getAuthToken();
     const response = await fetch(`${BASE_URL}/years/add`, {
       method: "POST",
       headers: {

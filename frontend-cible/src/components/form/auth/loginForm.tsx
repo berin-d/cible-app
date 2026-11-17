@@ -12,6 +12,7 @@ export default function LoginForm() {
         email: '',
         password: '',
     });
+    const [rememberMe, setRememberMe] = useState(false);
 
     const [validationErrors, setValidationErrors] = useState({
         email: '',
@@ -52,7 +53,7 @@ export default function LoginForm() {
             return; 
         }
 
-        await login(formData);
+        await login(formData, rememberMe);
     };
 
     return (
@@ -84,6 +85,16 @@ export default function LoginForm() {
                     placeholder="••••••••" 
                     required 
                 />
+
+                <label className="flex items-center gap-2 text-sm text-zinc-400">
+                    <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                        className="accent-emerald-500"
+                    />
+                    Remember me
+                </label>
                 
                 {/* On peut aussi désactiver le bouton si le format email est invalide */}
                 <Button 

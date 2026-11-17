@@ -1,5 +1,6 @@
 import { authApi } from '../../api/auth/authApi';
 import { UserRegisterDto, UserLoginDto, User } from '../../models/UserModel';
+import { storeAuthToken } from './authTokenStorage';
 
 export const authService = {
 
@@ -16,10 +17,10 @@ export const authService = {
         }
     },
 
-    async login(data: UserLoginDto): Promise<{ success: boolean; error?: string; token?: string }> {
+    async login(data: UserLoginDto, rememberMe: boolean): Promise<{ success: boolean; error?: string; token?: string }> {
         try {
-            const token = await authApi.login(data);
-            localStorage.setItem('token', token);
+            const token = await authApi.login(data, rememberMe);
+            storeAuthToken(token, rememberMe);
             return { success: true };
         } catch (error: any) {
             console.error('Login error:', error);

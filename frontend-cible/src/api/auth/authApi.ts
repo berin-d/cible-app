@@ -7,7 +7,10 @@ export const authApi = {
         return apiClient.post('register', { json: data }).json<User>();
     },
 
-    login: async function (data: UserLoginDto): Promise<string> {
-        return apiClient.post('login', { json: data }).text();
+    login: async function (data: UserLoginDto, rememberMe: boolean): Promise<string> {
+        return apiClient.post('login', {
+            json: data,
+            searchParams: { rememberMe: String(rememberMe) },
+        }).text();
     }
 };
